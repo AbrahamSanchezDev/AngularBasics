@@ -7,8 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://holykiller.github.io/AngularBasics/",
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.6",
