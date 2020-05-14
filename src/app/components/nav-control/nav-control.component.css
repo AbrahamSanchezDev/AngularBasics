@@ -1,0 +1,10 @@
+.mainNav{
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+.mainNav a{
+    color: #fff;
+    margin-right: 10px;
+}
