@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { MainComponent } from './components/pages/main/main.component';
 import { NavControlComponent } from './components/nav-control/nav-control.component';
+import { HowToComponent } from './components/how-to/how-to.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { NavControlComponent } from './components/nav-control/nav-control.compon
     AboutComponent,
     MainComponent,
     NavControlComponent,
+    HowToComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
