@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
+import { TopicControlService } from 'src/app/server/topic/topic-control.service';
+import { HowToComponent } from '../../how-to/how-to.component';
 
 @Component({
   selector: 'app-main',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   title: string = 'Angular Basics';
-  constructor() {}
+  topics: TopicObjModule[];
+  description: string;
 
-  ngOnInit(): void {}
+  constructor(private topicsServer: TopicControlService) {}
+
+  ngOnInit(): void {
+    this.topics = this.topicsServer.getTopics();
+  }
 }

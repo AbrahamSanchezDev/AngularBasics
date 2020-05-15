@@ -7,7 +7,8 @@ import { CommonModule } from '@angular/common';
 })
 export class TopicObjModule {
   title: string;
-  description: string[];
+  description: string;
+  text: string;
   local: boolean;
   imgs: string[];
 }
