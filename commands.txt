@@ -1,0 +1,11 @@
+//Build to dist
+ng build --prod --base-href "https://holykiller.github.io/AngularBasics/"
+
+//Deploy to the angular git and publish it to the same folder
+//Make sure to 
+ - do the ng build first before doing the deploy
+ - change the output path to "outputPath": "dist", in the angular.json file
+npm run deploy
+
+//Start Server for testing
+ng serve -o

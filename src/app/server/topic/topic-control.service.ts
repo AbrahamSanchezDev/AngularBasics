@@ -15,17 +15,18 @@ export class TopicControlService {
 
     return [
       {
-        title: 'Topic 1',
+        title: 'Topic Name 1',
         description: 'Description 1',
         text: 'This text should describe the how to of the current topic.',
         local: false,
         code: [
-          `         
-            public static void main(String[] args) 
-            {
-                System.out.println("Hello World");
-            }
-            `,
+          `    
+          //Testing Code
+          public static void main(String[] args)
+          {
+            System.out.println("Hello World");        
+          }
+          `,
         ],
         imgs: [
           'https://depor.com/resizer/O5BEliv00NW_zEPL4nS0lfz0OuY=/980x/smart/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/GVAN5QCY2VC6BIZB3E4ZYQ4LSM.jpg',

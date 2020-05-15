@@ -1,21 +1,23 @@
-.imgsParent {
+.displayHowTo {
   background-color: rgba(196, 196, 196, 0.623);
-  text-align: center;
   border-radius: 15px;
   font-size: 1.2em;
   font-family: Arial, Helvetica, sans-serif;
-  padding-top: 2px;
-  padding-bottom: 10px;
+  padding-left: 1%;
+  padding-right: 1%;
 }
-.imgsParent p {
+.displayHowTo p {
   max-width: 80%;
+}
+.displayText {
+  text-align: center;
+}
+.imgs {
+  text-align: center;
 }
 .imgObj {
   max-width: 90%;
   background-color: black;
   border-radius: 15px;
   border: 1px rgba(202, 202, 202, 0.589) solid;
-}
-.code {
-  text-align: initial;
 }
