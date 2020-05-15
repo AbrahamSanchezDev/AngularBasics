@@ -1,0 +1,18 @@
+<div *ngIf="isValid()" class="imgsParent">
+  <!-- Display Topic Title -->
+  <h1>{{ topic.title }}</h1>
+  <!-- Display Topic Description -->
+  <p class="descriptions">{{ topic.description }}</p>
+  <!-- Display the main -->
+  <p>{{ topic.text }}</p>
+  <!-- Display the codes examples in the topic -->
+  <pre
+    *ngFor="let code of getCode()"
+    class="prettyprint linenums:4"
+    [innerText]="code"
+  ></pre>
+  <!-- Display the Imgs -->
+  <div *ngFor="let img of getImgs()">
+    <img src="{{ img }}" class="imgObj" />
+  </div>
+</div>

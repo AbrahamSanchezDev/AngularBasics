@@ -3,12 +3,4 @@
     <h1>{{ topic.title }}</h1>
     <p class="descriptions">{{ topic.description }}</p>
   </button>
-  <div *ngIf="show" class="imgsParent">
-    <p>{{ topic.text }}</p>
-    <div *ngIf="hasImgs()">
-      <div *ngFor="let img of theImgs()">
-        <img src="{{ img }}" class="imgObj" />
-      </div>
-    </div>
-  </div>
 </div>

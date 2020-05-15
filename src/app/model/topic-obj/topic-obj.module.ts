@@ -10,5 +10,6 @@ export class TopicObjModule {
   description: string;
   text: string;
   local: boolean;
+  code: string[];
   imgs: string[];
 }
