@@ -3,11 +3,10 @@
   border-radius: 15px;
   font-size: 1.2em;
   font-family: Arial, Helvetica, sans-serif;
-  width: 93%;
+  width: 94%;
   position: absolute;
   z-index: 1;
   padding-left: 5%;
-  padding-right: 5%;
 }
 .displayHowTo p {
   max-width: 80%;
@@ -38,5 +37,6 @@
   width: 50px;
   height: 50px;
   margin-top: 5px;
+  margin-right: 5px;
   float: right;
 }
