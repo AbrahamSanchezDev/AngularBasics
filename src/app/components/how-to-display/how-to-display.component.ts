@@ -10,6 +10,8 @@ declare const PR: any;
 export class HowToDisplayComponent implements AfterViewChecked {
   topic: TopicObjModule;
 
+  defaultTopic: TopicObjModule;
+
   constructor(private topicControl: TopicControlService) {
     topicControl.onSelected.subscribe((topic) => this.onSelectedHowTo(topic));
   }
@@ -34,5 +36,9 @@ export class HowToDisplayComponent implements AfterViewChecked {
   //Called by the event onSelectedTopic and set this topic to the selected topic
   onSelectedHowTo(topic: TopicObjModule) {
     this.topic = topic;
+  }
+  onClose() {
+    this.topic = this.defaultTopic;
+    this.topicControl.onSelected.emit(this.topic);
   }
 }

@@ -1,10 +1,13 @@
 .displayHowTo {
-  background-color: rgba(196, 196, 196, 0.623);
+  background-color: rgb(196, 196, 196);
   border-radius: 15px;
   font-size: 1.2em;
   font-family: Arial, Helvetica, sans-serif;
-  padding-left: 1%;
-  padding-right: 1%;
+  width: 93%;
+  position: absolute;
+  z-index: 1;
+  padding-left: 5%;
+  padding-right: -50%;
 }
 .displayHowTo p {
   max-width: 80%;
@@ -20,4 +23,14 @@
   background-color: black;
   border-radius: 15px;
   border: 1px rgba(202, 202, 202, 0.589) solid;
+}
+.closeButton {
+  border-radius: 50%;
+  color: #d8d8d8;
+  background-color: rgb(170, 25, 25);
+  border: 3px solid #d8d8d8;
+  width: 50px;
+  height: 50px;
+  margin-top: 5px;
+  float: right;
 }
