@@ -8,16 +8,29 @@
     <!-- Display the main -->
     <p>{{ topic.text }}</p>
   </div>
-  <!-- Display the codes examples in the topic -->
-  <pre
-    *ngFor="let code of getCode()"
-    class="prettyprint linenums:4"
-    [innerText]="code"
-  ></pre>
-  <!-- Display the Imgs -->
-  <div class="imgs">
-    <div *ngFor="let img of getImgs()">
-      <img src="{{ img }}" class="imgObj" />
+  <!-- Check for what type of content it should display -->
+  <div *ngFor="let content of getContent()">
+    <div [ngSwitch]="getType(content)">
+      <!-- Display Simple Text -->
+      <p
+        *ngSwitchCase="'SimpleText'"
+        [innerText]="content.text"
+        class="displayText"
+      ></p>
+      <!-- Display the Imgs -->
+      <div *ngSwitchCase="'Img'" class="imgs">
+        <img src="{{ getContentText(content) }}" class="imgObj" />
+      </div>
+      <!-- Display the codes examples in the topic -->
+      <pre
+        *ngSwitchCase="'Code'"
+        class="prettyprint linenums:4 codeContainer"
+        [innerText]="getContentText(content)"
+      ></pre>
+      <!-- Display Error for when there there is no match -->
+      <p *ngSwitchDefault>
+        Error No Type found! looking for index {{ getType(content) }}
+      </p>
     </div>
   </div>
 </div>

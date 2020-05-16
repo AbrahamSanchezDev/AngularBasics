@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TopicData } from '../topic/topic-data';
 
 @NgModule({
   declarations: [],
@@ -9,7 +10,5 @@ export class TopicObjModule {
   title: string;
   description: string;
   text: string;
-  local: boolean;
-  code: string[];
-  imgs: string[];
+  content?: TopicData[];
 }

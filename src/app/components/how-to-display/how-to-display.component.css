@@ -7,12 +7,15 @@
   position: absolute;
   z-index: 1;
   padding-left: 5%;
-  padding-right: -50%;
+  padding-right: 5%;
 }
 .displayHowTo p {
   max-width: 80%;
 }
 .displayText {
+  text-align: left;
+}
+.displayText h1 {
   text-align: center;
 }
 .imgs {
@@ -23,6 +26,9 @@
   background-color: black;
   border-radius: 15px;
   border: 1px rgba(202, 202, 202, 0.589) solid;
+}
+.codeContainer {
+  width: 90%;
 }
 .closeButton {
   border-radius: 50%;
