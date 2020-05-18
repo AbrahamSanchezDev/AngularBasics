@@ -1,7 +1,7 @@
-<div class="form">
-  <input type="text" name="myText" [(ngModel)]="myText" required onchange="" />
-  <label for="myText" class="lable-name">
-    <span class="content-name">
+<div class="{{ mainClass }}">
+  <input type="text" name="myText" [(ngModel)]="myText" required />
+  <label for="myText" class="{{ lableClass }}">
+    <span class="{{ contentClass }}">
       {{ title }}
     </span>
   </label>

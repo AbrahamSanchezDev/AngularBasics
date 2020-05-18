@@ -1,0 +1,17 @@
+.textToAdd {
+  background: rgb(77, 77, 77);
+  padding: 5px;
+  border-bottom: 1px #ccc dotted;
+}
+.inpuTextObj {
+  display: inline;
+}
+.deleteBut {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 3px 7px;
+  border-radius: 50%;
+  cursor: pointer;
+  float: right;
+}

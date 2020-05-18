@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  NgModule,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TextFieldComponent } from '../Input/text-field/text-field.component';
 
 @Component({
@@ -19,11 +11,13 @@ export class HowToCreatorComponent implements OnInit {
   @ViewChild('titleField') title: TextFieldComponent;
   @ViewChild('descriptionField') descriptionField: TextFieldComponent;
 
-  topicName: string = 'Title To Name';
+  topicName: string = 'Title of the topic';
   topicDescription: string = 'Description';
+  introText: string = 'Intro / Main topic Text';
 
   constructor() {}
   ngOnInit(): void {}
+
   checkText() {
     if (this.title.myText) this.myText = this.title.myText;
   }

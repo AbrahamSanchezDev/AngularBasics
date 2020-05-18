@@ -12,6 +12,9 @@ import { HowToComponent } from './components/how-to/how-to.component';
 import { HowToDisplayComponent } from './components/how-to-display/how-to-display.component';
 import { HowToCreatorComponent } from './components/how-to-creator/how-to-creator.component';
 import { TextFieldComponent } from './components/Input/text-field/text-field.component';
+import { InputAreaComponent } from './components/Input/input-area/input-area.component';
+import { MultiLineToJsonComponent } from './components/Input/multi-line-to-json/multi-line-to-json.component';
+import { InputMultilineComponent } from './components/Input/input-multiline/input-multiline.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { TextFieldComponent } from './components/Input/text-field/text-field.com
     HowToDisplayComponent,
     HowToCreatorComponent,
     TextFieldComponent,
+    InputAreaComponent,
+    MultiLineToJsonComponent,
+    InputMultilineComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
