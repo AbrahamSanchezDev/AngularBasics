@@ -8,6 +8,7 @@ import { MainComponent } from './components/pages/main/main.component';
 import { NavControlComponent } from './components/nav-control/nav-control.component';
 import { HowToComponent } from './components/how-to/how-to.component';
 import { HowToDisplayComponent } from './components/how-to-display/how-to-display.component';
+import { HowToCreatorComponent } from './components/how-to-creator/how-to-creator.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HowToDisplayComponent } from './components/how-to-display/how-to-displa
     NavControlComponent,
     HowToComponent,
     HowToDisplayComponent,
+    HowToCreatorComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
