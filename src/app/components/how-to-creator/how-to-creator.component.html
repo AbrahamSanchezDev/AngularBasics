@@ -1,1 +1,8 @@
-<p>how-to-creator works!</p>
+<div>
+  <p>how-to-creator works!</p>
+  <app-text-field #titleField title="{{ topicName }}"> </app-text-field>
+  <app-text-field #descriptionField title="{{ topicDescription }}">
+  </app-text-field>
+  <button (click)="checkText()">Check for input text</button>
+  <p>{{ myText }}</p>
+</div>
