@@ -17,6 +17,7 @@ export class HowToCreatorComponent implements OnInit {
   @ViewChild('descriptionField') descriptionField: TextFieldComponent;
   @ViewChild('mainTopic') mainTopic: InputMultilineComponent;
 
+  errorText: string = '';
   topicName: string = 'Title';
   topicDescription: string = 'Description';
   introText: string = 'Intro / Main topic Text';
@@ -76,7 +77,11 @@ export class HowToCreatorComponent implements OnInit {
   }
 
   checkText() {
-    if (this.title.myText) this.myText = this.title.myText;
+    this.errorText = '';
+    if (this.title.myText == null || this.title.myText == '') {
+      this.errorText = 'Please add a title';
+      return;
+    }
     this.topic.title = this.title.myText;
     this.topic.description = this.descriptionField.myText;
     this.topic.text = this.mainTopic.content;

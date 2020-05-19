@@ -66,3 +66,8 @@
   background: rgb(77, 77, 77);
   color: #fff;
 }
+.errorText {
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+}
