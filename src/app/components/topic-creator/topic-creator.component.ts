@@ -27,10 +27,7 @@ export class TopicCreatorComponent implements OnInit {
     private topicControl: TopicControlService,
     private downloadTool: DownloadToolService
   ) {}
-  ngOnInit(): void {
-    // this.topic.title = 'TT';
-    // console.log(this.topic);
-  }
+  ngOnInit(): void {}
 
   //Add new Simple text to the topic
   addSimpleText() {
@@ -67,7 +64,7 @@ export class TopicCreatorComponent implements OnInit {
     }
     return content.text;
   }
-
+  //Remove the given topic
   removeContent(content: TopicData) {
     this.topic.content = this.topic.content.filter((t) => t !== content);
   }

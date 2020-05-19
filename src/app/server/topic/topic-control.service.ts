@@ -16,7 +16,10 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
   rePaintCode() {
     PR.prettyPrint();
   }
-
+  //Check if the topic contains the keyword
+  protected matchTopic(topic: TopicObjModule, keyword: string) {
+    return topic.title.includes(keyword);
+  }
   //Get Temp Topics for testing
   getTopics(): TopicObjModule[] {
     const url = `${'dir'}/${'path'}`;

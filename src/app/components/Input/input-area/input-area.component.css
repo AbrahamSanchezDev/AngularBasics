@@ -6,12 +6,3 @@
 .inpuTextObj {
   display: inline;
 }
-.deleteBut {
-  background: #ff0000;
-  color: #fff;
-  border: none;
-  padding: 3px 7px;
-  border-radius: 50%;
-  cursor: pointer;
-  float: right;
-}

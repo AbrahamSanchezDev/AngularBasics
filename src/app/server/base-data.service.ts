@@ -6,8 +6,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export abstract class BaseDataService<T> {
   public onSelected: EventEmitter<T> = new EventEmitter<T>();
+  public onSearch: EventEmitter<string> = new EventEmitter<string>();
   abstract jsonPath: string = 'assets/';
   protected allData: T[] = [];
+  protected customData: T[] = [];
   abstract fileNames: string[] = [];
   constructor(private http: HttpClient) {}
 
@@ -24,5 +26,26 @@ export abstract class BaseDataService<T> {
       });
     }
     return this.allData;
+  }
+  //Search for topics that match the given topic name
+  getData(topicName: string): T[] {
+    this.customData.length = 0;
+    var searchText = topicName.split(',');
+    for (let i = 0; i < this.allData.length; i++) {
+      for (let x = 0; x < searchText.length; x++) {
+        if (this.matchTopic(this.allData[i], searchText[x])) {
+          this.customData.push(this.allData[i]);
+          continue;
+        }
+      }
+    }
+    return this.customData;
+  }
+  //Check if the topic match the keyword
+  protected abstract matchTopic(topic: T, keyword: string);
+
+  //Call the search event
+  search(text: string) {
+    this.onSearch.emit(text);
   }
 }

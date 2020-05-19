@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { AboutComponent } from './components/pages/about/about.component';
 import { MainComponent } from './components/pages/main/main.component';
 import { NavControlComponent } from './components/nav-control/nav-control.component';
@@ -18,6 +19,8 @@ import { InputMultilineComponent } from './components/Input/input-multiline/inpu
 import { TopicObjModule } from './model/topic-obj/topic-obj.module';
 import { CodeDisplayComponent } from './components/Display/code-display/code-display.component';
 import { ToolsComponent } from './components/pages/tools/tools/tools.component';
+import { TopicSearchComponent } from './components/topic-search/topic-search.component';
+import { AddTextComponent } from './components/Input/add-text/add-text.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { ToolsComponent } from './components/pages/tools/tools/tools.component';
     InputMultilineComponent,
     CodeDisplayComponent,
     ToolsComponent,
+    TopicSearchComponent,
+    AddTextComponent,
   ],
   imports: [
     BrowserModule,

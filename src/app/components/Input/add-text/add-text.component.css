@@ -1,0 +1,21 @@
+.btn {
+  display: inline-block;
+  border: none;
+  background-color: #555;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #666;
+}
+.inputForm {
+  display: flex;
+}
+.inputForm input[type="text"] {
+  flex: 10;
+  padding: 5px;
+}
+.inputForm input[type="submit"] {
+  flex: 2;
+  color: #f4f4f4;
+}

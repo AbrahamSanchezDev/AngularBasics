@@ -12,9 +12,21 @@ export class MainComponent implements OnInit {
   topics: TopicObjModule[];
   description: string;
 
-  constructor(private topicsServer: TopicControlService) {}
-
+  constructor(private topicsServer: TopicControlService) {
+    topicsServer.onSearch.subscribe((text) => {
+      this.getTopics(text);
+    });
+  }
+  //On Init get the topic
   ngOnInit(): void {
-    this.topics = this.topicsServer.getJsonData();
+    this.getTopics();
+  }
+  //Get the topics if no text given if not then do a custom search
+  getTopics(text?: string) {
+    if (text == null || text == '') {
+      this.topics = this.topicsServer.getJsonData();
+      return;
+    }
+    this.topics = this.topicsServer.getData(text);
   }
 }

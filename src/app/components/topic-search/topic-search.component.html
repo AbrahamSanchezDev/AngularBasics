@@ -1,0 +1,13 @@
+<div class="topicSearch twoitemsingleline">
+  <app-add-text
+    (addTextData)="searchTopic($event)"
+    tempText="{{ tempText }}"
+    addText="{{ butttonText }}"
+    [clearIt]="false"
+    class="twoitemsinglelineone"
+    #inputAddText
+  ></app-add-text>
+  <button *ngIf="searching()" class="deleteBut" (click)="cancelSearch()">
+    X
+  </button>
+</div>

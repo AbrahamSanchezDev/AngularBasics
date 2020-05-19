@@ -14,6 +14,9 @@ export class HowToDisplayComponent implements AfterViewChecked {
 
   constructor(private topicControl: TopicControlService) {
     topicControl.onSelected.subscribe((topic) => this.onSelectedHowTo(topic));
+    topicControl.onSearch.subscribe((text) => {
+      this.onClose();
+    });
   }
 
   //Repaint the display code

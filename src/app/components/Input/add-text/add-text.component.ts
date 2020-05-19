@@ -9,7 +9,7 @@ export class AddTextComponent implements OnInit {
   @Output() addTextData: EventEmitter<any> = new EventEmitter();
   @Input('tempText') tempPlaceHolder: string = 'Add...';
   @Input('addText') addText: string = 'Submit';
-
+  @Input() clearIt: boolean = true;
   myText: string;
 
   constructor() {}
@@ -19,7 +19,9 @@ export class AddTextComponent implements OnInit {
     //this would send the content of the input field only if there is a text
     if (this.myText) {
       this.addTextData.emit(this.myText);
-      this.myText = null;
+      if (this.clearIt) {
+        this.myText = null;
+      }
     }
   }
 }
