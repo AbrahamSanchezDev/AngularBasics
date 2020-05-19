@@ -17,7 +17,6 @@ export class HowToCreatorComponent implements OnInit {
   @ViewChild('descriptionField') descriptionField: TextFieldComponent;
   @ViewChild('mainTopic') mainTopic: InputMultilineComponent;
 
-  myText: string = 'Test';
   topicName: string = 'Title';
   topicDescription: string = 'Description';
   introText: string = 'Intro / Main topic Text';
