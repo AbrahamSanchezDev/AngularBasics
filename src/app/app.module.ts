@@ -10,13 +10,14 @@ import { MainComponent } from './components/pages/main/main.component';
 import { NavControlComponent } from './components/nav-control/nav-control.component';
 import { HowToComponent } from './components/how-to/how-to.component';
 import { HowToDisplayComponent } from './components/how-to-display/how-to-display.component';
-import { HowToCreatorComponent } from './components/how-to-creator/how-to-creator.component';
+import { TopicCreatorComponent } from './components/topic-creator/topic-creator.component';
 import { TextFieldComponent } from './components/Input/text-field/text-field.component';
 import { InputAreaComponent } from './components/Input/input-area/input-area.component';
 import { MultiLineToJsonComponent } from './components/Input/multi-line-to-json/multi-line-to-json.component';
 import { InputMultilineComponent } from './components/Input/input-multiline/input-multiline.component';
 import { TopicObjModule } from './model/topic-obj/topic-obj.module';
 import { CodeDisplayComponent } from './components/Display/code-display/code-display.component';
+import { ToolsComponent } from './components/pages/tools/tools/tools.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,13 @@ import { CodeDisplayComponent } from './components/Display/code-display/code-dis
     NavControlComponent,
     HowToComponent,
     HowToDisplayComponent,
-    HowToCreatorComponent,
+    TopicCreatorComponent,
     TextFieldComponent,
     InputAreaComponent,
     MultiLineToJsonComponent,
     InputMultilineComponent,
     CodeDisplayComponent,
+    ToolsComponent,
   ],
   imports: [
     BrowserModule,

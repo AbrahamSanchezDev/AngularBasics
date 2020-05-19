@@ -15,6 +15,6 @@ export class MainComponent implements OnInit {
   constructor(private topicsServer: TopicControlService) {}
 
   ngOnInit(): void {
-    this.topics = this.topicsServer.getJsonTopics();
+    this.topics = this.topicsServer.getJsonData();
   }
 }

@@ -6,13 +6,13 @@ import { TopicData } from '../../model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
 import { TopicControlService } from 'src/app/server/topic/topic-control.service';
 import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 @Component({
-  selector: 'app-how-to-creator',
-  templateUrl: './how-to-creator.component.html',
-  styleUrls: ['./how-to-creator.component.css'],
+  selector: 'app-topic-creator',
+  templateUrl: './topic-creator.component.html',
+  styleUrls: ['./topic-creator.component.css'],
 })
-export class HowToCreatorComponent implements OnInit {
+export class TopicCreatorComponent implements OnInit {
   @ViewChild('titleField') title: TextFieldComponent;
   @ViewChild('descriptionField') descriptionField: TextFieldComponent;
   @ViewChild('mainTopic') mainTopic: InputMultilineComponent;
@@ -75,7 +75,7 @@ export class HowToCreatorComponent implements OnInit {
   getContent(): TopicData[] {
     return this.topic.content;
   }
-
+  //Check for valid values and create the json file
   checkText() {
     this.errorText = '';
     if (this.title.myText == null || this.title.myText == '') {
@@ -86,9 +86,5 @@ export class HowToCreatorComponent implements OnInit {
     this.topic.description = this.descriptionField.myText;
     this.topic.text = this.mainTopic.content;
     this.downloadTool.DownloadTextToFileAsJson(this.topic, this.topic.title);
-  }
-
-  async onCodeChange(content: TopicData) {
-    this.topicControl.rePaintCode();
   }
 }
