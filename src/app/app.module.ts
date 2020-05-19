@@ -15,6 +15,8 @@ import { TextFieldComponent } from './components/Input/text-field/text-field.com
 import { InputAreaComponent } from './components/Input/input-area/input-area.component';
 import { MultiLineToJsonComponent } from './components/Input/multi-line-to-json/multi-line-to-json.component';
 import { InputMultilineComponent } from './components/Input/input-multiline/input-multiline.component';
+import { TopicObjModule } from './model/topic-obj/topic-obj.module';
+import { CodeDisplayComponent } from './components/Display/code-display/code-display.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,15 @@ import { InputMultilineComponent } from './components/Input/input-multiline/inpu
     InputAreaComponent,
     MultiLineToJsonComponent,
     InputMultilineComponent,
+    CodeDisplayComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    TopicObjModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

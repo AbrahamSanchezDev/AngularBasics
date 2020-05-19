@@ -1,6 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { TopicObjModule } from '../../model/topic-obj/topic-obj.module';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
+import { HttpClient } from '@angular/common/http';
+
+declare const PR: any;
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +12,33 @@ export class TopicControlService {
   public onSelected: EventEmitter<TopicObjModule> = new EventEmitter<
     TopicObjModule
   >();
-  constructor() {}
+  private jsonsPath = 'assets/topics/';
 
+  fileNames: string[] = ['MisakaTopic.json'];
+  allData: TopicObjModule[] = [];
+
+  constructor(private http: HttpClient) {}
+  //Repaint the code from prettyprint
+  rePaintCode() {
+    PR.prettyPrint();
+  }
+  //Get the Topics using Json
+  getJsonTopics(): TopicObjModule[] {
+    //Check it the files were already loaded if so return them
+    if (this.allData != null && this.allData.length > 0) {
+      return this.allData;
+    }
+    // Get all the files that are in the file names
+    for (let i = 0; i < this.fileNames.length; i++) {
+      this.http
+        .get<TopicObjModule>(this.jsonsPath + this.fileNames[i])
+        .subscribe((data) => {
+          this.allData.push(data);
+        });
+    }
+    return this.allData;
+  }
+  //Get Temp Topics for testing
   getTopics(): TopicObjModule[] {
     const url = `${'dir'}/${'path'}`;
 

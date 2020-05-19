@@ -1,9 +1,63 @@
 <div class="howTo">
-  <p>how-to-creator works!</p>
+  <p class="topicTitle">Topic Creator!</p>
+  <!-- Display input for the topic -->
   <app-text-field #titleField title="{{ topicName }}"> </app-text-field>
+  <!-- Display input for the description -->
   <app-text-field #descriptionField title="{{ topicDescription }}">
+    <!-- Display input for the Intro / Main Topic -->
   </app-text-field>
-  <app-input-multiline #multiText title="{{ introText }}"></app-input-multiline>
+  <app-input-multiline #mainTopic title="{{ introText }}"></app-input-multiline>
+  <div class="createButtons">
+    <button (click)="addSimpleText()">Simple Text</button>
+    <button (click)="addCode()">Code</button>
+    <button (click)="addImg()">Img</button>
+  </div>
+  <div *ngFor="let content of getContent()" class="contentParent">
+    <div [ngSwitch]="getType(content)">
+      <!-- Display Simple Text -->
+      <div *ngSwitchCase="'SimpleText'" class="textToAdd inputField">
+        <input
+          type="text"
+          name="content.text"
+          [(ngModel)]="content.text"
+          class="inpuTextObj"
+        />
+        <button (click)="removeContent(content)" class="deleteBut">
+          X
+        </button>
+      </div>
+
+      <!-- Display the Imgs -->
+      <div *ngSwitchCase="'Img'" class="imgs textToAdd inputField">
+        <input
+          type="text"
+          name="content.text"
+          [(ngModel)]="content.text"
+          class="inpuTextObj"
+          placeholder="Add img Link..."
+        />
+        <img src="{{ getContentText(content) }}" class="imgObj" />
+        <button (click)="removeContent(content)" class="deleteBut">
+          X
+        </button>
+      </div>
+      <!-- Display the codes examples in the topic -->
+      <div *ngSwitchCase="'Code'" class="textToAdd inputField">
+        <textarea
+          class="inputArea"
+          name="content.text"
+          [(ngModel)]="content.text"
+          (change)="onCodeChange(content)"
+        ></textarea>
+      </div>
+
+      <!-- Display Error for when there there is no match -->
+      <p *ngSwitchDefault>
+        Error No Type found! looking for index {{ getType(content) }}
+      </p>
+    </div>
+  </div>
+
   <p>{{ myText }}</p>
   <button (click)="checkText()">Check for input text</button>
 </div>

@@ -4,7 +4,6 @@ import { TopicControlService } from 'src/app/server/topic/topic-control.service'
 import { TopicData } from 'src/app/model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
 
-declare const PR: any;
 @Component({
   selector: 'app-how-to-display',
   templateUrl: './how-to-display.component.html',
@@ -19,7 +18,7 @@ export class HowToDisplayComponent implements AfterViewChecked {
 
   //Repaint the display code
   public ngAfterViewChecked(): any {
-    PR.prettyPrint();
+    this.topicControl.rePaintCode();
   }
   //Check if the topic is valid
   isValid(): boolean {
