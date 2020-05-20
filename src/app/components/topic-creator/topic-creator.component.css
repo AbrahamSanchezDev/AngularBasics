@@ -12,13 +12,8 @@
   background: #333;
   color: #fff;
 }
-.contentParent {
-  margin: 0;
-  padding: 0;
-  display: inline;
-}
 .inputField {
-  width: 99%;
+  /* width: 99%; */
   height: 100%;
   text-align: center;
   border-bottom: 1px solid #5fa8d3;
@@ -34,13 +29,12 @@
   float: right;
 }
 .inpuTextObj {
-  width: 90%;
+  /* width: 99%; */
   text-align: center;
 }
 .textToAdd {
   background: rgb(77, 77, 77);
   padding: 5px;
-  border-bottom: 1px #ccc dotted;
 }
 .imgs {
   text-align: center;
@@ -70,4 +64,31 @@
   font-size: 20px;
   color: #fff;
   text-align: center;
+}
+.content-parent {
+  border: none;
+}
+.content-obj {
+  width: 98%;
+}
+.content-options {
+  padding: 4px 0px;
+  background-color: #333;
+}
+.content-options button {
+  margin-right: 10px;
+  float: right;
+}
+.content-options p {
+  margin-left: 10px;
+  color: #fff;
+  display: inline;
+}
+.rotatePos {
+  transform: rotate(180deg);
+}
+.optionsBut {
+  width: 30px;
+  border-radius: 25%;
+  background-color: rgb(241, 241, 241);
 }

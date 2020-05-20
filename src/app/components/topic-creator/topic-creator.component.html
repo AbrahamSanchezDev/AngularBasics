@@ -12,7 +12,27 @@
     <button (click)="addCode()">Code</button>
     <button (click)="addImg()">Img</button>
   </div>
-  <div *ngFor="let content of getContent()" class="contentParent">
+  <div *ngFor="let content of getContent()" class="content-parent">
+    <div class="content-options">
+      <p>{{ getType(content) }}</p>
+      <button (click)="removeContent(content)" class="deleteBut">
+        X
+      </button>
+      <button
+        (click)="moveUp(content)"
+        *ngIf="showUp(content)"
+        class="rotatePos optionsBut"
+      >
+        v
+      </button>
+      <button
+        (click)="moveDown(content)"
+        *ngIf="showDown(content)"
+        class="optionsBut"
+      >
+        v
+      </button>
+    </div>
     <div [ngSwitch]="getType(content)">
       <!-- Display Simple Text -->
       <div *ngSwitchCase="'SimpleText'" class="textToAdd inputField">
@@ -20,11 +40,8 @@
           type="text"
           name="content.text"
           [(ngModel)]="content.text"
-          class="inpuTextObj"
+          class="inpuTextObj content-obj"
         />
-        <button (click)="removeContent(content)" class="deleteBut">
-          X
-        </button>
       </div>
 
       <!-- Display the Imgs -->
@@ -33,23 +50,19 @@
           type="text"
           name="content.text"
           [(ngModel)]="content.text"
-          class="inpuTextObj"
+          class="inpuTextObj content-obj"
           placeholder="Add img Link..."
         />
         <img src="{{ getContentText(content) }}" class="imgObj" />
-        <button (click)="removeContent(content)" class="deleteBut">
-          X
-        </button>
       </div>
       <!-- Display the codes examples in the topic -->
       <div *ngSwitchCase="'Code'" class="textToAdd inputField">
         <textarea
-          class="inputArea"
+          class="inputArea content-obj"
           name="content.text"
           [(ngModel)]="content.text"
         ></textarea>
       </div>
-
       <!-- Display Error for when there there is no match -->
       <p *ngSwitchDefault>
         Error No Type found! looking for index {{ getType(content) }}
