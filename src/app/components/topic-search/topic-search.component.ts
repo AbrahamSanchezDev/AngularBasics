@@ -15,7 +15,7 @@ export class TopicSearchComponent implements OnInit {
   constructor(private topicsServer: TopicControlService) {}
 
   ngOnInit(): void {}
-
+  //Search the topic with the given text called by the AddTextComponent
   searchTopic(text: string) {
     this.doingSearch = true;
     this.topicsServer.search(text);
@@ -26,7 +26,6 @@ export class TopicSearchComponent implements OnInit {
   }
   //Cancel current search
   cancelSearch() {
-    console.log('Cancel search');
     this.doingSearch = false;
     this.topicsServer.search('');
     this.inputAddText.myText = '';
