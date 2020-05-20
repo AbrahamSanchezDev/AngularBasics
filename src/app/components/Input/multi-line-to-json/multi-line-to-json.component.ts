@@ -14,13 +14,12 @@ export class MultiLineToJsonComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
-  generateText() {
+  //Generate the text array using the current content
+  generateText(): string[] {
     if (this.content == null || this.content.length == 0) {
       return;
     }
     let textInArray = this.content.split('\n');
-    console.log(textInArray);
     return textInArray;
   }
 }

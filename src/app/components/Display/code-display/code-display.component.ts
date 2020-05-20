@@ -14,9 +14,8 @@ export class CodeDisplayComponent implements OnInit {
 
   ngOnInit(): void {}
   //Repaint the code
-  onCodeChanged() {
+  onCodeChanged(): void {
     console.log(this.codeText);
-
     this.topicControl.rePaintCode();
     console.log('Changed Something');
   }

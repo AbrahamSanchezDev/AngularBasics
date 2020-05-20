@@ -15,7 +15,7 @@ export class AddTextComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-  onSubmit() {
+  onSubmit(): void {
     //this would send the content of the input field only if there is a text
     if (this.myText) {
       this.addTextData.emit(this.myText);

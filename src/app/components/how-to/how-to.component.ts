@@ -14,7 +14,7 @@ export class HowToComponent implements OnInit {
 
   ngOnInit(): void {}
   //Called on selected the topic event
-  onSelect() {
+  onSelect(): void {
     this.topicControl.onSelected.emit(this.topic);
   }
 }

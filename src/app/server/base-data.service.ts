@@ -42,10 +42,10 @@ export abstract class BaseDataService<T> {
     return this.customData;
   }
   //Check if the topic match the keyword
-  protected abstract matchTopic(topic: T, keyword: string);
+  protected abstract matchTopic(topic: T, keyword: string): boolean;
 
   //Call the search event
-  search(text: string) {
+  search(text: string): void {
     this.onSearch.emit(text);
   }
 }

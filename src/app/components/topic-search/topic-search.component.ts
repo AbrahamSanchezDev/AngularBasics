@@ -25,7 +25,7 @@ export class TopicSearchComponent implements OnInit {
     return this.doingSearch;
   }
   //Cancel current search
-  cancelSearch() {
+  cancelSearch(): void {
     this.doingSearch = false;
     this.topicsServer.search('');
     this.inputAddText.myText = '';

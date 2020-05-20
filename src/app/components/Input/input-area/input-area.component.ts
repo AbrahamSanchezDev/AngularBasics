@@ -13,7 +13,7 @@ export class InputAreaComponent implements OnInit {
 
   ngOnInit() {}
 
-  onDelete() {
+  onDelete(): void {
     //this would send the content of the input field only if there is a text
     if (this.text) {
       this.onDeleteText.emit(this.text);

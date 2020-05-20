@@ -17,7 +17,7 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
     PR.prettyPrint();
   }
   //Check if the topic contains the keyword
-  protected matchTopic(topic: TopicObjModule, keyword: string) {
+  protected matchTopic(topic: TopicObjModule, keyword: string): boolean {
     return topic.title.includes(keyword);
   }
   //Get Temp Topics for testing

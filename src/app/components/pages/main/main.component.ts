@@ -22,7 +22,7 @@ export class MainComponent implements OnInit {
     this.getTopics();
   }
   //Get the topics if no text given if not then do a custom search
-  getTopics(text?: string) {
+  getTopics(text?: string): void {
     if (text == null || text == '') {
       this.topics = this.topicsServer.getJsonData();
       return;

@@ -30,19 +30,19 @@ export class TopicCreatorComponent implements OnInit {
   ngOnInit(): void {}
 
   //Add new Simple text to the topic
-  addSimpleText() {
+  addSimpleText(): void {
     this.addContent(TopicDataType.SimpleText);
   }
   //Add new Code tp the topic
-  addCode() {
+  addCode(): void {
     this.addContent(TopicDataType.Code);
   }
   //Add new Img to the topic
-  addImg() {
+  addImg(): void {
     this.addContent(TopicDataType.Img);
   }
   //Add content of the given type to the topic
-  addContent(dataType: TopicDataType, textToShow?: string) {
+  addContent(dataType: TopicDataType, textToShow?: string): void {
     this.topic.content.push({ data: dataType, text: textToShow });
   }
   //Returns the type of the given content and return it as string
@@ -57,7 +57,7 @@ export class TopicCreatorComponent implements OnInit {
     return content.text;
   }
   //Returns the content of the given topic
-  getContentCode(content: TopicData) {
+  getContentCode(content: TopicData): string {
     if (content == null) {
       console.log('Null Content');
       return '';
@@ -65,7 +65,7 @@ export class TopicCreatorComponent implements OnInit {
     return content.text;
   }
   //Remove the given topic
-  removeContent(content: TopicData) {
+  removeContent(content: TopicData): void {
     this.topic.content = this.topic.content.filter((t) => t !== content);
   }
   //Returns all the topic data in the current topic
@@ -73,7 +73,7 @@ export class TopicCreatorComponent implements OnInit {
     return this.topic.content;
   }
   //Check for valid values and create the json file
-  checkText() {
+  checkText(): void {
     this.errorText = '';
     if (this.title.myText == null || this.title.myText == '') {
       this.errorText = 'Please add a title';

@@ -39,7 +39,7 @@ export class HowToDisplayComponent implements AfterViewChecked {
     return content.text;
   }
   //Returns the content of the given topic
-  getContentCode(content: TopicData) {
+  getContentCode(content: TopicData): string {
     if (content == null) {
       return '';
     }
@@ -50,11 +50,11 @@ export class HowToDisplayComponent implements AfterViewChecked {
     return TopicDataType[content.data];
   }
   //Called by the event onSelectedTopic and set this topic to the selected topic
-  onSelectedHowTo(topic: TopicObjModule) {
+  onSelectedHowTo(topic: TopicObjModule): void {
     this.topic = topic;
   }
   //Called when the X button is pressed and set the current topic to null and send the event
-  onClose() {
+  onClose(): void {
     this.topic = null;
     this.topicControl.onSelected.emit(this.topic);
   }
