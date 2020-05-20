@@ -79,9 +79,13 @@ export class TopicCreatorComponent implements OnInit {
       this.errorText = 'Please add a title';
       return;
     }
+    this.updateTopicData();
+    this.downloadTool.DownloadTextToFileAsJson(this.topic, this.topic.title);
+  }
+  //Updates the values for the current topic
+  updateTopicData(): void {
     this.topic.title = this.title.myText;
     this.topic.description = this.descriptionField.myText;
     this.topic.text = this.mainTopic.content;
-    this.downloadTool.DownloadTextToFileAsJson(this.topic, this.topic.title);
   }
 }
