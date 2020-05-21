@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-creator-base.component';
 import { HowToDisplayComponent } from '../how-to-display/how-to-display.component';
 import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';

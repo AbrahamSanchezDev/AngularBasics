@@ -1,6 +1,0 @@
-{
-  "title": "The Nice title",
-  "description": "We are a description",
-  "text": "this is the Img:\n    <img src=\"https://scotch-res.cloudinary.com/image/upload/w_1050,q_auto:good,f_auto/media/272/RbhNRo2DRWOFBC1KChrl_g2SameHeight.png.jpg\" />\n    \n    now this should be code!\n    <center><b> This is bold!</b></center>\n    [code]\n    doPreview(): void {\n      this.updateTopicData();\n      console.log(this.topic.text);\n  \n      this.replaceTags();\n  \n      console.log(this.topic.text);\n  \n      this.preview.topic = this.topic;\n    }\n    [/code]\n    \n    ",
-  "content": []
-}
