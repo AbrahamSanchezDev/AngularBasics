@@ -1,4 +1,4 @@
-<div *ngIf="isValid()" class="displayHowTo">
+<div *ngIf="isValid()" class="displayHowTo {{ extraClass }}">
   <button (click)="onClose()" class="closeButton">X</button>
   <div class="displayText">
     <!-- Display Topic Title -->
@@ -6,7 +6,7 @@
     <!-- Display Topic Description -->
     <p class="descriptions">{{ topic.description }}</p>
     <!-- Display the main -->
-    <p>{{ topic.text }}</p>
+    <p [innerHtml]="topic.text" class="mainDisplay"></p>
   </div>
   <!-- Check for what type of content it should display -->
   <div *ngFor="let content of getContent()">
@@ -19,7 +19,7 @@
       ></p>
       <!-- Display the Imgs -->
       <div *ngSwitchCase="'Img'" class="imgs">
-        <img src="{{ getContentText(content) }}" class="imgObj" />
+        <img class="imgObj" src="{{ getContentText(content) }}" />
       </div>
       <!-- Display the codes examples in the topic -->
       <pre

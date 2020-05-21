@@ -21,7 +21,7 @@ import { CodeDisplayComponent } from './components/Display/code-display/code-dis
 import { ToolsComponent } from './components/pages/tools/tools/tools.component';
 import { TopicSearchComponent } from './components/topic-search/topic-search.component';
 import { AddTextComponent } from './components/Input/add-text/add-text.component';
-
+import { TopicSimpleCreatorComponent } from './components/topic-simple-creator/topic-simple-creator.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +39,7 @@ import { AddTextComponent } from './components/Input/add-text/add-text.component
     ToolsComponent,
     TopicSearchComponent,
     AddTextComponent,
+    TopicSimpleCreatorComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,27 +6,24 @@ import { TopicData } from '../../model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
 import { TopicControlService } from 'src/app/server/topic/topic-control.service';
 import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';
+import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-creator-base.component';
 
 @Component({
   selector: 'app-topic-creator',
   templateUrl: './topic-creator.component.html',
-  styleUrls: ['./topic-creator.component.css'],
+  styleUrls: [
+    './topic-creator.component.css',
+    '../Topic/topic-creator-base/topic-creator-base.component.css',
+  ],
 })
-export class TopicCreatorComponent implements OnInit {
-  @ViewChild('titleField') title: TextFieldComponent;
-  @ViewChild('descriptionField') descriptionField: TextFieldComponent;
-  @ViewChild('mainTopic') mainTopic: InputMultilineComponent;
-
-  errorText: string = '';
-  topicName: string = 'Title';
-  topicDescription: string = 'Description';
-  introText: string = 'Intro / Main topic Text';
-
-  private topic: TopicObjModule = new TopicObjModule();
+export class TopicCreatorComponent extends TopicCreatorBaseComponent
+  implements OnInit {
   constructor(
     private topicControl: TopicControlService,
-    private downloadTool: DownloadToolService
-  ) {}
+    protected downloadTool: DownloadToolService
+  ) {
+    super(downloadTool);
+  }
   ngOnInit(): void {}
 
   //Add new Simple text to the topic
@@ -44,17 +41,6 @@ export class TopicCreatorComponent implements OnInit {
   //Add content of the given type to the topic
   addContent(dataType: TopicDataType, textToShow?: string): void {
     this.topic.content.push({ data: dataType, text: textToShow });
-  }
-  //Returns the type of the given content and return it as string
-  getType(content: TopicData): string {
-    return TopicDataType[content.data];
-  }
-  //Returns the text of the given topic
-  getContentText(content: TopicData): string {
-    if (content == null) {
-      return '';
-    }
-    return content.text;
   }
   //Returns the content of the given topic
   getContentCode(content: TopicData): string {
@@ -112,21 +98,5 @@ export class TopicCreatorComponent implements OnInit {
   //Returns all the topic data in the current topic
   getContent(): TopicData[] {
     return this.topic.content;
-  }
-  //Check for valid values and create the json file
-  checkText(): void {
-    this.errorText = '';
-    if (this.title.myText == null || this.title.myText == '') {
-      this.errorText = 'Please add a title';
-      return;
-    }
-    this.updateTopicData();
-    this.downloadTool.DownloadTextToFileAsJson(this.topic, this.topic.title);
-  }
-  //Updates the values for the current topic
-  updateTopicData(): void {
-    this.topic.title = this.title.myText;
-    this.topic.description = this.descriptionField.myText;
-    this.topic.text = this.mainTopic.content;
   }
 }

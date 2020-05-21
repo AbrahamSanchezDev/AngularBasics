@@ -15,8 +15,13 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
     'How to change variable in a component via html',
     'How to keep track of a component in the html',
     'How to use if in html',
+    'The Nice title',
   ];
-
+  //Set data to replace the tags
+  protected initData(data: TopicObjModule): TopicObjModule {
+    data.text = this.replaceTags(data.text);
+    return data;
+  }
   //Repaint the code from prettyprint
   rePaintCode() {
     PR.prettyPrint();

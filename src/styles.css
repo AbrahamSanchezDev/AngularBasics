@@ -26,3 +26,16 @@ body {
   cursor: pointer;
   float: right;
 }
+.imgs {
+  text-align: left;
+}
+.imgObj {
+  max-width: 90%;
+  max-height: 300px;
+  background-color: black;
+  border-radius: 15px;
+  border: 1px rgba(202, 202, 202, 0.589) solid;
+}
+.center {
+  text-align: center;
+}

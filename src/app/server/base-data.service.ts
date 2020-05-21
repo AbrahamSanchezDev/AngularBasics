@@ -24,11 +24,13 @@ export abstract class BaseDataService<T> {
       this.http
         .get<T>(this.jsonPath + this.fileNames[i] + '.json')
         .subscribe((data) => {
+          data = this.initData(data);
           this.allData.push(data);
         });
     }
     return this.allData;
   }
+  protected abstract initData(data: T): T;
   //Search for topics that match the given topic name
   getData(topicName: string): T[] {
     this.customData.length = 0;
@@ -49,5 +51,40 @@ export abstract class BaseDataService<T> {
   //Call the search event
   search(text: string): void {
     this.onSearch.emit(text);
+  }
+  //Replace the tags for the correct code and classes
+  replaceTags(text: string): string {
+    let imgText = this.replaceText(text, '<img ', '<img class="imgObj"');
+    let codeStart = this.replaceText(
+      imgText,
+      '[code]',
+      '<div><pre class="prettyprint linenums codeContainer">'
+    );
+    let final = this.replaceText(codeStart, '[/code]', '</pre></div>');
+    return final;
+  }
+  //Replace the text for a new one
+  replaceText(text: string, original: string, newText: string): string {
+    // The general pattern is = text.split(search).join(replacement)
+    var newText = text.split(original).join(newText);
+    return newText;
+  }
+  //se the given text to have the code tags
+  setToCode(text: string, textToPrelace: string): string {
+    return text.replace(
+      textToPrelace,
+      `[code] 
+    ${textToPrelace}
+[/code]`
+    );
+  }
+  //Set the selected text to be an img
+  setToImg(text: string, textToPrelace: string): string {
+    let noSpaces = textToPrelace.replace(/\s/g, '');
+    return text.replace(textToPrelace, `<img src="${noSpaces}"/>`);
+  }
+  //Conbine the 3 texts as html tags
+  setToTag(text: string, tag: string, textToPrelace): string {
+    return text.replace(textToPrelace, `<${tag}>${textToPrelace}</${tag}>`);
   }
 }

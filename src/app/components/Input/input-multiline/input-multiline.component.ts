@@ -9,6 +9,7 @@ export class InputMultilineComponent implements OnInit {
   @Input() title: string = '';
   @Input() cssClass: string = 'expInputArea';
   @Input() content: string;
+  @Input() height: string = '150px';
   constructor() {}
 
   ngOnInit(): void {}
