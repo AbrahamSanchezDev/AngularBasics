@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TopicObjModule } from '../../model/topic-obj/topic-obj.module';
-import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
+import { TopicDataType } from './node_modules/src/app/model/enum/topic-data-type.enum';
 import { BaseDataService } from '../base-data.service';
 
 declare const PR: any;
@@ -10,7 +10,7 @@ declare const PR: any;
 })
 export class TopicControlService extends BaseDataService<TopicObjModule> {
   jsonPath: string = 'assets/topics/';
-  fileNames: string[] = ['How to use variables in html.json'];
+  fileNames: string[] = ['MisakaTopic.json'];
 
   //Repaint the code from prettyprint
   rePaintCode() {
