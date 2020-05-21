@@ -10,7 +10,12 @@ declare const PR: any;
 })
 export class TopicControlService extends BaseDataService<TopicObjModule> {
   jsonPath: string = 'assets/topics/';
-  fileNames: string[] = ['How to use variables in html.json'];
+  fileNames: string[] = [
+    'How to use variables in html',
+    'How to change variable in a component via html',
+    'How to keep track of a component in the html',
+    'How to use if in html',
+  ];
 
   //Repaint the code from prettyprint
   rePaintCode() {

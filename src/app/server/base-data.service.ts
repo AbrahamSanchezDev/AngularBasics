@@ -21,9 +21,11 @@ export abstract class BaseDataService<T> {
     }
     // Get all the files that are in the file names
     for (let i = 0; i < this.fileNames.length; i++) {
-      this.http.get<T>(this.jsonPath + this.fileNames[i]).subscribe((data) => {
-        this.allData.push(data);
-      });
+      this.http
+        .get<T>(this.jsonPath + this.fileNames[i] + '.json')
+        .subscribe((data) => {
+          this.allData.push(data);
+        });
     }
     return this.allData;
   }
