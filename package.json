@@ -9,8 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy": "gh-pages -d dist",
-    "buildIt": "ng build --prod --base-href 'https://holykiller.github.io/AngularBasics/'",
-    "bad": "gh-pages -d dist && ng build --prod --base-href 'https://holykiller.github.io/AngularBasics/'"
+    "buildIt": "ng build --prod --base-href 'https://holykiller.github.io/AngularBasics/'"
   },
   "homepage": "https://holykiller.github.io/AngularBasics/",
   "private": true,
