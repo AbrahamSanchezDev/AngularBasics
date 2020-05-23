@@ -61,6 +61,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       selected.toString()
     );
   }
+  //Set the selected text to have the given tag
   setToTag(tagName: string): void {
     let selected = window.getSelection();
     if (!selected.toString()) {
@@ -74,7 +75,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   }
   //Fill data for testing
   testingData() {
-    this.title.myText = 'The Nice title';
+    this.title.myText = 'Some nice title';
     this.descriptionField.myText = 'We are a description';
     this.mainTopic.content = `    
     `;
