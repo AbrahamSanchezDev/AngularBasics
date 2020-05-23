@@ -57,13 +57,10 @@ export abstract class BaseDataService<T> {
     //Img
     let imgText = this.replaceText(text, '<img ', '<img class="imgObj"');
     //Code
-    let codeStart = this.replaceText(
-      imgText,
-      '[code]',
-      '<div><pre class="prettyprint linenums codeContainer">'
-    );
-    let final = this.replaceText(codeStart, '[/code]', '</pre></div>');
-
+    let codeStart = `<div><pre class="prettyprint linenums codeContainer"><textarea>`;
+    let codeEnd = `</textarea></pre></div>`;
+    let codeStartText = this.replaceText(imgText, '[code]', codeStart);
+    let final = this.replaceText(codeStartText, '[/code]', codeEnd);
     return final;
   }
   //Get the text between the given start and the end

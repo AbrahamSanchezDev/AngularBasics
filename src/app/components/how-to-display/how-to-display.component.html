@@ -1,5 +1,6 @@
 <div *ngIf="isValid()" class="displayHowTo {{ extraClass }}">
   <button (click)="onClose()" class="closeButton">X</button>
+  <ng-content> </ng-content>
   <div class="displayText">
     <!-- Display Topic Title -->
     <h1>{{ topic.title }}</h1>
@@ -22,11 +23,11 @@
         <img class="imgObj" src="{{ getContentText(content) }}" />
       </div>
       <!-- Display the codes examples in the topic -->
-      <pre
-        *ngSwitchCase="'Code'"
-        class="prettyprint linenums:4 codeContainer"
-        [innerText]="getContentText(content)"
-      ></pre>
+      <div *ngSwitchCase="'Code'">
+        <app-code-display
+          codeText="{{ getContentText(content) }}"
+        ></app-code-display>
+      </div>
       <!-- Display Error for when there there is no match -->
       <p *ngSwitchDefault>
         Error No Type found! looking for index {{ getType(content) }}

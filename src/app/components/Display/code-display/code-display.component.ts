@@ -10,7 +10,14 @@ import { element } from 'protractor';
 export class CodeDisplayComponent implements OnInit {
   constructor(private topicControl: TopicControlService) {}
 
-  @Input() codeText: string;
+  @Input() codeText: string = `
+  //Repaint the code
+  onCodeChanged(): void {
+    console.log(this.codeText);
+    this.topicControl.rePaintCode();
+    console.log('Changed Something');
+  }
+  `;
 
   ngOnInit(): void {}
   //Repaint the code
@@ -18,5 +25,9 @@ export class CodeDisplayComponent implements OnInit {
     console.log(this.codeText);
     this.topicControl.rePaintCode();
     console.log('Changed Something');
+  }
+
+  onCheck() {
+    console.log(this.codeText);
   }
 }
