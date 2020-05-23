@@ -17,7 +17,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   implements OnInit {
   @ViewChild('preview') preview: HowToDisplayComponent;
 
-  testingAtm: boolean = true;
+  testingAtm: boolean = false;
 
   constructor(
     protected downloadTool: DownloadToolService,
