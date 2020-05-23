@@ -6,7 +6,7 @@
     <!-- Display Topic Description -->
     <p class="descriptions">{{ topic.description }}</p>
     <!-- Display the main -->
-    <p [innerHtml]="topic.text" class="mainDisplay"></p>
+    <p [innerHtml]="getTopicText()" class="mainDisplay"></p>
   </div>
   <!-- Check for what type of content it should display -->
   <div *ngFor="let content of getContent()">

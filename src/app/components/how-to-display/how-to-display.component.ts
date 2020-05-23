@@ -32,6 +32,9 @@ export class HowToDisplayComponent implements AfterViewChecked {
   getContent(): TopicData[] {
     return this.topic.content;
   }
+  getTopicText(): string {
+    return this.topic.text;
+  }
   //Returns the text of the given topic
   getContentText(content: TopicData): string {
     if (content == null) {
@@ -58,5 +61,9 @@ export class HowToDisplayComponent implements AfterViewChecked {
   onClose(): void {
     this.topic = null;
     this.topicControl.onSelected.emit(this.topic);
+  }
+
+  getToText(text: string) {
+    return text.toString();
   }
 }

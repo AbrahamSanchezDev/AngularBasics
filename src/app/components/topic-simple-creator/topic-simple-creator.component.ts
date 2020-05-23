@@ -3,6 +3,7 @@ import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-cre
 import { HowToDisplayComponent } from '../how-to-display/how-to-display.component';
 import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';
 import { TopicControlService } from 'src/app/server/topic/topic-control.service';
+import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
 
 @Component({
   selector: 'app-topic-simple-creator',
@@ -16,7 +17,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   implements OnInit {
   @ViewChild('preview') preview: HowToDisplayComponent;
 
-  testingAtm: boolean = false;
+  testingAtm: boolean = true;
 
   constructor(
     protected downloadTool: DownloadToolService,
@@ -76,38 +77,69 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   testingData() {
     this.title.myText = 'The Nice title';
     this.descriptionField.myText = 'We are a description';
-    this.mainTopic.content = `this is the Img:
-    <img src="https://scotch-res.cloudinary.com/image/upload/w_1050,q_auto:good,f_auto/media/272/RbhNRo2DRWOFBC1KChrl_g2SameHeight.png.jpg" />
-    
-    now this should be code!
-    <center><b> This is bold!</b></center>
-    [code]
-    doPreview(): void {
-      this.updateTopicData();
-      console.log(this.topic.text);
-  
-      this.replaceTags();
-  
-      console.log(this.topic.text);
-  
-      this.preview.topic = this.topic;
-    }
-    [/code]
-    
-    some other code
+    this.mainTopic.content = `
+    There are times when you want to display and array of variables been single data of stings or an array of objects and to do this the for loop is a good idea.
+
+In this example there is an array of objects that have "someText" and "someId" in them
+[code] 
+//Ts file
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-howto-for',
+  templateUrl: './howto-for.component.html',
+  styleUrls: ['./howto-for.component.css'],
+})
+export class HowtoForComponent implements OnInit {
+  allTheObjs: any[] = [
+    {
+      someText: 'This is an obj text',
+      someId: 1,
+    },
+    {
+      someText: 'Hello world!',
+      someId: 5,
+    },
+    {
+      someText: 'Angular how to!',
+      someId: 10,
+    },
+    {
+      someText: 'And this would be the last text',
+      someId: 15,
+    },
+  ];
+  constructor() {}
+
+  ngOnInit(): void {}
+}
+[/code]
+Codeeeee
+[code]
+ //Html
+
+ <div *ngFor="let obj of allTheObjs">
+   <h1>{{ obj.someText }}</h1>
+   <p>This is the value : {{ obj.someId }}</p>
+ </div>
+
+[/code]
+
+And this is how you would display them using for loop
 
 
-    [code]
-    //Replace the text for a new one
-    replaceText(text: string, original: string, newText: string): string {
-      // var newText = text.replace(original, newText);
-      var newText = text.replace(new RegExp(original, 'gi'), newText);
-      return newText;
-    }
-    [/code]
-
-
-    https://profile.es/pro/wp-content/media/directivas-de-angular-programaci%C3%B3n.jpg
+<img src="https://i.imgur.com/ITaJWbJ.png"/>
     `;
+    this.topic.content.push({
+      data: TopicDataType.Code,
+      text: `
+       //Html
+      <div>
+      <div *ngFor="let obj of allTheObjs">
+        <h1>{{ obj.someText }}</h1>
+        <p>This is the value : {{ obj.someId }}</p>
+      </div>
+     </div>`,
+    });
   }
 }

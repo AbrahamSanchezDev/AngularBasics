@@ -17,11 +17,7 @@
     title="{{ introText }}"
     height="600px"
   ></app-input-multiline>
-  <button
-    *ngIF="testingAtm"
-    (click)="testingData()"
-    class="preview confirmButton"
-  >
+  <button (click)="testingData()" class="preview confirmButton">
     Test Data
   </button>
   <button (click)="doPreview()" class="preview confirmButton">Preview</button>

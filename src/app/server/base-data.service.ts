@@ -54,14 +54,34 @@ export abstract class BaseDataService<T> {
   }
   //Replace the tags for the correct code and classes
   replaceTags(text: string): string {
+    //Img
     let imgText = this.replaceText(text, '<img ', '<img class="imgObj"');
+    //Code
     let codeStart = this.replaceText(
       imgText,
       '[code]',
       '<div><pre class="prettyprint linenums codeContainer">'
     );
     let final = this.replaceText(codeStart, '[/code]', '</pre></div>');
+
     return final;
+  }
+  //Get the text between the given start and the end
+  parseBetween(beginString, endString, originalString) {
+    var beginIndex = originalString.indexOf(beginString);
+    if (beginIndex === -1) {
+      return null;
+    }
+    var beginStringLength = beginString.length;
+    var substringBeginIndex = beginIndex + beginStringLength;
+    var substringEndIndex = originalString.indexOf(
+      endString,
+      substringBeginIndex
+    );
+    if (substringEndIndex === -1) {
+      return null;
+    }
+    return originalString.substring(substringBeginIndex, substringEndIndex);
   }
   //Replace the text for a new one
   replaceText(text: string, original: string, newText: string): string {
