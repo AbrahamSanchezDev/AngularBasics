@@ -6,6 +6,12 @@
     "homepage": "https://holykiller.github.io/AngularBasics/",
     "commands": [
       {
+        "name": "Start Server",
+        "singleInstance": true,
+        "color": "#fff",
+        "command": "ng serve -o"
+      },
+      {
         "name": "Buid Div",
         "singleInstance": true,
         "color": "#fff",

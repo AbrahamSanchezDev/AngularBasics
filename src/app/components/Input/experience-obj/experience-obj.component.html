@@ -1,25 +1,35 @@
 <div class="expObj">
-    <!-- Header -->
-    <app-header title="Experience Json Creation"></app-header>
-    <!-- Get the title for the ExpObj -->
-    <div class="inputObj">
-        <label>Title</label>
-        <input type="text" [(ngModel)]="expObj.title">
-    </div>
-    <!-- Get the link that the image will send you to for the ExpObj -->
-    <div class="inputObj">
-        <label>Link</label>
-        <input type="text" [(ngModel)]="expObj.link">
-    </div>
-    <!-- Get the image name with the ending .png,.jpg ,etc based in the path assets/img for the ExpObj -->
-    <div class="inputObj">
-        <label>ImagePath</label>
-        <input type="text" [(ngModel)]="expObj.img">
-    </div>
-    <!-- Multi line area that will be turn in to an array of strings to be used in the expObjDisplay -->
-    <app-multi-line-to-json cssClass="expInputArea" #multiText></app-multi-line-to-json>
-    <!-- Header -->
-    <app-header title="Download Experience File" cssClass="smallHeader"></app-header>
-    <!-- Download the file with the given name as a json -->
-    <app-add-text (addTextData)="createExp($event)" tempText="File name..." addText="Download File"></app-add-text>
+  <!-- Header -->
+  <app-header title="Experience Json Creation"></app-header>
+  <!-- Get the title for the ExpObj -->
+  <div class="inputObj">
+    <label>Title</label>
+    <input type="text" [(ngModel)]="expObj.title" />
+  </div>
+  <!-- Get the link that the image will send you to for the ExpObj -->
+  <div class="inputObj">
+    <label>Link</label>
+    <input type="text" [(ngModel)]="expObj.link" />
+  </div>
+  <!-- Get the image name with the ending .png,.jpg ,etc based in the path assets/img for the ExpObj -->
+  <div class="inputObj">
+    <label>ImagePath</label>
+    <input type="text" [(ngModel)]="expObj.img" />
+  </div>
+  <!-- Multi line area that will be turn in to an array of strings to be used in the expObjDisplay -->
+  <app-multi-line-to-json
+    cssClass="expInputArea"
+    #multiText
+  ></app-multi-line-to-json>
+  <!-- Header -->
+  <app-header
+    title="Download Experience File"
+    cssClass="smallHeader"
+  ></app-header>
+  <!-- Download the file with the given name as a json -->
+  <app-add-text
+    (addTextData)="createExp($event)"
+    tempText="File name..."
+    addText="Download File"
+  ></app-add-text>
 </div>
