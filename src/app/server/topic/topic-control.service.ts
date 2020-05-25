@@ -17,6 +17,7 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
     'How to use if in html',
     'How to use for loop in html',
     'How to use html input fields',
+    'How to pass boolean value to a component',
   ];
   //Set data to replace the tags
   protected initData(data: TopicObjModule): TopicObjModule {
