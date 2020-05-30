@@ -1,5 +1,5 @@
 .mainAbout {
-  background: rgba(202, 202, 202, 0.589);
+  background: var(--creatorbg);
   margin-top: 5px;
   padding-left: 3%;
   padding-top: 20px;
