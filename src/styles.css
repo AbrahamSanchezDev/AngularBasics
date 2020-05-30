@@ -1,5 +1,22 @@
+:root {
+  /* 
+  --bg: rgb(60, 130, 196);     
+  --displaybg: rgb(196, 196, 196);    
+  --topicbg: rgb(68, 68, 68);     
+  --topicbg: rgb(68, 68, 68);
+  */
+  --bg: #3e5b7b;
+  --displaybg: #2f4761;
+  --topicbg: rgb(68, 68, 68);
+  --topicText: #fff;
+  --textColor: rgb(236, 236, 236);
+  --creatorbg: #2f4761;
+}
 body {
-  background-color: rgb(60, 130, 196);
+  background-color: var(--bg);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
 }
 .twoitemsinglelineone {
   width: 100%;
@@ -38,4 +55,8 @@ body {
 }
 .center {
   text-align: center;
+}
+.intro {
+  color: var(--textColor);
+  padding-bottom: 10px;
 }

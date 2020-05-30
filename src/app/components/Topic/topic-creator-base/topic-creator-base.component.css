@@ -1,16 +1,16 @@
 .howTo {
   margin-top: 10px;
   align-self: center;
-  background: rgba(202, 202, 202, 0.589);
+  background: var(--creatorbg);
   padding: 1%;
+  border-radius: 10px;
 }
 .topicTitle {
   height: 30px;
   padding: 10px;
   text-align: center;
   font-style: oblique;
-  background: #333;
-  color: #fff;
+  background: var(--topicbg);
 }
 .inputField {
   /* width: 99%; */

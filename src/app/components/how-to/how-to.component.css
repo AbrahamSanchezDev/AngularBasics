@@ -5,8 +5,11 @@
 }
 .howToButton {
   position: relative;
-  margin-left: 5%;
-  width: 90%;
+  width: 98%;
+  margin-left: 1%;
   display: block;
   border-radius: 5px;
+  background-color: var(--topicbg);
+  color: var(--topicText);
+  text-align: left;
 }
