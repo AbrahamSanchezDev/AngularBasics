@@ -59,7 +59,7 @@ export abstract class BaseDataService<T> {
     //Video
     let videoStart = `
     <a target="_blank" href =`;
-    let videoEnd = ` >Video</a>`;
+    let videoEnd = ` >Video Link</a>`;
     let video = this.replaceText(imgText, '[video]', videoStart);
     let videoFinal = this.replaceText(video, '[/video]', videoEnd);
     //Code
