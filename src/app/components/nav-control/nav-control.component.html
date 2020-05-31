@@ -1,5 +1,23 @@
-<nav class="mainNav">
-  <a routerLink="/">Main</a>
-  <a routerLink="/tools">Tools</a>
-  <a routerLink="/about">About</a>
-</nav>
+<div>
+  <nav class="main-nav">
+    <div class="logo">
+      <h4>{{ title }}</h4>
+    </div>
+    <ul class=" links {{ linksClass }}" #nav>
+      <li>
+        <a routerLink="/" (click)="onChanged()">Main</a>
+      </li>
+      <li>
+        <a routerLink="/tools" (click)="onChanged()">Tools</a>
+      </li>
+      <li>
+        <a routerLink="/about" (click)="onChanged()">About</a>
+      </li>
+    </ul>
+    <div class="burger {{ burgerOthers }}" (click)="onBurger()">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
+</div>
