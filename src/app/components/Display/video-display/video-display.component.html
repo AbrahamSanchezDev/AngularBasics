@@ -1,1 +1,14 @@
-<p>video-display works!</p>
+<div>
+  Cur Path : {{ path }}
+  <br />
+  <iframe
+    [class.thumbnail]="thumbnail"
+    width="560"
+    height="315"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+    [src]="getUrl()"
+  ></iframe>
+</div>

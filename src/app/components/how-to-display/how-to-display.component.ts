@@ -1,4 +1,10 @@
-import { Component, OnInit, AfterViewChecked, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewChecked,
+  Input,
+  ViewContainerRef,
+} from '@angular/core';
 import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 import { TopicControlService } from 'src/app/server/topic/topic-control.service';
 import { TopicData } from 'src/app/model/topic/topic-data';
@@ -13,7 +19,10 @@ export class HowToDisplayComponent implements AfterViewChecked {
   @Input() extraClass: string = 'mostTop';
   topic: TopicObjModule;
 
-  constructor(private topicControl: TopicControlService) {
+  constructor(
+    private topicControl: TopicControlService,
+    private viewContainerRef: ViewContainerRef
+  ) {
     topicControl.onSelected.subscribe((topic) => this.onSelectedHowTo(topic));
     topicControl.onSearch.subscribe((text) => {
       this.onClose();
@@ -61,9 +70,5 @@ export class HowToDisplayComponent implements AfterViewChecked {
   onClose(): void {
     this.topic = null;
     this.topicControl.onSelected.emit(this.topic);
-  }
-
-  getToText(text: string) {
-    return text.toString();
   }
 }

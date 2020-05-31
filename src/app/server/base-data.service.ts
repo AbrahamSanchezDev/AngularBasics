@@ -55,11 +55,17 @@ export abstract class BaseDataService<T> {
   //Replace the tags for the correct code and classes
   replaceTags(text: string): string {
     //Img
-    let imgText = this.replaceText(text, '<img ', '<img class="imgObj"');
+    let imgText = this.replaceText(text, '<img ', `<img class="imgObj"`);
+    //Video
+    let videoStart = `
+    <a target="_blank" href =`;
+    let videoEnd = ` >Video</a>`;
+    let video = this.replaceText(imgText, '[video]', videoStart);
+    let videoFinal = this.replaceText(video, '[/video]', videoEnd);
     //Code
     let codeStart = `<div><pre class="prettyprint linenums codeContainer"><textarea>`;
     let codeEnd = `</textarea></pre></div>`;
-    let codeStartText = this.replaceText(imgText, '[code]', codeStart);
+    let codeStartText = this.replaceText(videoFinal, '[code]', codeStart);
     let final = this.replaceText(codeStartText, '[/code]', codeEnd);
     return final;
   }
