@@ -20,6 +20,7 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
     'How to pass boolean value to a component',
     'How to use switch in the html using angular',
     'How to insert content to a component',
+    'How to get started with Angular',
   ];
   //Set data to replace the tags
   protected initData(data: TopicObjModule): TopicObjModule {
