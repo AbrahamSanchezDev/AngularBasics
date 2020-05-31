@@ -57,9 +57,14 @@ export abstract class BaseDataService<T> {
     //Img
     let imgText = this.replaceText(text, '<img ', `<img class="imgObj"`);
     //Video
-    let videoStart = `
-    <a target="_blank" href =`;
-    let videoEnd = ` >Video Link</a>`;
+    let videoStart = `    
+    Video:
+    <iframe width="560" height="315" 
+    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
+    picture-in-picture" allowfullscreen
+    src=" 
+    `;
+    let videoEnd = ` "></iframe>`;
     let video = this.replaceText(imgText, '[video]', videoStart);
     let videoFinal = this.replaceText(video, '[/video]', videoEnd);
     //Code

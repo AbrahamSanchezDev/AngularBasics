@@ -9,6 +9,7 @@ import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 import { TopicControlService } from 'src/app/server/topic/topic-control.service';
 import { TopicData } from 'src/app/model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-how-to-display',
@@ -21,7 +22,7 @@ export class HowToDisplayComponent implements AfterViewChecked {
 
   constructor(
     private topicControl: TopicControlService,
-    private viewContainerRef: ViewContainerRef
+    private sanitizer: DomSanitizer
   ) {
     topicControl.onSelected.subscribe((topic) => this.onSelectedHowTo(topic));
     topicControl.onSearch.subscribe((text) => {
@@ -41,8 +42,9 @@ export class HowToDisplayComponent implements AfterViewChecked {
   getContent(): TopicData[] {
     return this.topic.content;
   }
-  getTopicText(): string {
-    return this.topic.text;
+  getTopicText(): SafeHtml {
+    var saveHtml = this.sanitizer.bypassSecurityTrustHtml(this.topic.text);
+    return saveHtml;
   }
   //Returns the text of the given topic
   getContentText(content: TopicData): string {
