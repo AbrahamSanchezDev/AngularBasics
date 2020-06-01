@@ -42,7 +42,7 @@ export class HowToDisplayComponent implements AfterViewChecked {
   getContent(): TopicData[] {
     return this.topic.content;
   }
-  getTopicText(): SafeHtml {
+  getTopicText() {
     var saveHtml = this.sanitizer.bypassSecurityTrustHtml(this.topic.text);
     return saveHtml;
   }

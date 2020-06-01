@@ -1,5 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+const lessThan = '&lt';
+const graterThan = '&gt';
 
 @Injectable({
   providedIn: 'root',
@@ -56,26 +58,28 @@ export abstract class BaseDataService<T> {
   replaceTags(text: string): string {
     //Img
     let imgText = this.replaceText(text, '<img ', `<img class="imgObj"`);
+    //Code
+    // let codeStart = `<div><pre class="prettyprint linenums codeContainer">`;
+    // let codeEnd = `</pre></div>`;
+    // let codeStartText = this.replaceText(removeDivs, '[code]', codeStart);
+    // let final = this.replaceText(codeStartText, '[/code]', codeEnd);
+    let final = this.checkForCodes(imgText);
     //Video
     let videoStart = `    
-    Video:
-    <iframe width="560" height="315" 
-    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
-    picture-in-picture" allowfullscreen
-    src=" 
-    `;
-    let videoEnd = ` "></iframe>`;
-    let video = this.replaceText(imgText, '[video]', videoStart);
+     <iframe width="560" height="315" 
+     frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
+     picture-in-picture" allowfullscreen
+     src=" 
+     `;
+    let videoEnd = `"></iframe>`;
+    let video = this.replaceText(final, '[video]', videoStart);
     let videoFinal = this.replaceText(video, '[/video]', videoEnd);
-    //Code
-    let codeStart = `<div><pre class="prettyprint linenums codeContainer"><textarea>`;
-    let codeEnd = `</textarea></pre></div>`;
-    let codeStartText = this.replaceText(videoFinal, '[code]', codeStart);
-    let final = this.replaceText(codeStartText, '[/code]', codeEnd);
-    return final;
+
+    return videoFinal;
   }
+
   //Get the text between the given start and the end
-  parseBetween(beginString, endString, originalString) {
+  parseBetween(beginString, endString, originalString): string {
     var beginIndex = originalString.indexOf(beginString);
     if (beginIndex === -1) {
       return null;
@@ -90,6 +94,71 @@ export abstract class BaseDataService<T> {
       return null;
     }
     return originalString.substring(substringBeginIndex, substringEndIndex);
+  }
+  //Check if it has code tag if so then change them all
+  checkForCodes(text: string): string {
+    var theText = text;
+    var indexCode = theText.indexOf('[code]');
+    while (indexCode != -1) {
+      theText = this.changeCode(theText);
+      indexCode = theText.indexOf('[code]');
+    }
+    return theText;
+  }
+  //Change the given text if it has code tag
+  changeCode(theText: string): string {
+    //Check if it has code tag
+    var index = theText.indexOf('[code]');
+    if (index == -1) {
+      return theText;
+    }
+    //Look for the text inside of the code tags
+    var foundText = this.parseBetween('[code]', '[/code]', theText);
+    var newHtml = foundText;
+    //Look if it has html tag
+    var divIndex = newHtml.indexOf('</div>');
+    if (divIndex != -1) {
+      newHtml = this.removeGiven(newHtml, '<div', 'div');
+      newHtml = this.checkForHtmls(newHtml);
+    }
+    //Set what the text will be replaced for
+    var codeText = `<div><pre class="prettyprint linenums codeContainer"> ${newHtml}</pre></div>`;
+    //Replace the text
+    var theNewText = this.replaceText(
+      theText,
+      `[code]${foundText}[/code]`,
+      codeText
+    );
+    return theNewText;
+  }
+  //Remove the given tag biggining and end < , >
+  removeGiven(original: string, lookingFor: string, tag: string): string {
+    let remove = '';
+    remove = this.replaceText(original, lookingFor, `${lessThan}${tag}`);
+    remove = this.replaceText(remove, `">`, `"${graterThan}`);
+    return remove;
+  }
+  //Replace the html tags
+  checkForHtmls(text: string) {
+    var tags = ['div', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'li', 'ul'];
+    tags.forEach((tag) => {
+      text = this.removeTo(text, tag);
+    });
+    return text;
+  }
+  //Remove < and > to the given text
+  removeTo(original: string, container: string): string {
+    let removePs = this.replaceText(
+      original,
+      `<${container}>`,
+      `${lessThan}p${graterThan}`
+    );
+    let removePsEnds = this.replaceText(
+      removePs,
+      `</${container}>`,
+      `${lessThan}/${container}${graterThan}`
+    );
+    return removePsEnds;
   }
   //Replace the text for a new one
   replaceText(text: string, original: string, newText: string): string {

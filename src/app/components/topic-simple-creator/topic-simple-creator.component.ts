@@ -3,6 +3,7 @@ import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-cre
 import { HowToDisplayComponent } from '../how-to-display/how-to-display.component';
 import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';
 import { TopicControlService } from 'src/app/server/topic/topic-control.service';
+import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 
 @Component({
   selector: 'app-topic-simple-creator',
@@ -79,5 +80,28 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
     this.descriptionField.myText = 'We are a description';
     this.mainTopic.content = `    
     `;
+  }
+  updateFromTopic(): void {
+    this.title.myText = this.topic.title;
+    this.descriptionField.myText = this.topic.description;
+    this.mainTopic.content = this.topic.text;
+  }
+  //On Selected imgs
+  onChange(event: any) {
+    var curFile = event.target.files[0];
+    let totalImgs = event.target.files.length;
+    if (totalImgs > 10) {
+      totalImgs = 10;
+    }
+    for (let i = 0; i < totalImgs; i++) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        var topic = reader.result[0];
+        var data = JSON.parse((reader.result as unknown) as string);
+        this.topic = data;
+        this.updateFromTopic();
+      };
+      reader.readAsText(curFile);
+    }
   }
 }
