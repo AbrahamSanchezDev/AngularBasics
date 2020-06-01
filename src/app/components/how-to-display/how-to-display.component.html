@@ -1,10 +1,6 @@
 <div *ngIf="isValid()" class="displayHowTo {{ extraClass }}">
   <div class="back-button">
-    <img
-      src="../../../assets/imgs/backButton.svg"
-      alt="back"
-      (click)="onClose()"
-    />
+    <img src="assets/svg/backButton.svg" alt="back" (click)="onClose()" />
   </div>
 
   <ng-content> </ng-content>
