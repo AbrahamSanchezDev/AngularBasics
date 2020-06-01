@@ -2,11 +2,11 @@
   width: auto;
   display: block;
   margin-bottom: 5px;
+  margin-right: 5px;
 }
 .howToButton {
   position: relative;
-  width: 98%;
-  margin-left: 1%;
+  width: 100%;
   display: block;
   border-radius: 5px;
   background-color: var(--topicbg);

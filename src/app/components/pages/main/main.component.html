@@ -1,5 +1,11 @@
 <div class="mainParent">
   <app-topic-search></app-topic-search>
   <app-how-to-display></app-how-to-display>
-  <app-how-to *ngFor="let topic of topics" [topic]="topic"></app-how-to>
+  <div class="topics-parent">
+    <app-how-to
+      *ngFor="let topic of topics"
+      [topic]="topic"
+      class="topics"
+    ></app-how-to>
+  </div>
 </div>
