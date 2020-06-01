@@ -1,5 +1,5 @@
 .displayHowTo {
-  background-color: var(--displaybg);
+  background: linear-gradient(var(--displaybg), var(--displaybg2));
   border-radius: 15px;
   /* font-size: 1.2em; */
   width: 97%;
@@ -16,6 +16,7 @@
 }
 .displayText {
   text-align: left;
+  padding-top: 10px;
 }
 .displayText h1 {
   text-align: center;
@@ -38,6 +39,27 @@
   margin-right: 5px;
   float: right;
 }
+.back-button {
+  width: 150px;
+  height: 50px;
+  background: linear-gradient(rgb(255, 0, 0), rgb(115, 0, 0));
+  background-size: cover;
+  border-radius: 50%;
+  top: 2px;
+  left: 5px;
+  position: absolute;
+  cursor: pointer;
+  display: block;
+  box-shadow: rgba(0, 0, 0, 0.2) 3px 5px 5px;
+}
+.back-button img {
+  position: absolute;
+  top: -5px;
+  left: -10px;
+  width: 150px;
+  height: 60px;
+}
+
 .displayText {
   text-align: left;
   font-family: sans-serif;

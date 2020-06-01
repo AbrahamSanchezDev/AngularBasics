@@ -1,5 +1,12 @@
 <div *ngIf="isValid()" class="displayHowTo {{ extraClass }}">
-  <button (click)="onClose()" class="closeButton">X</button>
+  <div class="back-button">
+    <img
+      src="../../../assets/imgs/backButton.svg"
+      alt="back"
+      (click)="onClose()"
+    />
+  </div>
+
   <ng-content> </ng-content>
   <div class="displayText">
     <!-- Display Topic Title -->

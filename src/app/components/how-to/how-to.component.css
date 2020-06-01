@@ -12,4 +12,6 @@
   background-color: var(--topicbg);
   color: var(--topicText);
   text-align: left;
+
+  font-family: "Poppins", sans-serif;
 }

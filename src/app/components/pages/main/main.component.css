@@ -3,8 +3,8 @@
 }
 .topics-parent {
   display: flex;
-  flex-flow: row wrap;
   flex-wrap: wrap;
+  flex-flow: row wrap;
   margin: 5px 5px;
 }
 .topics {
