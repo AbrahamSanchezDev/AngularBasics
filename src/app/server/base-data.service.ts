@@ -118,7 +118,20 @@ export abstract class BaseDataService<T> {
     //Look if it has html tag
     var divIndex = newHtml.indexOf('</div>');
     if (divIndex != -1) {
-      newHtml = this.removeGiven(newHtml, '<div', 'div');
+      //Remove Comments
+      newHtml = this.replaceText(newHtml, '<!', `${lessThan}!`);
+      newHtml = this.replaceText(newHtml, '->', `-${graterThan}`);
+      //Remove Breaks
+      newHtml = this.replaceText(
+        newHtml,
+        '<br />',
+        `${lessThan}br /${graterThan}`
+      );
+      //Remove the ones that are not fully closed
+      var htmlParts = ['div,br,input,button', 'label', ''];
+      for (let i = 0; i < htmlParts.length; i++) {
+        newHtml = this.removeGiven(newHtml, htmlParts[i]);
+      }
       newHtml = this.checkForHtmls(newHtml);
     }
     //Set what the text will be replaced for
@@ -132,10 +145,17 @@ export abstract class BaseDataService<T> {
     return theNewText;
   }
   //Remove the given tag biggining and end < , >
-  removeGiven(original: string, lookingFor: string, tag: string): string {
+  removeGiven(original: string, tag: string): string {
     let remove = '';
-    remove = this.replaceText(original, lookingFor, `${lessThan}${tag}`);
     remove = this.replaceText(remove, `">`, `"${graterThan}`);
+    remove = this.replaceText(remove, `/>`, `/${graterThan}`);
+    remove = this.replaceText(original, `<${tag}`, `${lessThan}${tag}`);
+
+    remove = this.replaceText(
+      remove,
+      `</${tag}>`,
+      `${lessThan}/${tag}${graterThan}`
+    );
     return remove;
   }
   //Replace the html tags
