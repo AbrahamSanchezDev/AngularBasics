@@ -10,6 +10,7 @@ declare const PR: any;
 })
 export class TopicControlService extends BaseDataService<TopicObjModule> {
   jsonPath: string = 'assets/topics/';
+  firstPlace: string = 'How to get started with Angular';
   fileNames: string[] = [
     'How to use variables in html',
     'How to change variable in a component via html',
@@ -26,6 +27,10 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
   protected initData(data: TopicObjModule): TopicObjModule {
     data.text = this.replaceTags(data.text);
     return data;
+  }
+  //Place it in the first place check
+  protected firstPlaceObj(data: TopicObjModule): boolean {
+    return data.title == this.firstPlace;
   }
   //Repaint the code from prettyprint
   rePaintCode() {

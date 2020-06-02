@@ -27,11 +27,17 @@ export abstract class BaseDataService<T> {
         .get<T>(this.jsonPath + this.fileNames[i] + '.json')
         .subscribe((data) => {
           data = this.initData(data);
-          this.allData.push(data);
+          //Check if it should add to the start of the array wih unshift
+          if (this.firstPlaceObj(data)) {
+            this.allData.unshift(data);
+          } else {
+            this.allData.push(data);
+          }
         });
     }
     return this.allData;
   }
+  protected abstract firstPlaceObj(data: T): boolean;
   protected abstract initData(data: T): T;
   //Search for topics that match the given topic name
   getData(topicName: string): T[] {
