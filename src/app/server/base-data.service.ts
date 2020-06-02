@@ -63,10 +63,6 @@ export abstract class BaseDataService<T> {
     finalText = this.replaceText(finalText, '<app-', `${lessThan}app-`);
     finalText = this.replaceText(finalText, `></`, `${graterThan}${lessThan}/`);
     //Code
-    // let codeStart = `<div><pre class="prettyprint linenums codeContainer">`;
-    // let codeEnd = `</pre></div>`;
-    // let codeStartText = this.replaceText(removeDivs, '[code]', codeStart);
-    // let final = this.replaceText(codeStartText, '[/code]', codeEnd);
     finalText = this.checkForCodes(finalText);
     //Video
     let videoStart = `    
