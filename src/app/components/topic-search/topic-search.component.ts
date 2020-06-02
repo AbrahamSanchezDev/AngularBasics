@@ -17,6 +17,10 @@ export class TopicSearchComponent implements OnInit {
   ngOnInit(): void {}
   //Search the topic with the given text called by the AddTextComponent
   searchTopic(text: string) {
+    if (text == undefined || text == '') {
+      this.cancelSearch();
+      return;
+    }
     this.doingSearch = true;
     this.topicsServer.search(text);
   }

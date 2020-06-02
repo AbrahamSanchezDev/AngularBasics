@@ -10,6 +10,7 @@ export class AddTextComponent implements OnInit {
   @Input('tempText') tempPlaceHolder: string = 'Add...';
   @Input('addText') addText: string = 'Submit';
   @Input() clearIt: boolean = true;
+  @Input() reportEmpty: boolean = false;
   myText: string;
 
   constructor() {}
@@ -22,6 +23,10 @@ export class AddTextComponent implements OnInit {
       if (this.clearIt) {
         this.myText = null;
       }
+      return;
+    }
+    if (this.reportEmpty) {
+      this.addTextData.emit(this.myText);
     }
   }
 }
