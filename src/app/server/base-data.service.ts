@@ -56,14 +56,18 @@ export abstract class BaseDataService<T> {
   }
   //Replace the tags for the correct code and classes
   replaceTags(text: string): string {
+    var finalText = text;
     //Img
-    let imgText = this.replaceText(text, '<img ', `<img class="imgObj"`);
+    finalText = this.replaceText(finalText, '<img ', `<img class="imgObj"`);
+    //Remove any lesser than and greater than
+    finalText = this.replaceText(finalText, '<app-', `${lessThan}app-`);
+    finalText = this.replaceText(finalText, `></`, `${graterThan}${lessThan}/`);
     //Code
     // let codeStart = `<div><pre class="prettyprint linenums codeContainer">`;
     // let codeEnd = `</pre></div>`;
     // let codeStartText = this.replaceText(removeDivs, '[code]', codeStart);
     // let final = this.replaceText(codeStartText, '[/code]', codeEnd);
-    let final = this.checkForCodes(imgText);
+    finalText = this.checkForCodes(finalText);
     //Video
     let videoStart = `    
      <iframe width="560" height="315" 
@@ -72,10 +76,9 @@ export abstract class BaseDataService<T> {
      src=" 
      `;
     let videoEnd = `"></iframe>`;
-    let video = this.replaceText(final, '[video]', videoStart);
-    let videoFinal = this.replaceText(video, '[/video]', videoEnd);
-
-    return videoFinal;
+    finalText = this.replaceText(finalText, '[video]', videoStart);
+    finalText = this.replaceText(finalText, '[/video]', videoEnd);
+    return finalText;
   }
 
   //Get the text between the given start and the end
@@ -134,6 +137,11 @@ export abstract class BaseDataService<T> {
       }
       newHtml = this.checkForHtmls(newHtml);
     }
+    //Remove any other less than and greater than
+    newHtml = this.replaceText(newHtml, '<', `${lessThan}`);
+    newHtml = this.replaceText(newHtml, '>', `${graterThan}`);
+    newHtml = this.replaceText(newHtml, '<textarea>"', ``);
+    newHtml = this.replaceText(newHtml, '</textarea>"', ``);
     //Set what the text will be replaced for
     var codeText = `<div><pre class="prettyprint linenums codeContainer"> ${newHtml}</pre></div>`;
     //Replace the text
