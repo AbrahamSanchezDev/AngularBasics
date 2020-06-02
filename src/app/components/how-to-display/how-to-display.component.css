@@ -1,5 +1,5 @@
 .displayHowTo {
-  background: linear-gradient(var(--displaybg), var(--displaybg2));
+  background: var(--displaybg);
   border-radius: 15px;
   /* font-size: 1.2em; */
   width: 97%;

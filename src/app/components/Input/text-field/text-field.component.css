@@ -53,7 +53,7 @@
 }
 .text-parent input:focus + .lable-name .content-name,
 .text-parent input:valid + .lable-name .content-name {
-  transform: translateY(-150%);
+  transform: translateY(-100%);
   font-size: 14px;
   color: #5fa8d3;
 }

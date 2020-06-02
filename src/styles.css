@@ -5,21 +5,30 @@
   --topicbg: rgb(68, 68, 68);     
   --topicbg: rgb(68, 68, 68);
   */
-  --bg: #3e5b7b;
-  --displaybg: #2f4761;
-  --displaybg2: #416892;
-  --topicbg: rgb(68, 68, 68);
+  --bg: linear-gradient(to bottom, #3e5b7b 0%, #2a4158 100%);
+  --displaybg: linear-gradient(#36587c, #2f4761);
+  --topicbg: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(110, 110, 110, 0.15) 100%
+    ),
+    radial-gradient(
+        at top center,
+        rgba(179, 179, 179, 0.644) 0%,
+        rgba(0, 0, 0, 0.4) 120%
+      )
+      #989898;
+  background-blend-mode: multiply, multiply;
   --topicText: #fff;
   --textColor: rgb(236, 236, 236);
   --creatorbg: #2f4761;
 }
 body {
-  background-color: var(--bg);
+  background: var(--bg);
   color: #fff;
   /* font-family: Arial, Helvetica, sans-serif; */
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-size: 1em;
-
   margin: 0;
   padding: 0;
   box-sizing: border-box;

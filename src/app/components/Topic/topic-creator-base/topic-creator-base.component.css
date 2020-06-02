@@ -6,11 +6,11 @@
   border-radius: 10px;
 }
 .topicTitle {
-  height: 30px;
+  /* height: 30px; */
   padding: 10px;
-  text-align: center;
+  text-align: left;
   font-style: oblique;
-  background: var(--topicbg);
+  background: var(--bg);
 }
 .inputField {
   /* width: 99%; */

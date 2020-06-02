@@ -9,7 +9,8 @@
   width: 100%;
   display: block;
   border-radius: 5px;
-  background-color: var(--topicbg);
+  background: var(--topicbg);
+  background-blend-mode: multiply, multiply;
   color: var(--topicText);
   text-align: left;
 
