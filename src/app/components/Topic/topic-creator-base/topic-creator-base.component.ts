@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TextFieldComponent } from '../../Input/text-field/text-field.component';
 import { InputMultilineComponent } from '../../Input/input-multiline/input-multiline.component';
-import { HowToDisplayComponent } from '../../how-to-display/how-to-display.component';
 import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 import { TopicData } from 'src/app/model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
@@ -43,7 +42,11 @@ export abstract class TopicCreatorBaseComponent {
       return;
     }
     this.updateTopicData();
-    this.downloadTool.DownloadTextToFileAsJson(this.topic, this.topic.title);
+    this.downloadAsJsonFile(this.topic, this.topic.title);
+  }
+  //Create the json file with the given data and the given file name
+  downloadAsJsonFile(data: any, fileName: string): void {
+    this.downloadTool.DownloadTextToFileAsJson(data, fileName);
   }
   //Updates the values for the current topic
   updateTopicData(): void {

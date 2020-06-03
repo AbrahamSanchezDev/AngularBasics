@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DownloadToolService {
   a = document.createElement('a');
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
+  //This creates a json file with the given data
   DownloadTextToFileAsJson(theText: any, fileName: string): void {
     if (theText == null) {
       console.log('No Data');

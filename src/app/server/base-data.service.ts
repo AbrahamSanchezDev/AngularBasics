@@ -24,7 +24,7 @@ export abstract class BaseDataService<T> {
     // Get all the files that are in the file names
     for (let i = 0; i < this.fileNames.length; i++) {
       this.http
-        .get<T>(this.jsonPath + this.fileNames[i] + '.json')
+        .get<T>(`${this.jsonPath}${this.fileNames[i]}.json`)
         .subscribe((data) => {
           data = this.initData(data);
           //Check if it should add to the start of the array wih unshift
@@ -37,6 +37,7 @@ export abstract class BaseDataService<T> {
     }
     return this.allData;
   }
+
   protected abstract firstPlaceObj(data: T): boolean;
   protected abstract initData(data: T): T;
   //Search for topics that match the given topic name
