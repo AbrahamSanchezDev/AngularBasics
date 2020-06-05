@@ -1,0 +1,28 @@
+.project {
+  width: 250px;
+  height: 400px;
+  background-size: 400px;
+  border-radius: 40px;
+  background: linear-gradient(rgb(41, 153, 197), rgb(31, 63, 150));
+  position: relative;
+  z-index: 1;
+  padding: 0px 1%;
+  text-align: center;
+  cursor: pointer;
+}
+.project img {
+  width: 100%;
+  height: 30%;
+  border-radius: 40px;
+}
+.title {
+  opacity: 1;
+  z-index: 2;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px rgb(43, 43, 43);
+}
+.project p {
+  text-align: left;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}

@@ -23,6 +23,7 @@ import { TopicSearchComponent } from './components/topic-search/topic-search.com
 import { AddTextComponent } from './components/Input/add-text/add-text.component';
 import { TopicSimpleCreatorComponent } from './components/topic-simple-creator/topic-simple-creator.component';
 import { VideoDisplayComponent } from './components/Display/video-display/video-display.component';
+import { ProjectPreviewComponent } from './components/Projects/project-preview/project-preview.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { VideoDisplayComponent } from './components/Display/video-display/video-
     AddTextComponent,
     TopicSimpleCreatorComponent,
     VideoDisplayComponent,
+    ProjectPreviewComponent,
   ],
   imports: [
     BrowserModule,
