@@ -1,11 +1,11 @@
-<div>
-  <p>{{ data.title }}</p>
+<div class="main-container">
+  <h2>{{ data.title }}</h2>
   <div *ngFor="let obj of data.content" class="one">
-    <div [ngSwitch]="obj.type" mat-dialog-content>
+    <div [ngSwitch]="obj.type">
       <!-- Display text if the type is p -->
       <p *ngSwitchCase="'p'">{{ obj.text }}</p>
       <!-- Display As input -->
-      <mat-form-field *ngSwitchDefault class="form-field">
+      <mat-form-field *ngSwitchDefault class="form-field" mat-dialog-content>
         <mat-label>{{ obj.text }}</mat-label>
         <input matInput [(ngModel)]="obj.value" />
       </mat-form-field>

@@ -1,7 +1,6 @@
-.parent {
-  background: linear-gradient(rgb(46, 138, 224), rgb(14, 22, 87));
-  width: 100%;
-}
 .form-field {
   width: 100%;
+}
+.main-container h2 {
+  text-align: center;
 }

@@ -24,6 +24,18 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   @ViewChild('preview') preview: HowToDisplayComponent;
 
   testingAtm: boolean /*= true*/;
+  imgData = {
+    title: 'Add Img',
+    content: [
+      {
+        text: 'Imgs Link:',
+        value: '',
+      },
+      {
+        text: 'Display if not found:',
+      },
+    ],
+  };
 
   constructor(
     protected downloadTool: DownloadToolService,
@@ -41,7 +53,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       this.topic.text = this.topicControlServer.replaceTags(this.topic.text);
     }
 
-    if (this.topic.title == '') {
+    if (this.topic.title == '' && this.mainTopic.content == '') {
       this.errorText = 'Set Topic Title';
       return;
     }
@@ -60,8 +72,20 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   }
   //Set the selected text to be an img
   setToImg(): void {
+    let selected = window.getSelection();
+    if (!selected.toString()) {
+      this.insertImgInLastSelectedPosition();
+      return;
+    }
+    // this.mainTopic.content = this.topicControlServer.setToTag(
+    //   this.mainTopic.content,
+    //   tagName,
+    //   selected.toString()
+    // );
+  }
+  insertImgInLastSelectedPosition() {
     const dialogRef = this.dialog.open(TextConfirmComponent, {
-      width: '700px',
+      width: '500px',
       data: {
         title: 'Add Img',
         content: [
@@ -72,18 +96,11 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
           {
             text: 'Display if not found:',
           },
-          {
-            text: 'Press Ok To Add',
-            type: 'p',
-          },
         ],
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       if (result != null && result.content[0].value != '') {
-        console.log('Adding text');
-
         this.mainTopic.content = this.topicControlServer.addImg(
           this.mainTopic.content,
           result.content[0].value,
@@ -92,16 +109,8 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
         );
       }
     });
-
-    // let selected = window.getSelection();
-    // if (!selected.toString()) {
-    //   return;
-    // }
-    // this.mainTopic.content = this.topicControlServer.setToImg(
-    //   this.mainTopic.content,
-    //   selected.toString()
-    // );
   }
+  insertLink(): void {}
   //Set the selected text to have the given tag
   setToTag(tagName: string): void {
     let selected = window.getSelection();
