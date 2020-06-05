@@ -1,16 +1,12 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-creator-base.component';
 import { HowToDisplayComponent } from '../how-to-display/how-to-display.component';
 import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';
 import { TopicControlService } from 'src/app/server/topic/topic-control.service';
-import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
-
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { TextConfirmComponent } from '../Input/text-confirm/text-confirm.component';
+import { InputData } from 'src/app/model/inputs/input-data';
+
 @Component({
   selector: 'app-topic-simple-creator',
   templateUrl: './topic-simple-creator.component.html',
@@ -24,7 +20,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   @ViewChild('preview') preview: HowToDisplayComponent;
 
   testingAtm: boolean /*= true*/;
-  imgData = {
+  imgData: InputData = {
     title: 'Add Img',
     content: [
       {
@@ -74,41 +70,40 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   setToImg(): void {
     let selected = window.getSelection();
     if (!selected.toString()) {
-      this.insertImgInLastSelectedPosition();
+      this.showInsertInput(this.imgData, (result) => this.onAddedImg(result));
       return;
     }
-    // this.mainTopic.content = this.topicControlServer.setToTag(
-    //   this.mainTopic.content,
-    //   tagName,
-    //   selected.toString()
-    // );
+    this.mainTopic.content = this.topicControlServer.setToImg(
+      this.mainTopic.content,
+      selected.toString()
+    );
   }
-  insertImgInLastSelectedPosition() {
+  //Shows a input pop up window with the given data
+  showInsertInput(datas: InputData, onClose: Function) {
     const dialogRef = this.dialog.open(TextConfirmComponent, {
       width: '500px',
-      data: {
-        title: 'Add Img',
-        content: [
-          {
-            text: 'Imgs Link:',
-            value: '',
-          },
-          {
-            text: 'Display if not found:',
-          },
-        ],
-      },
+      data: datas,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result != null && result.content[0].value != '') {
-        this.mainTopic.content = this.topicControlServer.addImg(
-          this.mainTopic.content,
-          result.content[0].value,
-          result.content[1].value,
-          this.mainTopic.theText
-        );
-      }
+      console.log('Closed');
+
+      onClose(result);
     });
+  }
+  //Add img with the given result to the text field
+  onAddedImg(result: InputData) {
+    //Check if the value is valid if so inset the img
+    if (result != null && result.content[0].value != '') {
+      this.mainTopic.content = this.topicControlServer.addImg(
+        this.mainTopic.content,
+        result.content[0].value,
+        result.content[1].value,
+        this.mainTopic.theText
+      );
+      //Reset the values for the next use
+      result.content[0].value = null;
+      result.content[1].value = null;
+    }
   }
   insertLink(): void {}
   //Set the selected text to have the given tag

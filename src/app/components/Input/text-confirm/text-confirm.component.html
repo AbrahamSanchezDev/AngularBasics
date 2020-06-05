@@ -7,7 +7,7 @@
       <!-- Display As input -->
       <mat-form-field *ngSwitchDefault class="form-field" mat-dialog-content>
         <mat-label>{{ obj.text }}</mat-label>
-        <input matInput [(ngModel)]="obj.value" />
+        <input matInput [(ngModel)]="obj.value" (keyup.enter)="onEnter()" />
       </mat-form-field>
     </div>
   </div>

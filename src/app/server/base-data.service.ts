@@ -211,7 +211,7 @@ export abstract class BaseDataService<T> {
     let noSpaces = textToPrelace.replace(/\s/g, '');
     return text.replace(
       textToPrelace,
-      `<img src="${noSpaces}" target= "_blank"/>`
+      `<img src="${noSpaces}" target= "_blank"/ alt = "Image not found">`
     );
   }
   //Add img to the given element
