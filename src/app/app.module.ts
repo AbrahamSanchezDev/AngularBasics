@@ -24,6 +24,13 @@ import { AddTextComponent } from './components/Input/add-text/add-text.component
 import { TopicSimpleCreatorComponent } from './components/topic-simple-creator/topic-simple-creator.component';
 import { VideoDisplayComponent } from './components/Display/video-display/video-display.component';
 import { ProjectPreviewComponent } from './components/Projects/project-preview/project-preview.component';
+
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TextConfirmComponent } from './components/Input/text-confirm/text-confirm.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +51,7 @@ import { ProjectPreviewComponent } from './components/Projects/project-preview/p
     TopicSimpleCreatorComponent,
     VideoDisplayComponent,
     ProjectPreviewComponent,
+    TextConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +59,11 @@ import { ProjectPreviewComponent } from './components/Projects/project-preview/p
     FormsModule,
     HttpClientModule,
     TopicObjModule,
+    MatButtonModule,
+    MatDialogModule,
+    NoopAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

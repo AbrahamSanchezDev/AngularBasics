@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 const lessThan = '&lt';
 const graterThan = '&gt';
@@ -209,7 +209,36 @@ export abstract class BaseDataService<T> {
   //Set the selected text to be an img
   setToImg(text: string, textToPrelace: string): string {
     let noSpaces = textToPrelace.replace(/\s/g, '');
-    return text.replace(textToPrelace, `<img src="${noSpaces}"/>`);
+    return text.replace(
+      textToPrelace,
+      `<img src="${noSpaces}" target= "_blank"/>`
+    );
+  }
+  //Add img to the given element
+  addImg(
+    originalText: string,
+    link: string,
+    altText: string,
+    element: ElementRef
+  ) {
+    return this.insertText(
+      originalText,
+      //Text to insert
+      `<img src="${link}" target= "_blank" alt = "${altText}"/>`,
+      element
+    );
+  }
+  //Incert text at the given element in it last selected position
+  insertText(originalText: String, textToAdd: string, element: ElementRef) {
+    if (originalText == null) {
+      return textToAdd;
+    }
+    let startPos = element.nativeElement.selectionStart;
+    let curText = originalText;
+    return `${curText.substring(0, startPos)}${textToAdd}${curText.substring(
+      startPos,
+      curText.length
+    )}`;
   }
   //Conbine the 3 texts as html tags
   setToTag(text: string, tag: string, textToPrelace): string {

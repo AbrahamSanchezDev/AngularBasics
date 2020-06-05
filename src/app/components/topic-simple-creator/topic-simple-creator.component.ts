@@ -1,10 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-creator-base.component';
 import { HowToDisplayComponent } from '../how-to-display/how-to-display.component';
 import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';
 import { TopicControlService } from 'src/app/server/topic/topic-control.service';
 import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { TextConfirmComponent } from '../Input/text-confirm/text-confirm.component';
 @Component({
   selector: 'app-topic-simple-creator',
   templateUrl: './topic-simple-creator.component.html',
@@ -21,7 +27,8 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
 
   constructor(
     protected downloadTool: DownloadToolService,
-    private topicControlServer: TopicControlService
+    private topicControlServer: TopicControlService,
+    public dialog: MatDialog
   ) {
     super(downloadTool);
   }
@@ -53,14 +60,47 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   }
   //Set the selected text to be an img
   setToImg(): void {
-    let selected = window.getSelection();
-    if (!selected.toString()) {
-      return;
-    }
-    this.mainTopic.content = this.topicControlServer.setToImg(
-      this.mainTopic.content,
-      selected.toString()
-    );
+    const dialogRef = this.dialog.open(TextConfirmComponent, {
+      width: '700px',
+      data: {
+        title: 'Add Img',
+        content: [
+          {
+            text: 'Imgs Link:',
+            value: '',
+          },
+          {
+            text: 'Display if not found:',
+          },
+          {
+            text: 'Press Ok To Add',
+            type: 'p',
+          },
+        ],
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result != null && result.content[0].value != '') {
+        console.log('Adding text');
+
+        this.mainTopic.content = this.topicControlServer.addImg(
+          this.mainTopic.content,
+          result.content[0].value,
+          result.content[1].value,
+          this.mainTopic.theText
+        );
+      }
+    });
+
+    // let selected = window.getSelection();
+    // if (!selected.toString()) {
+    //   return;
+    // }
+    // this.mainTopic.content = this.topicControlServer.setToImg(
+    //   this.mainTopic.content,
+    //   selected.toString()
+    // );
   }
   //Set the selected text to have the given tag
   setToTag(tagName: string): void {

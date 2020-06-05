@@ -1,0 +1,18 @@
+<div>
+  <p>{{ data.title }}</p>
+  <div *ngFor="let obj of data.content" class="one">
+    <div [ngSwitch]="obj.type" mat-dialog-content>
+      <!-- Display text if the type is p -->
+      <p *ngSwitchCase="'p'">{{ obj.text }}</p>
+      <!-- Display As input -->
+      <mat-form-field *ngSwitchDefault class="form-field">
+        <mat-label>{{ obj.text }}</mat-label>
+        <input matInput [(ngModel)]="obj.value" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  </div>
+</div>

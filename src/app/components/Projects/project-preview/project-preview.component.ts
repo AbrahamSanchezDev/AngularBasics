@@ -10,14 +10,7 @@ export class ProjectPreviewComponent implements OnInit {
   project: ProjectDataModule;
   webLink: string = 'https://i.imgur.com/BCRnjrH.png';
 
-  constructor() {
-    // this.project = new ProjectDataModule();
-    // this.project.name = 'Resume';
-    // this.project.description = `My Presonal resume showing my experience
-    // and some other skills`;
-    // this.project.link = 'https://holykiller.github.io/Resume/';
-    // this.project.img = this.webLink;
-  }
+  constructor() {}
 
   ngOnInit(): void {}
   //Open the project Link

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-input-multiline',
@@ -10,6 +10,8 @@ export class InputMultilineComponent implements OnInit {
   @Input() cssClass: string = 'expInputArea';
   @Input() content: string;
   @Input() height: string = '150px';
+
+  @ViewChild('theText') theText: ElementRef;
   constructor() {}
 
   ngOnInit(): void {}
