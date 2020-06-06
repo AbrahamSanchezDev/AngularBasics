@@ -1,11 +1,5 @@
 :root {
-  /* 
-  --bg: rgb(60, 130, 196);     
-  --displaybg: rgb(196, 196, 196);    
-  --topicbg: rgb(68, 68, 68);     
-  --topicbg: rgb(68, 68, 68);
-  */
-  --bg: linear-gradient(to bottom, #3e5b7b 0%, #2a4158 100%);
+  --bg: linear-gradient(to bottom, #3e5b7b 0%, #3b5c7c 100%);
   --displaybg: linear-gradient(#36587c, #2f4761);
   --topicbg: linear-gradient(
       to bottom,
@@ -87,5 +81,11 @@ a:visited {
   padding-bottom: 10px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
