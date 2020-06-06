@@ -22,6 +22,12 @@
         "singleInstance": true,
         "color": "#fff",
         "command": "ngh"
+      },
+      {
+        "name": "Update Angular and Angular Cli",
+        "singleInstance": true,
+        "color": "#fff",
+        "command": "ng update @angular/core @angular/cli"
       }
     ]
   }
