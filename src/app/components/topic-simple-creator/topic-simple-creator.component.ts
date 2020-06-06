@@ -20,6 +20,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   @ViewChild('preview') preview: HowToDisplayComponent;
 
   testingAtm: boolean /*= true*/;
+
   imgData: InputData = {
     title: 'Add Image',
     content: [
@@ -54,19 +55,19 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   }
 
   ngOnInit(): void {}
-  //Preview topic
-  doPreview(): void {
-    this.updateTopicData();
-    if (this.topic.text != null && this.topic.text != '') {
-      this.topic.text = this.topicControlServer.replaceTags(this.topic.text);
-    }
 
-    if (this.topic.title == '' && this.mainTopic.content == '') {
-      this.errorText = 'Set Topic Title';
-      return;
-    }
-    this.preview.topic = this.topic;
+  //#region Tools
+  //Shows a input pop up window with the given data
+  showInsertInput(datas: InputData, onClose: Function) {
+    const dialogRef = this.dialog.open(TextConfirmComponent, {
+      width: '500px',
+      data: datas,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      onClose(result);
+    });
   }
+  //#region Code
   //Set the selected text to be an code
   setToCode(): void {
     let selected = window.getSelection();
@@ -78,8 +79,8 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       selected.toString()
     );
   }
+  //#endregion
   //#region Imgs
-
   //Set the selected text to be an img
   setToImg(): void {
     //Check if there is nothing selected and turn it to an image
@@ -110,17 +111,6 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
     }
   }
   //#endregion
-
-  //Shows a input pop up window with the given data
-  showInsertInput(datas: InputData, onClose: Function) {
-    const dialogRef = this.dialog.open(TextConfirmComponent, {
-      width: '500px',
-      data: datas,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      onClose(result);
-    });
-  }
   //#region Link
   //Turn selected to link if not then show Insert link if there nothing select
   insertLink(): void {
@@ -152,6 +142,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
     }
   }
   //#endregion
+
   //Set the selected text to have the given tag
   setToTag(tagName: string): void {
     let selected = window.getSelection();
@@ -164,17 +155,26 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       selected.toString()
     );
   }
-  //Fill data for testing
-  testingData() {
-    this.title.myText = 'Some nice title';
-    this.descriptionField.myText = 'We are a description';
-    this.mainTopic.content = `    
-    `;
-  }
+  //#endregion
+
   updateFromTopic(): void {
     this.title.myText = this.topic.title;
     this.descriptionField.myText = this.topic.description;
     this.mainTopic.content = this.topic.text;
+  }
+  //#region Load And Preview
+  //Preview topic
+  doPreview(): void {
+    this.updateTopicData();
+    if (this.topic.text != null && this.topic.text != '') {
+      this.topic.text = this.topicControlServer.replaceTags(this.topic.text);
+    }
+
+    if (this.topic.title == '' && this.mainTopic.content == '') {
+      this.errorText = 'Set Topic Title';
+      return;
+    }
+    this.preview.topic = this.topic;
   }
   //On Selected imgs
   onChange(event: any) {
@@ -194,4 +194,15 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       reader.readAsText(curFile);
     }
   }
+  //#endregion
+
+  //#region Testing
+  //Fill data for testing
+  testingData() {
+    this.title.myText = 'Some nice title';
+    this.descriptionField.myText = 'We are a description';
+    this.mainTopic.content = `    
+    `;
+  }
+  //#endregion
 }
