@@ -1,4 +1,4 @@
-import { InputContent } from 'src/app/components/Input/text-confirm/text-confirm.component';
+import { InputContent } from './input-content';
 
 export interface InputData {
   title: string;

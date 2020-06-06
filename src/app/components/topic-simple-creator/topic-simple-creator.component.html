@@ -7,10 +7,11 @@
     <!-- Display input for the Intro / Main Topic -->
   </app-text-field>
   <div>
-    <button (click)="setToCode()">Code</button>
-    <button (click)="setToImg()">Img</button>
     <button (click)="setToTag('b')">Bold</button>
     <button (click)="setToTag('center')">Center</button>
+    <button (click)="setToCode()">Code</button>
+    <button (click)="setToImg()">Img</button>
+    <button (click)="insertLink()">Link</button>
   </div>
   <app-input-multiline
     #mainTopic

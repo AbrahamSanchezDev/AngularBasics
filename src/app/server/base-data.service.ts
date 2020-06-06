@@ -211,8 +211,23 @@ export abstract class BaseDataService<T> {
     let noSpaces = textToPrelace.replace(/\s/g, '');
     return text.replace(
       textToPrelace,
-      `<img src="${noSpaces}" target= "_blank"/ alt = "Image not found">`
+      `<img src="${noSpaces}" alt = "Image not found"/>`
     );
+  }
+  //Insert a link at the given position
+  setToLink(
+    originalText: string,
+    link: string,
+    display: string,
+    element: ElementRef
+  ): string {
+    var theNewText = `<a href = "${link}" target= "_blank">${display}</a>`;
+    return this.insertText(originalText, theNewText, element);
+  }
+  //Replace select to be a link
+  replaceToLink(originalText: string, link: string): string {
+    var theNewText = `<a href = "${link}" target= "_blank">Link</a>`;
+    return this.replaceText(originalText, link, theNewText);
   }
   //Add img to the given element
   addImg(
@@ -224,11 +239,12 @@ export abstract class BaseDataService<T> {
     return this.insertText(
       originalText,
       //Text to insert
-      `<img src="${link}" target= "_blank" alt = "${altText}"/>`,
+      `<img src="${link}" alt = "${altText}"/>`,
       element
     );
   }
-  //Incert text at the given element in it last selected position
+
+  //Insert text at the given element in it last selected position
   insertText(originalText: String, textToAdd: string, element: ElementRef) {
     if (originalText == null) {
       return textToAdd;

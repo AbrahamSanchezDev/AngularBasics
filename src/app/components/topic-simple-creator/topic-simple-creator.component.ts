@@ -21,7 +21,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
 
   testingAtm: boolean /*= true*/;
   imgData: InputData = {
-    title: 'Add Img',
+    title: 'Add Image',
     content: [
       {
         text: 'Imgs Link:',
@@ -29,6 +29,18 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       },
       {
         text: 'Display if not found:',
+      },
+    ],
+  };
+  linkData: InputData = {
+    title: 'Add Link',
+    content: [
+      {
+        text: 'Link:',
+        value: '',
+      },
+      {
+        text: 'Display Text:',
       },
     ],
   };
@@ -66,33 +78,25 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       selected.toString()
     );
   }
+  //#region Imgs
+
   //Set the selected text to be an img
   setToImg(): void {
+    //Check if there is nothing selected and turn it to an image
     let selected = window.getSelection();
     if (!selected.toString()) {
       this.showInsertInput(this.imgData, (result) => this.onAddedImg(result));
       return;
     }
+    //Turn the selected text to a Image
     this.mainTopic.content = this.topicControlServer.setToImg(
       this.mainTopic.content,
       selected.toString()
     );
   }
-  //Shows a input pop up window with the given data
-  showInsertInput(datas: InputData, onClose: Function) {
-    const dialogRef = this.dialog.open(TextConfirmComponent, {
-      width: '500px',
-      data: datas,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Closed');
-
-      onClose(result);
-    });
-  }
   //Add img with the given result to the text field
   onAddedImg(result: InputData) {
-    //Check if the value is valid if so inset the img
+    //Check if the value is valid if so insert the img
     if (result != null && result.content[0].value != '') {
       this.mainTopic.content = this.topicControlServer.addImg(
         this.mainTopic.content,
@@ -105,7 +109,49 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       result.content[1].value = null;
     }
   }
-  insertLink(): void {}
+  //#endregion
+
+  //Shows a input pop up window with the given data
+  showInsertInput(datas: InputData, onClose: Function) {
+    const dialogRef = this.dialog.open(TextConfirmComponent, {
+      width: '500px',
+      data: datas,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      onClose(result);
+    });
+  }
+  //#region Link
+  //Turn selected to link if not then show Insert link if there nothing select
+  insertLink(): void {
+    //Check if there is nothing selected
+    let selected = window.getSelection();
+    if (!selected.toString()) {
+      this.showInsertInput(this.linkData, (result) => this.onAddedLink(result));
+      return;
+    }
+    //Turn the selected text to a link
+    this.mainTopic.content = this.topicControlServer.replaceToLink(
+      this.mainTopic.content,
+      selected.toString()
+    );
+  }
+  //Add Link with the given result to the text field
+  onAddedLink(result: InputData) {
+    //Check if the value is valid if so insert the link
+    if (result != null && result.content[0].value != '') {
+      this.mainTopic.content = this.topicControlServer.setToLink(
+        this.mainTopic.content,
+        result.content[0].value,
+        result.content[1].value,
+        this.mainTopic.theText
+      );
+      //Reset the values for the next use
+      result.content[0].value = null;
+      result.content[1].value = null;
+    }
+  }
+  //#endregion
   //Set the selected text to have the given tag
   setToTag(tagName: string): void {
     let selected = window.getSelection();
