@@ -69,20 +69,18 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
     });
   }
   //Check if there is something selected
-  checkSelected(onResult: Function): boolean {
+  hasSomethingSelected(onResult: Function): boolean {
     let selected = window.getSelection();
     if (!selected.toString()) {
       return false;
     }
-    console.log(selected);
-
     onResult(selected.toString());
     return true;
   }
   //#region Code
   //Set the selected text to be an code
   setSelectedToCode(): void {
-    this.checkSelected((selected: string) => {
+    this.hasSomethingSelected((selected: string) => {
       this.mainTopic.content = this.topicControlServer.setToCode(
         this.mainTopic.content,
         selected
@@ -93,23 +91,25 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   //#region Imgs
   //Set the selected text to be an img
   setSelectedToImage(): void {
-    //Check if there is nothing selected and turn it to an image
+    //Check if there is something selected
     if (
-      !this.checkSelected((selected) => {
+      this.hasSomethingSelected((selected: string) => {
         //Turn the selected text to a Image
         this.mainTopic.content = this.topicControlServer.replaceSelectedToImg(
           this.mainTopic.content,
           selected,
           this.mainTopic.theText
         );
-        return;
       })
-    )
-      this.showInsertInput(this.imgData, (result) => this.onAddedImg(result));
+    ) {
+      return;
+    }
+    //Nothing was selected thus show the insert image ui
+    this.showInsertInput(this.imgData, (result) => this.onAddedImg(result));
   }
   //Add img with the given result to the text field
   onAddedImg(result: InputData) {
-    //Check if the value is valid if so insert the img
+    // Check if the value is valid if so insert the link
     if (result != null && result.content[0].value != '') {
       this.mainTopic.content = this.topicControlServer.InsertImg(
         this.mainTopic.content,
@@ -125,23 +125,26 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   //#endregion
   //#region Link
   //Turn selected to link if not then show Insert link if there nothing select
-  insertLink(): void {
+  setSelectedToLink(): void {
     //Check if there is nothing selected
-    let selected = window.getSelection();
-    if (!selected.toString()) {
-      this.showInsertInput(this.linkData, (result) => this.onAddedLink(result));
+    if (
+      this.hasSomethingSelected((selected: string) => {
+        //Turn the selected text to a link
+        this.mainTopic.content = this.topicControlServer.replaceSelectedToLink(
+          this.mainTopic.content,
+          selected,
+          this.mainTopic.theText
+        );
+      })
+    ) {
       return;
     }
-    //Turn the selected text to a link
-    this.mainTopic.content = this.topicControlServer.replaceSelectedToLink(
-      this.mainTopic.content,
-      selected.toString(),
-      this.mainTopic.theText
-    );
+    //Nothing was selected thus show the insert link ui
+    this.showInsertInput(this.linkData, (result) => this.onAddedLink(result));
   }
   //Add Link with the given result to the text field
   onAddedLink(result: InputData) {
-    //Check if the value is valid if so insert the link
+    // Check if the value is valid if so insert the link
     if (result != null && result.content[0].value != '') {
       this.mainTopic.content = this.topicControlServer.insertLink(
         this.mainTopic.content,
