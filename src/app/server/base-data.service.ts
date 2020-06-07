@@ -206,16 +206,53 @@ export abstract class BaseDataService<T> {
 [/code]`
     );
   }
-  //Set the selected text to be an img
-  setToImg(text: string, textToPrelace: string): string {
-    let noSpaces = textToPrelace.replace(/\s/g, '');
-    return text.replace(
-      textToPrelace,
-      `<img src="${noSpaces}" alt = "Image not found"/>`
-    );
+  //#region  Replace selected
+  //Replace the selected text to be an img
+  replaceSelectedToImg(
+    text: string,
+    textToReplace: string,
+    element: ElementRef
+  ): string {
+    let noSpaces = textToReplace.replace(/\s/g, '');
+    let theNewText = `<img src="${noSpaces}" alt = "Image not found"/>`;
+    return this.replaceTextAt(text, element, theNewText, textToReplace);
   }
-  //Insert a link at the given position
-  setToLink(
+  //Replace select text to be a link
+  replaceSelectedToLink(
+    originalText: string,
+    link: string,
+    element: ElementRef
+  ): string {
+    var newText = `<a href = "${link}" target= "_blank">Link</a>`;
+    if (originalText == null) {
+      return newText;
+    }
+    return this.replaceTextAt(originalText, element, newText);
+  }
+  //Replace the text at the given index for the other text
+  replaceTextAt(
+    originalText: string,
+    element: ElementRef,
+    textToReplace: string,
+    originalReplace: string = ''
+  ): string {
+    //Get the starting position
+    let index = element.nativeElement.selectionStart;
+    //Extra inf in case you changed something
+    if (originalReplace == '') {
+      originalReplace = textToReplace;
+    }
+    //The Text to return
+    var finalText = `${originalText.substr(
+      0,
+      index
+    )}${textToReplace}${originalText.substr(index + originalReplace.length)}`;
+    return finalText;
+  }
+  //#endregion
+  //#region Insert
+  //Insert link to the given element at the last selected position
+  insertLink(
     originalText: string,
     link: string,
     display: string,
@@ -224,38 +261,30 @@ export abstract class BaseDataService<T> {
     var theNewText = `<a href = "${link}" target= "_blank">${display}</a>`;
     return this.insertText(originalText, theNewText, element);
   }
-  //Replace select to be a link
-  replaceToLink(originalText: string, link: string): string {
-    var theNewText = `<a href = "${link}" target= "_blank">Link</a>`;
-    return this.replaceText(originalText, link, theNewText);
-  }
-  //Add img to the given element
-  addImg(
+  //Insert img to the given element at the last selected position
+  InsertImg(
     originalText: string,
     link: string,
     altText: string,
     element: ElementRef
   ) {
-    return this.insertText(
-      originalText,
-      //Text to insert
-      `<img src="${link}" alt = "${altText}"/>`,
-      element
-    );
+    let replaceFor = `<img src="${link}" alt = "${altText}"/>`;
+    return this.insertText(originalText, replaceFor, element);
   }
-
   //Insert text at the given element in it last selected position
   insertText(originalText: String, textToAdd: string, element: ElementRef) {
     if (originalText == null) {
       return textToAdd;
     }
+    //Get the last selected position
     let startPos = element.nativeElement.selectionStart;
-    let curText = originalText;
-    return `${curText.substring(0, startPos)}${textToAdd}${curText.substring(
-      startPos,
-      curText.length
-    )}`;
+
+    return `${originalText.substring(
+      0,
+      startPos
+    )}${textToAdd}${originalText.substring(startPos, originalText.length)}`;
   }
+  //#endregion
   //Conbine the 3 texts as html tags
   setToTag(text: string, tag: string, textToPrelace): string {
     return text.replace(textToPrelace, `<${tag}>${textToPrelace}</${tag}>`);

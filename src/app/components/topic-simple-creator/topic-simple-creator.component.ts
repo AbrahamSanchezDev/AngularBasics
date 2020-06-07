@@ -63,43 +63,55 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       width: '500px',
       data: datas,
     });
+    //Subcribe to the event that is called when the pop up window is close
     dialogRef.afterClosed().subscribe((result) => {
       onClose(result);
     });
   }
-  //#region Code
-  //Set the selected text to be an code
-  setToCode(): void {
+  //Check if there is something selected
+  checkSelected(onResult: Function): boolean {
     let selected = window.getSelection();
     if (!selected.toString()) {
-      return;
+      return false;
     }
-    this.mainTopic.content = this.topicControlServer.setToCode(
-      this.mainTopic.content,
-      selected.toString()
-    );
+    console.log(selected);
+
+    onResult(selected.toString());
+    return true;
+  }
+  //#region Code
+  //Set the selected text to be an code
+  setSelectedToCode(): void {
+    this.checkSelected((selected: string) => {
+      this.mainTopic.content = this.topicControlServer.setToCode(
+        this.mainTopic.content,
+        selected
+      );
+    });
   }
   //#endregion
   //#region Imgs
   //Set the selected text to be an img
-  setToImg(): void {
+  setSelectedToImage(): void {
     //Check if there is nothing selected and turn it to an image
-    let selected = window.getSelection();
-    if (!selected.toString()) {
+    if (
+      !this.checkSelected((selected) => {
+        //Turn the selected text to a Image
+        this.mainTopic.content = this.topicControlServer.replaceSelectedToImg(
+          this.mainTopic.content,
+          selected,
+          this.mainTopic.theText
+        );
+        return;
+      })
+    )
       this.showInsertInput(this.imgData, (result) => this.onAddedImg(result));
-      return;
-    }
-    //Turn the selected text to a Image
-    this.mainTopic.content = this.topicControlServer.setToImg(
-      this.mainTopic.content,
-      selected.toString()
-    );
   }
   //Add img with the given result to the text field
   onAddedImg(result: InputData) {
     //Check if the value is valid if so insert the img
     if (result != null && result.content[0].value != '') {
-      this.mainTopic.content = this.topicControlServer.addImg(
+      this.mainTopic.content = this.topicControlServer.InsertImg(
         this.mainTopic.content,
         result.content[0].value,
         result.content[1].value,
@@ -121,16 +133,17 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       return;
     }
     //Turn the selected text to a link
-    this.mainTopic.content = this.topicControlServer.replaceToLink(
+    this.mainTopic.content = this.topicControlServer.replaceSelectedToLink(
       this.mainTopic.content,
-      selected.toString()
+      selected.toString(),
+      this.mainTopic.theText
     );
   }
   //Add Link with the given result to the text field
   onAddedLink(result: InputData) {
     //Check if the value is valid if so insert the link
     if (result != null && result.content[0].value != '') {
-      this.mainTopic.content = this.topicControlServer.setToLink(
+      this.mainTopic.content = this.topicControlServer.insertLink(
         this.mainTopic.content,
         result.content[0].value,
         result.content[1].value,
@@ -169,7 +182,6 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
     if (this.topic.text != null && this.topic.text != '') {
       this.topic.text = this.topicControlServer.replaceTags(this.topic.text);
     }
-
     if (this.topic.title == '' && this.mainTopic.content == '') {
       this.errorText = 'Set Topic Title';
       return;
@@ -178,7 +190,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   }
   //On Selected imgs
   onChange(event: any) {
-    var curFile = event.target.files[0];
+    let curFile = event.target.files[0];
     let totalImgs = event.target.files.length;
     if (totalImgs > 10) {
       totalImgs = 10;
@@ -186,7 +198,6 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
     for (let i = 0; i < totalImgs; i++) {
       const reader = new FileReader();
       reader.onload = () => {
-        var topic = reader.result[0];
         var data = JSON.parse((reader.result as unknown) as string);
         this.topic = data;
         this.updateFromTopic();
