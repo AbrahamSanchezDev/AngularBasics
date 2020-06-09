@@ -12,6 +12,7 @@ export class TopicSearchComponent implements OnInit {
   butttonText: string = 'Search';
   tempText: string = 'Search Topic...';
   doingSearch: boolean = false;
+
   constructor(private topicsServer: TopicControlService) {}
 
   ngOnInit(): void {}

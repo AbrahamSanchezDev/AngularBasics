@@ -8,27 +8,36 @@ import { url } from 'inspector';
   styleUrls: ['./video-display.component.css'],
 })
 export class VideoDisplayComponent implements OnInit {
-  @Input() path: string;
+  @Input() link: string;
 
+  embededLink: string;
   saveSrc: SafeResourceUrl;
-  constructor(private sanitizer: DomSanitizer) {
-    this.saveSrc = this.sanitizer.bypassSecurityTrustResourceUrl(this.path);
+
+  constructor(private sanitizer: DomSanitizer) {}
+
+  ngOnInit(): void {
+    this.saveSrc = this.getUrl();
   }
-
-  ngOnInit(): void {}
-
+  //Returns the SafeResourceUrl
   getUrl(): SafeResourceUrl {
-    var url = this.path;
+    if (this.saveSrc != null) {
+      return this.saveSrc;
+    }
+    this.generateSafeUrl();
+    return this.saveSrc;
+  }
+  //Set the saveSrc value using the link
+  generateSafeUrl(): void {
+    var url = this.link;
     var video, results;
     if (url === null) {
-      return '';
+      return;
     }
     results = url.match('[\\?&]v=([^&#]*)');
     video = results === null ? url : results[1];
-
+    this.embededLink = `https://www.youtube.com/embed/${video}`;
     this.saveSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
-      'https://www.youtube.com/embed/' + video
+      this.embededLink
     );
-    return this.saveSrc;
   }
 }

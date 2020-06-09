@@ -8,9 +8,8 @@ describe('VideoDisplayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VideoDisplayComponent ]
-    })
-    .compileComponents();
+      declarations: [VideoDisplayComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,15 @@ describe('VideoDisplayComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('generate saveSrc using the path as a link', () => {
+    const originalLink =
+      'https://www.youtube.com/watch?v=yG4FH60fhUE&ab_channel=ProgrammingwithMosh';
+    const embededLink = 'https://www.youtube.com/embed/yG4FH60fhUE';
+    component.link = originalLink;
+    component.generateSafeUrl();
+    //to be check that the value in the ( ) before it should be equal to the ( ) next to it
+    expect(component.embededLink).toBe(embededLink);
+    //Check that the (component) value is true
+    // expect(component).toBeTruthy();
   });
 });
