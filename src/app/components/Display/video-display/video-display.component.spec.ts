@@ -18,14 +18,13 @@ describe('VideoDisplayComponent', () => {
     fixture.detectChanges();
   });
 
-  it('generate saveSrc using the path as a link', () => {
-    const originalLink =
+  it('Generate saveSrc using the path as a link', () => {
+    const originalLink: string =
       'https://www.youtube.com/watch?v=yG4FH60fhUE&ab_channel=ProgrammingwithMosh';
-    const embededLink = 'https://www.youtube.com/embed/yG4FH60fhUE';
-    component.link = originalLink;
-    component.generateSafeUrl();
+    const embededLink: string = 'https://www.youtube.com/embed/yG4FH60fhUE';
+    const link = component.turnYoutubeLinkToEmbeded(originalLink);
     //to be check that the value in the ( ) before it should be equal to the ( ) next to it
-    expect(component.embededLink).toBe(embededLink);
+    expect(link).toBe(embededLink);
     //Check that the (component) value is true
     // expect(component).toBeTruthy();
   });

@@ -12,6 +12,7 @@ export class ExperienceObjComponent implements OnInit {
   @ViewChild('multiText') multiLineText: MultiLineToJsonComponent;
 
   expObj: ExpObjModule = new ExpObjModule();
+
   constructor(private downloadTool: DownloadToolService) {}
 
   ngOnInit() {}

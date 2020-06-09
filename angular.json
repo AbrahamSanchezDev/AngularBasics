@@ -121,6 +121,46 @@
           }
         }
       }
+    },
+    "ArraysTool": {
+      "projectType": "library",
+      "root": "projects/arrays-tool",
+      "sourceRoot": "projects/arrays-tool/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/arrays-tool/tsconfig.lib.json",
+            "project": "projects/arrays-tool/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/arrays-tool/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/arrays-tool/src/test.ts",
+            "tsConfig": "projects/arrays-tool/tsconfig.spec.json",
+            "karmaConfig": "projects/arrays-tool/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/arrays-tool/tsconfig.lib.json",
+              "projects/arrays-tool/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "AngularBasics"

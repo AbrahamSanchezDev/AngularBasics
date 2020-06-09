@@ -1,15 +1,9 @@
-import {
-  Component,
-  OnInit,
-  AfterViewChecked,
-  Input,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, OnInit, AfterViewChecked, Input } from '@angular/core';
 import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 import { TopicControlService } from 'src/app/server/topic/topic-control.service';
 import { TopicData } from 'src/app/model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-how-to-display',
@@ -42,6 +36,7 @@ export class HowToDisplayComponent implements AfterViewChecked {
   getContent(): TopicData[] {
     return this.topic.content;
   }
+  //Get topic text as trusted html
   getTopicText() {
     var saveHtml = this.sanitizer.bypassSecurityTrustHtml(this.topic.text);
     return saveHtml;

@@ -8,7 +8,6 @@ import { ProjectDataModule } from 'src/app/model/project-data/project-data.modul
 })
 export class ProjectPreviewComponent implements OnInit {
   project: ProjectDataModule;
-  webLink: string = 'https://i.imgur.com/BCRnjrH.png';
 
   constructor() {}
 
