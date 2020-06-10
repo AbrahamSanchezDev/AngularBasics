@@ -6,6 +6,7 @@
   <app-text-field #descriptionField title="{{ topicDescription }}">
     <!-- Display input for the Intro / Main Topic -->
   </app-text-field>
+  <app-topic-text-tool [mainTopic]="mainTopic"></app-topic-text-tool>
   <app-input-multiline #mainTopic title="{{ introText }}"></app-input-multiline>
   <div class="createButtons">
     <button (click)="addSimpleText()">Simple Text</button>
