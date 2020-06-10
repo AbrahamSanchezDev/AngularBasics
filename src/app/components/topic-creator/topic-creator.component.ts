@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TextFieldComponent } from '../Input/text-field/text-field.component';
-import { InputMultilineComponent } from '../Input/input-multiline/input-multiline.component';
-import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 import { TopicData } from '../../model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
-import { TopicControlService } from 'src/app/server/topic/topic-control.service';
 import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';
 import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-creator-base.component';
+import { ArraysToolService } from 'src/app/library/arrays-tool/arrays-tool.service';
 
 @Component({
   selector: 'app-topic-creator',
@@ -19,8 +16,8 @@ import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-cre
 export class TopicCreatorComponent extends TopicCreatorBaseComponent
   implements OnInit {
   constructor(
-    private topicControl: TopicControlService,
-    protected downloadTool: DownloadToolService
+    protected downloadTool: DownloadToolService,
+    private arraysTool: ArraysToolService
   ) {
     super(downloadTool);
   }
@@ -64,36 +61,11 @@ export class TopicCreatorComponent extends TopicCreatorBaseComponent
   }
   //Move content up
   moveUp(content: TopicData): void {
-    this.moveContent(content, -1);
+    this.arraysTool.moveElementLeft(this.topic.content, content);
   }
   //Move content down
   moveDown(content: TopicData): void {
-    this.moveContent(content, 1);
-  }
-  //Move the content by the given amount
-  moveContent(content: TopicData, amount: number) {
-    let curIndex = this.topic.content.indexOf(content);
-    let newPos = curIndex + amount;
-    this.moveElementInArray(this.topic.content, content, newPos);
-  }
-  //Move element
-  moveElementInArray(array: any[], element: any, newPos: number) {
-    var index = array.indexOf(element);
-    // Item non-existent?
-    if (index == -1) {
-      return false;
-    }
-    // If there is a previous element in sections
-    if (array[newPos]) {
-      // Swap elements
-      if (newPos < index) {
-        array.splice(newPos, 2, array[index], array[newPos]);
-      } else {
-        array.splice(index, 2, array[newPos], array[index]);
-      }
-    } else {
-      console.log('Do Nothing');
-    }
+    this.arraysTool.moveElementRight(this.topic.content, content);
   }
   //Returns all the topic data in the current topic
   getContent(): TopicData[] {
