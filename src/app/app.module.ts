@@ -31,6 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TextConfirmComponent } from './components/Input/text-confirm/text-confirm.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TopicTextToolComponent } from './components/Topic/topic-text-tool/topic-text-tool.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,7 @@ import { MatInputModule } from '@angular/material/input';
     VideoDisplayComponent,
     ProjectPreviewComponent,
     TextConfirmComponent,
+    TopicTextToolComponent,
   ],
   imports: [
     BrowserModule,

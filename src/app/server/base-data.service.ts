@@ -198,13 +198,12 @@ export abstract class BaseDataService<T> {
     return newText;
   }
   //se the given text to have the code tags
-  setToCode(text: string, textToPrelace: string): string {
-    return text.replace(
-      textToPrelace,
-      `[code] 
+  setToCode(text: string, textToPrelace: string, element: ElementRef): string {
+    let newCodeText = `
+[code] 
     ${textToPrelace}
-[/code]`
-    );
+[/code]`;
+    return this.replaceTextAt(text, element, newCodeText, textToPrelace);
   }
   //#region  Replace selected
   //Replace the selected text to be an img
@@ -227,7 +226,7 @@ export abstract class BaseDataService<T> {
     if (originalText == null) {
       return newText;
     }
-    return this.replaceTextAt(originalText, element, newText);
+    return this.replaceTextAt(originalText, element, newText, link);
   }
   //Replace the text at the given index for the other text
   replaceTextAt(
@@ -286,7 +285,13 @@ export abstract class BaseDataService<T> {
   }
   //#endregion
   //Conbine the 3 texts as html tags
-  setToTag(text: string, tag: string, textToPrelace): string {
-    return text.replace(textToPrelace, `<${tag}>${textToPrelace}</${tag}>`);
+  setToTag(
+    text: string,
+    tag: string,
+    textToPrelace,
+    element: ElementRef
+  ): string {
+    var replaceFor = `<${tag}>${textToPrelace}</${tag}>`;
+    return this.replaceTextAt(text, element, replaceFor, textToPrelace);
   }
 }
