@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InputMultilineComponent } from '../../Input/input-multiline/input-multiline.component';
-import { TopicControlService } from 'src/app/server/topic/topic-control.service';
 import { InputData } from 'src/app/model/inputs/input-data';
 import { MatDialog } from '@angular/material/dialog';
 import { TextConfirmComponent } from '../../Input/text-confirm/text-confirm.component';
+import { TextToolService } from 'src/app/library/text-tool/text-tool.service';
 
 @Component({
   selector: 'app-topic-text-tool',
@@ -38,14 +38,10 @@ export class TopicTextToolComponent implements OnInit {
     ],
   };
 
-  constructor(
-    private topicControlServer: TopicControlService,
-    public dialog: MatDialog
-  ) {}
+  constructor(public dialog: MatDialog, private textTool: TextToolService) {}
 
   ngOnInit(): void {}
 
-  //#region Tools
   //Shows a input pop up window with the given data
   showInsertInput(datas: InputData, onClose: Function) {
     const dialogRef = this.dialog.open(TextConfirmComponent, {
@@ -66,11 +62,12 @@ export class TopicTextToolComponent implements OnInit {
     onResult(selected.toString());
     return true;
   }
+
   //#region Code
   //Set the selected text to be an code
   setSelectedToCode(): void {
     this.hasSomethingSelected((selected: string) => {
-      this.mainTopic.content = this.topicControlServer.setToCode(
+      this.mainTopic.content = this.textTool.setToCode(
         this.mainTopic.content,
         selected,
         this.mainTopic.theText
@@ -78,6 +75,7 @@ export class TopicTextToolComponent implements OnInit {
     });
   }
   //#endregion
+
   //#region Imgs
   //Set the selected text to be an img
   setSelectedToImage(): void {
@@ -85,7 +83,7 @@ export class TopicTextToolComponent implements OnInit {
     if (
       this.hasSomethingSelected((selected: string) => {
         //Turn the selected text to a Image
-        this.mainTopic.content = this.topicControlServer.replaceSelectedToImg(
+        this.mainTopic.content = this.textTool.replaceSelectedToImg(
           this.mainTopic.content,
           selected,
           this.mainTopic.theText
@@ -101,7 +99,7 @@ export class TopicTextToolComponent implements OnInit {
   onAddedImg(result: InputData) {
     // Check if the value is valid if so insert the link
     if (result != null && result.content[0].value != '') {
-      this.mainTopic.content = this.topicControlServer.InsertImg(
+      this.mainTopic.content = this.textTool.InsertImg(
         this.mainTopic.content,
         result.content[0].value,
         result.content[1].value,
@@ -113,6 +111,7 @@ export class TopicTextToolComponent implements OnInit {
     }
   }
   //#endregion
+
   //#region Link
   //Turn selected to link if not then show Insert link if there nothing select
   setSelectedToLink(): void {
@@ -120,7 +119,7 @@ export class TopicTextToolComponent implements OnInit {
     if (
       this.hasSomethingSelected((selected: string) => {
         //Turn the selected text to a link
-        this.mainTopic.content = this.topicControlServer.replaceSelectedToLink(
+        this.mainTopic.content = this.textTool.replaceSelectedToLink(
           this.mainTopic.content,
           selected,
           this.mainTopic.theText
@@ -136,7 +135,7 @@ export class TopicTextToolComponent implements OnInit {
   onAddedLink(result: InputData) {
     // Check if the value is valid if so insert the link
     if (result != null && result.content[0].value != '') {
-      this.mainTopic.content = this.topicControlServer.insertLink(
+      this.mainTopic.content = this.textTool.insertLink(
         this.mainTopic.content,
         result.content[0].value,
         result.content[1].value,
@@ -155,12 +154,11 @@ export class TopicTextToolComponent implements OnInit {
     if (!selected.toString()) {
       return;
     }
-    this.mainTopic.content = this.topicControlServer.setToTag(
+    this.mainTopic.content = this.textTool.setToTag(
       this.mainTopic.content,
       tagName,
       selected.toString(),
       this.mainTopic.theText
     );
   }
-  //#endregion
 }
