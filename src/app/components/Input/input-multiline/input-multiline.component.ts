@@ -11,7 +11,7 @@ export class InputMultilineComponent implements OnInit {
   @Input() content: string;
   @Input() height: string = '150px';
 
-  @ViewChild('theText') theText: ElementRef;
+  @ViewChild('theText') theText: ElementRef<HTMLInputElement>;
   constructor() {}
 
   ngOnInit(): void {}

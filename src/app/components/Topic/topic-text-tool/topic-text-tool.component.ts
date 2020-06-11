@@ -56,6 +56,22 @@ export class TopicTextToolComponent implements OnInit {
   //Check if there is something selected
   hasSomethingSelected(onResult: Function): boolean {
     let selected = window.getSelection();
+    console.log('on checking');
+
+    console.log(this.mainTopic.content);
+
+    this.mainTopic.theText.nativeElement.select();
+    this.mainTopic.theText.nativeElement.focus();
+    this.mainTopic.theText.nativeElement.setSelectionRange(1, 5);
+    this.mainTopic.theText.nativeElement.select();
+
+    // this.mainTopic.theText.nativeElement.setSelectionRange(1, 4);
+    console.log('On Check');
+
+    console.log(this.mainTopic.theText.nativeElement.selectionStart);
+
+    console.log('On Check ' + selected);
+
     if (!selected.toString()) {
       return false;
     }
@@ -66,13 +82,18 @@ export class TopicTextToolComponent implements OnInit {
   //#region Code
   //Set the selected text to be an code
   setSelectedToCode(): void {
-    this.hasSomethingSelected((selected: string) => {
-      this.mainTopic.content = this.textTool.setToCode(
-        this.mainTopic.content,
-        selected,
-        this.mainTopic.theText
-      );
-    });
+    if (
+      this.hasSomethingSelected((selected: string) => {
+        this.mainTopic.content = this.textTool.setToCode(
+          this.mainTopic.content,
+          selected,
+          this.mainTopic.theText
+        );
+      })
+    ) {
+      return;
+    }
+    // this.mainTopic.content = 'Nothing Selected';
   }
   //#endregion
 

@@ -6,19 +6,30 @@ import { Injectable, ElementRef } from '@angular/core';
 export class TextToolService {
   constructor() {}
   //set the given text to have the code tags
-  setToCode(text: string, textToPrelace: string, element: ElementRef): string {
-    let newCodeText = `
-  [code] 
-      ${textToPrelace}
-  [/code]`;
+  setToCode(
+    text: string,
+    textToPrelace: string,
+    element: ElementRef<any>
+  ): string {
+    let newCodeText = this.getTextAsCode(textToPrelace);
     return this.replaceTextAt(text, element, newCodeText, textToPrelace);
+  }
+  //Turns the given text to the correct format for code
+  getTextAsCode(textToPrelace: string): string {
+    return `
+[code]
+
+${textToPrelace}
+
+[/code]
+`;
   }
   //#region  Replace selected
   //Replace the selected text to be an img
   replaceSelectedToImg(
     text: string,
     textToReplace: string,
-    element: ElementRef
+    element: ElementRef<any>
   ): string {
     let noSpaces = textToReplace.replace(/\s/g, '');
     let theNewText = `<img src="${noSpaces}" alt = "Image not found"/>`;
@@ -28,7 +39,7 @@ export class TextToolService {
   replaceSelectedToLink(
     originalText: string,
     link: string,
-    element: ElementRef
+    element: ElementRef<any>
   ): string {
     var newText = `<a href = "${link}" target= "_blank">Link</a>`;
     if (originalText == null) {
@@ -39,12 +50,14 @@ export class TextToolService {
   //Replace the text at the given index for the other text
   replaceTextAt(
     originalText: string,
-    element: ElementRef,
+    element: ElementRef<any>,
     textToReplace: string,
     originalReplace: string = ''
   ): string {
     //Get the starting position
     let index = element.nativeElement.selectionStart;
+    console.log('Starting at ' + index);
+
     //Extra inf in case you changed something
     if (originalReplace == '') {
       originalReplace = textToReplace;
@@ -65,7 +78,7 @@ export class TextToolService {
     originalText: string,
     link: string,
     display: string,
-    element: ElementRef
+    element: ElementRef<any>
   ): string {
     var theNewText = `<a href = "${link}" target= "_blank">${display}</a>`;
     return this.insertText(originalText, theNewText, element);
@@ -75,7 +88,7 @@ export class TextToolService {
     originalText: string,
     link: string,
     altText: string,
-    element: ElementRef
+    element: ElementRef<any>
   ) {
     let replaceFor = `<img src="${link}" alt = "${altText}"/>`;
     return this.insertText(originalText, replaceFor, element);

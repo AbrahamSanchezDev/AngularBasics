@@ -17,21 +17,4 @@ describe('AppComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('should create the app', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it(`should have as title 'AngularBasics'`, () => {
-    expect(component.title).toEqual('How to Series this one on Angular!');
-  });
-
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement;
-  //   expect(compiled.querySelector('.content span').textContent).toContain(
-  //     'AngularBasics app is running!'
-  //   );
-  // });
 });
