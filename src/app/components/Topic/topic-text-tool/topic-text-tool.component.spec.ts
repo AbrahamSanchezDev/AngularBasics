@@ -45,12 +45,8 @@ describe('TopicTextToolComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should have the both `ViewChild`s defined', () => {
-  //   expect(component.mainTopic.theText).toBeDefined();
-  // });
-
   it('should replace selected text to code', async(() => {
-    const code = 'Jojojo';
+    const code = 'HolyLegioner';
     const codeText = `Holy Killer
 Legions
 Legion
@@ -67,18 +63,14 @@ ${code}
 [/code]
 
 other Code`;
-    expect(component.mainTopic.theText).toBeTruthy;
+
     fixture.whenStable().then(() => {
-      // let el = fixture2.debugElement.query(
-      //   By.css('.expInputArea')
-      // ) as ElementRef<HTMLTextAreaElement>;
-      // let data = el.nativeElement;
-      let data = component.mainTopic.theText.nativeElement;
-      //Asign element to the compontent
-      // component.mainTopic.theText = el;
+      //Refer to theText nativeElement
+      const data = component.mainTopic.theText.nativeElement;
+      //Set the data to be the initial code
       data.textContent = codeText;
-      component.mainTopic.content =
-        component.mainTopic.theText.nativeElement.value;
+      //Set the content to be the same as the value of theText element since [ngModel] in not been called
+      component.mainTopic.content = data.value;
       //Set to selected and set the range of the selected text
       data.select();
       data.focus();
@@ -90,13 +82,13 @@ other Code`;
       component2.theText.nativeElement.value = component.mainTopic.content;
       //Final text
       let finalValue = component.mainTopic.content;
-      expect(finalValue).toBe('finalCodeText');
+      expect(finalValue).toBe(finalCodeText);
     });
   }));
 
-  // //Remove the InputMultilineComponent commpont
-  // afterAll(() => {
-  //   fixture.debugElement.nativeElement.remove();
-  //   fixture2.debugElement.nativeElement.remove();
-  // });
+  //Remove the InputMultilineComponent commpont
+  afterAll(() => {
+    fixture.debugElement.nativeElement.remove();
+    fixture2.debugElement.nativeElement.remove();
+  });
 });
