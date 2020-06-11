@@ -38,6 +38,9 @@ export class TopicTextToolComponent implements OnInit {
     ],
   };
 
+  selected: Selection;
+  selectedText: string;
+
   constructor(public dialog: MatDialog, private textTool: TextToolService) {}
 
   ngOnInit(): void {}
@@ -54,30 +57,28 @@ export class TopicTextToolComponent implements OnInit {
     });
   }
   //Check if there is something selected
-  hasSomethingSelected(onResult: Function): boolean {
-    let selected = window.getSelection();
-    if (!selected.toString()) {
+  hasSomethingSelected(): boolean {
+    this.selected = window.getSelection();
+    this.selectedText = '';
+    if (!this.selected.toString()) {
       return false;
     }
-    onResult(selected.toString());
+    this.selectedText = this.selected.toString();
     return true;
   }
 
   //#region Code
   //Set the selected text to be an code
   setSelectedToCode(): void {
-    if (
-      this.hasSomethingSelected((selected: string) => {
-        this.mainTopic.content = this.textTool.setToCode(
-          this.mainTopic.content,
-          selected,
-          this.mainTopic.theText
-        );
-      })
-    ) {
-      return;
+    if (this.hasSomethingSelected()) {
+      this.mainTopic.content = this.textTool.setToCode(
+        this.mainTopic.content,
+        this.selectedText,
+        this.mainTopic.theText
+      );
+    } else {
+      console.log('nothing Selected');
     }
-    // this.mainTopic.content = 'Nothing Selected';
   }
   //#endregion
 
@@ -85,16 +86,13 @@ export class TopicTextToolComponent implements OnInit {
   //Set the selected text to be an img
   setSelectedToImage(): void {
     //Check if there is something selected
-    if (
-      this.hasSomethingSelected((selected: string) => {
-        //Turn the selected text to a Image
-        this.mainTopic.content = this.textTool.replaceSelectedToImg(
-          this.mainTopic.content,
-          selected,
-          this.mainTopic.theText
-        );
-      })
-    ) {
+    if (this.hasSomethingSelected()) {
+      //Turn the selected text to a Image
+      this.mainTopic.content = this.textTool.replaceSelectedToImg(
+        this.mainTopic.content,
+        this.selectedText,
+        this.mainTopic.theText
+      );
       return;
     }
     //Nothing was selected thus show the insert image ui
@@ -121,16 +119,13 @@ export class TopicTextToolComponent implements OnInit {
   //Turn selected to link if not then show Insert link if there nothing select
   setSelectedToLink(): void {
     //Check if there is nothing selected
-    if (
-      this.hasSomethingSelected((selected: string) => {
-        //Turn the selected text to a link
-        this.mainTopic.content = this.textTool.replaceSelectedToLink(
-          this.mainTopic.content,
-          selected,
-          this.mainTopic.theText
-        );
-      })
-    ) {
+    if (this.hasSomethingSelected()) {
+      //Turn the selected text to a link
+      this.mainTopic.content = this.textTool.replaceSelectedToLink(
+        this.mainTopic.content,
+        this.selectedText,
+        this.mainTopic.theText
+      );
       return;
     }
     //Nothing was selected thus show the insert link ui
@@ -155,15 +150,13 @@ export class TopicTextToolComponent implements OnInit {
 
   //Set the selected text to have the given tag
   setToTag(tagName: string): void {
-    let selected = window.getSelection();
-    if (!selected.toString()) {
-      return;
+    if (this.hasSomethingSelected()) {
+      this.mainTopic.content = this.textTool.setToTag(
+        this.mainTopic.content,
+        tagName,
+        this.selectedText,
+        this.mainTopic.theText
+      );
     }
-    this.mainTopic.content = this.textTool.setToTag(
-      this.mainTopic.content,
-      tagName,
-      selected.toString(),
-      this.mainTopic.theText
-    );
   }
 }
