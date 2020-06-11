@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -66,6 +66,7 @@ import { TopicTextToolComponent } from './components/Topic/topic-text-tool/topic
     NoopAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    ElementRef,
   ],
   providers: [],
   bootstrap: [AppComponent],

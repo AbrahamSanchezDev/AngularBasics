@@ -56,8 +56,6 @@ ${textToPrelace}
   ): string {
     //Get the starting position
     let index = element.nativeElement.selectionStart;
-    console.log('Starting at ' + index);
-
     //Extra inf in case you changed something
     if (originalReplace == '') {
       originalReplace = textToReplace;

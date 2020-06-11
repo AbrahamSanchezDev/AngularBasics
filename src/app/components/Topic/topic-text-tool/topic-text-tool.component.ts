@@ -56,22 +56,6 @@ export class TopicTextToolComponent implements OnInit {
   //Check if there is something selected
   hasSomethingSelected(onResult: Function): boolean {
     let selected = window.getSelection();
-    console.log('on checking');
-
-    console.log(this.mainTopic.content);
-
-    this.mainTopic.theText.nativeElement.select();
-    this.mainTopic.theText.nativeElement.focus();
-    this.mainTopic.theText.nativeElement.setSelectionRange(1, 5);
-    this.mainTopic.theText.nativeElement.select();
-
-    // this.mainTopic.theText.nativeElement.setSelectionRange(1, 4);
-    console.log('On Check');
-
-    console.log(this.mainTopic.theText.nativeElement.selectionStart);
-
-    console.log('On Check ' + selected);
-
     if (!selected.toString()) {
       return false;
     }
