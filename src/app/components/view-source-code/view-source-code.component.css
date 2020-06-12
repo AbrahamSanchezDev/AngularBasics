@@ -19,3 +19,9 @@
   margin-bottom: -5px;
   height: 20px;
 }
+@media screen and (max-width: 768px) {
+  #source-code {
+    position: relative;
+    border-radius: 0 0 15px 0;
+  }
+}
