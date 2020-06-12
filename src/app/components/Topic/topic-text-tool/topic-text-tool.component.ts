@@ -55,7 +55,6 @@ export class TopicTextToolComponent implements OnInit {
     this.selectedText = this.selected.toString();
     return true;
   }
-
   //Shows a input pop up window with the given data
   showInsertInput(datas: InputData, onClose: Function) {
     const dialogRef = this.dialog.open(TextConfirmComponent, {
@@ -123,6 +122,7 @@ export class TopicTextToolComponent implements OnInit {
     }
   }
   //#endregion
+
   //#region Insert
   //Add img with the given result to the text field
   onAddedImg(result: InputData) {

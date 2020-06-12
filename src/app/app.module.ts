@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ElementRef } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -32,6 +32,7 @@ import { TextConfirmComponent } from './components/Input/text-confirm/text-confi
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TopicTextToolComponent } from './components/Topic/topic-text-tool/topic-text-tool.component';
+import { ViewSourceCodeComponent } from './components/view-source-code/view-source-code.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { TopicTextToolComponent } from './components/Topic/topic-text-tool/topic
     ProjectPreviewComponent,
     TextConfirmComponent,
     TopicTextToolComponent,
+    ViewSourceCodeComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,6 @@ import { TopicTextToolComponent } from './components/Topic/topic-text-tool/topic
     NoopAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    ElementRef,
   ],
   providers: [],
   bootstrap: [AppComponent],
