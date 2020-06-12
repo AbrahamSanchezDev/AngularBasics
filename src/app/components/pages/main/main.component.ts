@@ -12,7 +12,6 @@ export class MainComponent implements OnInit {
   topics: TopicObjModule[];
   currentTopics: TopicObjModule[];
   description: string;
-  link: string = 'https://github.com/holykiller/ResumeAngular';
 
   constructor(private topicsServer: TopicControlService) {
     topicsServer.onSearch.subscribe((text) => {

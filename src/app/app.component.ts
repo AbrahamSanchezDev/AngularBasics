@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title: string = 'How to Series this one on Angular!';
+  link: string = 'https://github.com/holykiller/AngularBasics';
 }

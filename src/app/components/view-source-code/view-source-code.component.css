@@ -1,0 +1,21 @@
+#source-code {
+  background-image: linear-gradient(to right, #3f7ff7 0%, #2f5fb1 100%);
+  padding: 5px;
+  width: 150px;
+  text-align: center;
+  border-radius: 0 0 0 15px;
+  position: absolute;
+  right: 0;
+}
+#source-code a {
+  color: #fff;
+  margin-left: 10px;
+  text-decoration: none;
+}
+#source-code img {
+  background-color: #fff;
+  padding: 1px;
+  border-radius: 50%;
+  margin-bottom: -5px;
+  height: 20px;
+}

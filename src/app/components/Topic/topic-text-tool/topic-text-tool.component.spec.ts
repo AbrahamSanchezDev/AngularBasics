@@ -191,7 +191,7 @@ other Code`;
       //Set selection range
       setRange(selectedText, index);
       //Current testing main
-      component.setToTag('center');
+      component.setSelectedToTag('center');
       let newText = component.mainTopic.content;
       expect(newText).toBe(updatedText);
     });
