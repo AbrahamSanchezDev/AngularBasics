@@ -10,4 +10,7 @@ export class ViewSourceCodeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+  openLink(): void {
+    window.open(this.link);
+  }
 }
