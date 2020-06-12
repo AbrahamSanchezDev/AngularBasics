@@ -45,17 +45,6 @@ export class TopicTextToolComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  //Shows a input pop up window with the given data
-  showInsertInput(datas: InputData, onClose: Function) {
-    const dialogRef = this.dialog.open(TextConfirmComponent, {
-      width: '500px',
-      data: datas,
-    });
-    //Subcribe to the event that is called when the pop up window is close
-    dialogRef.afterClosed().subscribe((result) => {
-      onClose(result);
-    });
-  }
   //Check if there is something selected
   hasSomethingSelected(): boolean {
     this.selected = window.getSelection();
@@ -67,7 +56,19 @@ export class TopicTextToolComponent implements OnInit {
     return true;
   }
 
-  //#region Code
+  //Shows a input pop up window with the given data
+  showInsertInput(datas: InputData, onClose: Function) {
+    const dialogRef = this.dialog.open(TextConfirmComponent, {
+      width: '500px',
+      data: datas,
+    });
+    //Subcribe to the event that is called when the pop up window is close
+    dialogRef.afterClosed().subscribe((result) => {
+      onClose(result);
+    });
+  }
+
+  //#region Set Selected to
   //Set the selected text to be an code
   setSelectedToCode(): void {
     if (this.hasSomethingSelected()) {
@@ -80,9 +81,21 @@ export class TopicTextToolComponent implements OnInit {
       console.log('nothing Selected');
     }
   }
-  //#endregion
-
-  //#region Imgs
+  //Turn selected to link if not then show Insert link if there nothing select
+  setSelectedToLink(): void {
+    //Check if there is nothing selected
+    if (this.hasSomethingSelected()) {
+      //Turn the selected text to a link
+      this.mainTopic.content = this.textTool.replaceSelectedToLink(
+        this.mainTopic.content,
+        this.selectedText,
+        this.mainTopic.theText
+      );
+      return;
+    }
+    //Nothing was selected thus show the insert link ui
+    this.showInsertInput(this.linkData, (result) => this.onAddedLink(result));
+  }
   //Set the selected text to be an img
   setSelectedToImage(): void {
     //Check if there is something selected
@@ -98,6 +111,19 @@ export class TopicTextToolComponent implements OnInit {
     //Nothing was selected thus show the insert image ui
     this.showInsertInput(this.imgData, (result) => this.onAddedImg(result));
   }
+  //Set the selected text to have the given tag
+  setSelectedToTag(tagName: string): void {
+    if (this.hasSomethingSelected()) {
+      this.mainTopic.content = this.textTool.setToTag(
+        this.mainTopic.content,
+        tagName,
+        this.selectedText,
+        this.mainTopic.theText
+      );
+    }
+  }
+  //#endregion
+  //#region Insert
   //Add img with the given result to the text field
   onAddedImg(result: InputData) {
     // Check if the value is valid if so insert the link
@@ -112,24 +138,6 @@ export class TopicTextToolComponent implements OnInit {
       result.content[0].value = null;
       result.content[1].value = null;
     }
-  }
-  //#endregion
-
-  //#region Link
-  //Turn selected to link if not then show Insert link if there nothing select
-  setSelectedToLink(): void {
-    //Check if there is nothing selected
-    if (this.hasSomethingSelected()) {
-      //Turn the selected text to a link
-      this.mainTopic.content = this.textTool.replaceSelectedToLink(
-        this.mainTopic.content,
-        this.selectedText,
-        this.mainTopic.theText
-      );
-      return;
-    }
-    //Nothing was selected thus show the insert link ui
-    this.showInsertInput(this.linkData, (result) => this.onAddedLink(result));
   }
   //Add Link with the given result to the text field
   onAddedLink(result: InputData) {
@@ -147,16 +155,4 @@ export class TopicTextToolComponent implements OnInit {
     }
   }
   //#endregion
-
-  //Set the selected text to have the given tag
-  setToTag(tagName: string): void {
-    if (this.hasSomethingSelected()) {
-      this.mainTopic.content = this.textTool.setToTag(
-        this.mainTopic.content,
-        tagName,
-        this.selectedText,
-        this.mainTopic.theText
-      );
-    }
-  }
 }
