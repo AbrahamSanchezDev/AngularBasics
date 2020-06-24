@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TopicControlService } from 'src/app/server/topic/topic-control.service';
+import { TopicControlService } from 'src/app/service/topic/topic-control.service';
 
 @Component({
   selector: 'app-code-display',

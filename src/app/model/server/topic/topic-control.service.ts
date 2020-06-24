@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TopicObjModule } from '../../topic-obj/topic-obj.module';
 import { TopicDataType } from '../../enum/topic-data-type.enum';
-import { BaseDataService } from 'src/app/server/base-data.service';
+import { BaseDataService } from 'src/app/service/base-data.service';
 
 declare const PR: any;
 

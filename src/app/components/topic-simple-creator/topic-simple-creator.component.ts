@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-creator-base.component';
 import { HowToDisplayComponent } from '../how-to-display/how-to-display.component';
-import { TopicControlService } from 'src/app/server/topic/topic-control.service';
+import { TopicControlService } from 'src/app/service/topic/topic-control.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DownloadToolService } from 'src/app/server/tool/download-tool/download-tool.service';
+import { DownloadToolService } from 'src/app/service/tool/download-tool/download-tool.service';
 
 @Component({
   selector: 'app-topic-simple-creator',

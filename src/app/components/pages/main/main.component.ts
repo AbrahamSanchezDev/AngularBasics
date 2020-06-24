@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
-import { TopicControlService } from 'src/app/server/topic/topic-control.service';
+import { TopicControlService } from 'src/app/service/topic/topic-control.service';
 
 @Component({
   selector: 'app-main',

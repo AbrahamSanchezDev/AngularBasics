@@ -3,7 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { TextToolService } from './text-tool.service';
 import { ElementRef } from '@angular/core';
 export class MockElementRef extends ElementRef {}
-fdescribe('TextToolService', () => {
+describe('TextToolService', () => {
   let service: TextToolService;
   let input: ElementRef<HTMLInputElement>;
   const firstText = 'This is some previews text'; //26

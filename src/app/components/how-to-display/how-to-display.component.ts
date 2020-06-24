@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewChecked, Input } from '@angular/core';
 import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
-import { TopicControlService } from 'src/app/server/topic/topic-control.service';
+import { TopicControlService } from 'src/app/service/topic/topic-control.service';
 import { TopicData } from 'src/app/model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
 import { DomSanitizer } from '@angular/platform-browser';

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MultiLineToJsonComponent } from '../multi-line-to-json/multi-line-to-json.component';
 import { ExpObjModule } from 'src/app/model/exp-obj/exp-obj.module';
-import { DownloadToolService } from 'src/app/server/tool/download-tool/download-tool.service';
+import { DownloadToolService } from 'src/app/service/tool/download-tool/download-tool.service';
 
 @Component({
   selector: 'app-experience-obj',
