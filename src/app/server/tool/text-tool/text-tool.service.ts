@@ -8,18 +8,18 @@ export class TextToolService {
   //set the given text to have the code tags
   setToCode(
     text: string,
-    textToPrelace: string,
+    textToReplace: string,
     element: ElementRef<any>
   ): string {
-    let newCodeText = this.getTextAsCode(textToPrelace);
-    return this.replaceTextAt(text, element, newCodeText, textToPrelace);
+    let newCodeText = this.getTextAsCode(textToReplace);
+    return this.replaceTextAt(text, element, newCodeText, textToReplace);
   }
   //Turns the given text to the correct format for code
-  getTextAsCode(textToPrelace: string): string {
+  getTextAsCode(textToReplace: string): string {
     return `
 [code]
 
-${textToPrelace}
+${textToReplace}
 
 [/code]
 `;
@@ -105,7 +105,7 @@ ${textToPrelace}
     )}${textToAdd}${originalText.substring(startPos, originalText.length)}`;
   }
   //#endregion
-  //Conbine the 3 texts as html tags
+  //Combine the 3 texts as html tags
   setToTag(
     text: string,
     tag: string,

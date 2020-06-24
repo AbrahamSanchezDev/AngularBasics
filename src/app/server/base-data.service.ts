@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter, ElementRef } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 const lessThan = '&lt';
 const graterThan = '&gt';
@@ -155,7 +155,7 @@ export abstract class BaseDataService<T> {
     );
     return theNewText;
   }
-  //Remove the given tag biggining and end < , >
+  //Remove the given tag starts and end < , >
   removeGiven(original: string, tag: string): string {
     let remove = '';
     remove = this.replaceText(remove, `">`, `"${graterThan}`);

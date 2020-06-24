@@ -8,6 +8,7 @@
   position: absolute;
   right: 0;
   display: flex;
+  cursor: pointer;
 }
 #source-code p {
   padding-top: 5px;

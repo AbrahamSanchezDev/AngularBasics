@@ -4,7 +4,7 @@ import { InputMultilineComponent } from '../../Input/input-multiline/input-multi
 import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 import { TopicData } from 'src/app/model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
-import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';
+import { DownloadToolService } from 'src/app/server/tool/download-tool/download-tool.service';
 
 @Component({
   selector: 'app-topic-creator-base',

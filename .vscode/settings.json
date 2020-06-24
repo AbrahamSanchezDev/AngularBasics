@@ -34,6 +34,12 @@
         "singleInstance": true,
         "color": "#fff",
         "command": "ng update @angular/core @angular/cli"
+      },
+      {
+        "name": "Start Server 4201",
+        "singleInstance": true,
+        "color": "#fff8",
+        "command": "ng serve --port 4201 -o"
       }
     ]
   }

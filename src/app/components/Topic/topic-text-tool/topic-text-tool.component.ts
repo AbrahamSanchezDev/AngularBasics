@@ -3,7 +3,7 @@ import { InputMultilineComponent } from '../../Input/input-multiline/input-multi
 import { InputData } from 'src/app/model/inputs/input-data';
 import { MatDialog } from '@angular/material/dialog';
 import { TextConfirmComponent } from '../../Input/text-confirm/text-confirm.component';
-import { TextToolService } from 'src/app/library/text-tool/text-tool.service';
+import { TextToolService } from 'src/app/server/tool/text-tool/text-tool.service';
 
 @Component({
   selector: 'app-topic-text-tool',

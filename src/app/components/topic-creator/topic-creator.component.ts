@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicData } from '../../model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
-import { DownloadToolService } from 'src/app/library/download-tool/download-tool.service';
 import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-creator-base.component';
-import { ArraysToolService } from 'src/app/library/arrays-tool/arrays-tool.service';
+import { DownloadToolService } from 'src/app/server/tool/download-tool/download-tool.service';
+import { ArraysToolService } from 'src/app/server/tool/arrays-tool/arrays-tool.service';
 
 @Component({
   selector: 'app-topic-creator',
