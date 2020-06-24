@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TopicTextToolComponent } from './topic-text-tool.component';
 import { InputMultilineComponent } from '../../Input/input-multiline/input-multiline.component';
-import { Component } from '@angular/core';
 import { FormControlName } from '@angular/forms';
 
 describe('TopicTextToolComponent', () => {
@@ -10,6 +9,9 @@ describe('TopicTextToolComponent', () => {
   let fixture: ComponentFixture<TopicTextToolComponent>;
   let component2: InputMultilineComponent;
   let fixture2: ComponentFixture<InputMultilineComponent>;
+  const link = 'https://www.youtube.com/';
+  const startText = 'this text starts';
+  const end = 'this one ends';
 
   //Fill the InputMultilineComponent with the given text
   const setText = (text: string) => {
@@ -80,12 +82,12 @@ describe('TopicTextToolComponent', () => {
     fixture.whenStable().then(() => {
       //Set the text
       setText(currentText);
-      //Check if ther is something selected
+      //Check if there is something selected
       let currentSelected = component.hasSomethingSelected();
       expect(currentSelected).toBe(false);
       //Set selection range
       setRange(selectedText, 5);
-      //Check if ther is something selected
+      //Check if there is something selected
       currentSelected = component.hasSomethingSelected();
       expect(currentSelected).toBe(true);
       expect(component.selectedText).toBe(selectedText);
@@ -153,18 +155,16 @@ other Code`;
   }));
   //Checking function setSelectedToLink
   it('should turn selected text to a link', async(() => {
-    const link = 'https://www.youtube.com/';
     const currentText = `
-    this text starts
+    ${startText}
     ${link}
-    this one ends
+    ${end}
     `;
     const updatedText = `
-    this text starts
-    <a href = "${link}" target= "_blank">Link</a>
-    this one ends
+    ${startText}
+    <a href="${link}" target= "_blank">Link</a>
+    ${end}
     `;
-    const selectedText = 'text';
 
     fixture.whenStable().then(() => {
       //Set the text
@@ -175,14 +175,18 @@ other Code`;
       //Current testing main
       component.setSelectedToLink();
       let newText = component.mainTopic.content;
-      expect(newText).toBe(updatedText);
+      expect(newText).toContain('a href');
+      expect(newText).toContain(startText);
+      expect(newText).toContain(link);
+      expect(newText).toContain(end);
     });
   }));
   //Checking function setToTag
   it('should turn selected text to a given tag', async(() => {
     const selectedText = 'This should be bold';
-    const currentText = `this text starts ${selectedText} this one ends`;
-    const updatedText = `this text starts <center>${selectedText}</center> this one ends`;
+    const centerTag = 'center';
+    const currentText = `${startText} ${selectedText}  ${end}`;
+    const updatedText = `${startText} <${centerTag}>${selectedText}</${centerTag}>  ${end}`;
 
     fixture.whenStable().then(() => {
       //Set the text
@@ -194,10 +198,13 @@ other Code`;
       component.setSelectedToTag('center');
       let newText = component.mainTopic.content;
       expect(newText).toBe(updatedText);
+      expect(newText).toContain(startText);
+      expect(newText).toContain(end);
+      expect(newText).toContain(centerTag);
     });
   }));
 
-  //Remove the InputMultilineComponent commpont
+  //Remove the InputMultilineComponent component
   afterAll(() => {
     fixture.debugElement.nativeElement.remove();
     fixture2.debugElement.nativeElement.remove();

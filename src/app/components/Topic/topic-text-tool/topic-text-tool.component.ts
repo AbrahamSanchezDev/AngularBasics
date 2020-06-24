@@ -4,6 +4,7 @@ import { InputData } from 'src/app/model/inputs/input-data';
 import { MatDialog } from '@angular/material/dialog';
 import { TextConfirmComponent } from '../../Input/text-confirm/text-confirm.component';
 import { TextToolService } from 'src/app/server/tool/text-tool/text-tool.service';
+import { HtmlTextToolService } from 'src/app/server/tool/html-tool/html-text-tool.service';
 
 @Component({
   selector: 'app-topic-text-tool',
@@ -41,7 +42,10 @@ export class TopicTextToolComponent implements OnInit {
   selected: Selection;
   selectedText: string;
 
-  constructor(public dialog: MatDialog, private textTool: TextToolService) {}
+  constructor(
+    public dialog: MatDialog,
+    private htmlTextTool: HtmlTextToolService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -71,7 +75,7 @@ export class TopicTextToolComponent implements OnInit {
   //Set the selected text to be an code
   setSelectedToCode(): void {
     if (this.hasSomethingSelected()) {
-      this.mainTopic.content = this.textTool.setToCode(
+      this.mainTopic.content = this.htmlTextTool.setToCode(
         this.mainTopic.content,
         this.selectedText,
         this.mainTopic.theText
@@ -85,7 +89,7 @@ export class TopicTextToolComponent implements OnInit {
     //Check if there is nothing selected
     if (this.hasSomethingSelected()) {
       //Turn the selected text to a link
-      this.mainTopic.content = this.textTool.replaceSelectedToLink(
+      this.mainTopic.content = this.htmlTextTool.replaceSelectedToLink(
         this.mainTopic.content,
         this.selectedText,
         this.mainTopic.theText
@@ -100,7 +104,7 @@ export class TopicTextToolComponent implements OnInit {
     //Check if there is something selected
     if (this.hasSomethingSelected()) {
       //Turn the selected text to a Image
-      this.mainTopic.content = this.textTool.replaceSelectedToImg(
+      this.mainTopic.content = this.htmlTextTool.replaceSelectedToImg(
         this.mainTopic.content,
         this.selectedText,
         this.mainTopic.theText
@@ -113,7 +117,7 @@ export class TopicTextToolComponent implements OnInit {
   //Set the selected text to have the given tag
   setSelectedToTag(tagName: string): void {
     if (this.hasSomethingSelected()) {
-      this.mainTopic.content = this.textTool.setToTag(
+      this.mainTopic.content = this.htmlTextTool.setToTag(
         this.mainTopic.content,
         tagName,
         this.selectedText,
@@ -128,7 +132,7 @@ export class TopicTextToolComponent implements OnInit {
   onAddedImg(result: InputData) {
     // Check if the value is valid if so insert the link
     if (result != null && result.content[0].value != '') {
-      this.mainTopic.content = this.textTool.InsertImg(
+      this.mainTopic.content = this.htmlTextTool.InsertImg(
         this.mainTopic.content,
         result.content[0].value,
         result.content[1].value,
@@ -143,7 +147,7 @@ export class TopicTextToolComponent implements OnInit {
   onAddedLink(result: InputData) {
     // Check if the value is valid if so insert the link
     if (result != null && result.content[0].value != '') {
-      this.mainTopic.content = this.textTool.insertLink(
+      this.mainTopic.content = this.htmlTextTool.insertLink(
         this.mainTopic.content,
         result.content[0].value,
         result.content[1].value,

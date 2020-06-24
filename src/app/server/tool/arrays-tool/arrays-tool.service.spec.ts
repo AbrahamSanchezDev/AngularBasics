@@ -4,11 +4,12 @@ import { ArraysToolService } from './arrays-tool.service';
 
 describe('ArraysToolService', () => {
   let service: ArraysToolService;
-  const numbers = [1, 2, 3, 4, 5];
+  let numbers;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(ArraysToolService);
+    numbers = [1, 2, 3, 4, 5];
   });
 
   it('should move element from its current position to a new index', () => {

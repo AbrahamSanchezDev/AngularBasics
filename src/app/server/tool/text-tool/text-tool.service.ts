@@ -5,48 +5,9 @@ import { Injectable, ElementRef } from '@angular/core';
 })
 export class TextToolService {
   constructor() {}
-  //set the given text to have the code tags
-  setToCode(
-    text: string,
-    textToReplace: string,
-    element: ElementRef<any>
-  ): string {
-    let newCodeText = this.getTextAsCode(textToReplace);
-    return this.replaceTextAt(text, element, newCodeText, textToReplace);
-  }
-  //Turns the given text to the correct format for code
-  getTextAsCode(textToReplace: string): string {
-    return `
-[code]
 
-${textToReplace}
-
-[/code]
-`;
-  }
   //#region  Replace selected
-  //Replace the selected text to be an img
-  replaceSelectedToImg(
-    text: string,
-    textToReplace: string,
-    element: ElementRef<any>
-  ): string {
-    let noSpaces = textToReplace.replace(/\s/g, '');
-    let theNewText = `<img src="${noSpaces}" alt = "Image not found"/>`;
-    return this.replaceTextAt(text, element, theNewText, textToReplace);
-  }
-  //Replace select text to be a link
-  replaceSelectedToLink(
-    originalText: string,
-    link: string,
-    element: ElementRef<any>
-  ): string {
-    var newText = `<a href = "${link}" target= "_blank">Link</a>`;
-    if (originalText == null) {
-      return newText;
-    }
-    return this.replaceTextAt(originalText, element, newText, link);
-  }
+
   //Replace the text at the given index for the other text
   replaceTextAt(
     originalText: string,
@@ -71,26 +32,7 @@ ${textToReplace}
   //#endregion
 
   //#region Insert
-  //Insert link to the given element at the last selected position
-  insertLink(
-    originalText: string,
-    link: string,
-    display: string,
-    element: ElementRef<any>
-  ): string {
-    var theNewText = `<a href = "${link}" target= "_blank">${display}</a>`;
-    return this.insertText(originalText, theNewText, element);
-  }
-  //Insert img to the given element at the last selected position
-  InsertImg(
-    originalText: string,
-    link: string,
-    altText: string,
-    element: ElementRef<any>
-  ) {
-    let replaceFor = `<img src="${link}" alt = "${altText}"/>`;
-    return this.insertText(originalText, replaceFor, element);
-  }
+
   //Insert text at the given element in it last selected position
   insertText(originalText: String, textToAdd: string, element: ElementRef) {
     if (originalText == null) {
@@ -105,14 +47,4 @@ ${textToReplace}
     )}${textToAdd}${originalText.substring(startPos, originalText.length)}`;
   }
   //#endregion
-  //Combine the 3 texts as html tags
-  setToTag(
-    text: string,
-    tag: string,
-    textToPrelace,
-    element: ElementRef
-  ): string {
-    var replaceFor = `<${tag}>${textToPrelace}</${tag}>`;
-    return this.replaceTextAt(text, element, replaceFor, textToPrelace);
-  }
 }
