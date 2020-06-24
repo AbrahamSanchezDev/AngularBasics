@@ -155,7 +155,6 @@ export class TextToolService {
     if (endIndex == -1) {
       return originalString;
     }
-
     let original = originalString.substring(startIndex, endIndex + end.length);
     originalString = this.replaceText(originalString, original, replaceFor);
     this.removedTotal++;

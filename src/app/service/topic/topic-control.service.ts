@@ -44,8 +44,6 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
   }
   //Get Temp Topics for testing
   getTopics(): TopicObjModule[] {
-    const url = `${'dir'}/${'path'}`;
-
     return [
       {
         title: 'Topic Name 1',
@@ -54,12 +52,12 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
         content: [
           {
             data: TopicDataType.SimpleText,
-            text: 'Display code as neeeded',
+            text: 'Display code as needed',
           },
           {
             data: TopicDataType.Code,
             text: `    
-            //Testing Code Firts one!
+            //Testing Code First one!
             public static void main(String[] args)
             {
               System.out.println("Hello World I Say!");        
