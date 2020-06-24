@@ -79,6 +79,19 @@ ${textToReplace}
   }
   //#endregion
 
+  //#region Remove
+  //Remove all the given tag
+  removeAllTags(originalString: string, tag: string): string {
+    this.removedTotal = 0;
+    originalString = this.removeAllTextFromTo(originalString, `<${tag}`, '>');
+    originalString = this.removeAllTextFromTo(originalString, `</${tag}`, '>');
+    if (this.removedTotal == 0) {
+      console.log("Didn't remove any " + tag + 'tag');
+    }
+    return originalString;
+  }
+
+  //#endregion
   //Set the given text to be in between the start and ending tag
   setToTag(
     text: string,

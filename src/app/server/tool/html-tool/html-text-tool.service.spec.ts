@@ -16,6 +16,7 @@ describe('HtmlToolService', () => {
     let textPos = fullText.indexOf(lookingForText);
     input.nativeElement.selectionStart = textPos;
   };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
