@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { RemoveReplaceOptionService } from './remove-replace-option.service';
-import { RemoveReplaceOptions } from 'src/app/interface/remove-replace-options';
+import { RemoveReplaceOptions } from 'src/app/service/tool/remove-replace-option/interface/remove-replace-options';
 
 describe('RemoveReplaceOptionService', () => {
   let service: RemoveReplaceOptionService;

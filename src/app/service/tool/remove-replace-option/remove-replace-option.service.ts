@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ReplaceStrings } from 'src/app/interface/replace-strings';
-import { RemoveReplaceOptions } from 'src/app/interface/remove-replace-options';
+import { ReplaceStrings } from 'src/app/service/tool/remove-replace-option/interface/replace-strings';
+import { RemoveReplaceOptions } from 'src/app/service/tool/remove-replace-option/interface/remove-replace-options';
 import { TextToolService } from '../text-tool/text-tool.service';
 
 @Injectable({

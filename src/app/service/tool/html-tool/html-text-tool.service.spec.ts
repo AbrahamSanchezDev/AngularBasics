@@ -3,7 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { HtmlTextToolService } from './html-text-tool.service';
 import { ElementRef } from '@angular/core';
 import { MockElementRef } from '../text-tool/text-tool.service.spec';
-import { ReplaceStrings } from 'src/app/interface/replace-strings';
+import { ReplaceStrings } from 'src/app/service/tool/remove-replace-option/interface/replace-strings';
 
 describe('HtmlToolService', () => {
   let service: HtmlTextToolService;
