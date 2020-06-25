@@ -21,10 +21,6 @@ const imgReplace: ReplaceStrings[] = [
     original: '<img src=',
     replaceFor: `<img class="imgObj" src=`,
   },
-  {
-    original: '[/video]',
-    replaceFor: '"></iframe>',
-  },
 ];
 const lessThan = '&lt';
 const graterThan = '&gt';
@@ -65,7 +61,7 @@ const tagContainerReplace: ReplaceStrings[] = [
 const codeTagStart = '[code]';
 const codeTagEnd = '[/code]';
 const codeFormateadStart =
-  '<div><pre class="prettyprint linenums codeContainer">';
+  '<div class="code-obj"><pre class="prettyprint linenums codeContainer">';
 const codeFormateadEnd = '</pre></div>';
 
 @Injectable({
@@ -110,13 +106,11 @@ export class HtmlTextToolService extends RemoveReplaceOptionService {
       );
       let formateadText = originalInnerText;
       formateadText = this.formatAnyTagContainer(formateadText);
-      let codeStartNew = `<div class="code-obj"><pre class="prettyprint linenums codeContainer">`;
-      let codeEndNew = `</pre></div>`;
 
       let before = originalString.substring(0, startIndex);
       let after = originalString.substring(endIndex + codeTagEnd.length);
 
-      originalString = `${before}${codeStartNew}${formateadText}${codeEndNew}${after}`;
+      originalString = `${before}${codeFormateadStart}${formateadText}${codeFormateadEnd}${after}`;
       counter++;
       if (counter > 50) {
         console.log('Max searches');
@@ -125,7 +119,6 @@ export class HtmlTextToolService extends RemoveReplaceOptionService {
     }
     return originalString;
   }
-
   //Format the text if has < , > so they can be displayed as text
   formatAnyTagContainer(originalString: string): string {
     return this.replaceTextOptions(originalString, tagContainerReplace);

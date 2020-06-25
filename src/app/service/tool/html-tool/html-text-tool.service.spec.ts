@@ -5,32 +5,12 @@ import { ElementRef } from '@angular/core';
 import { MockElementRef } from '../text-tool/text-tool.service.spec';
 import { ReplaceStrings } from 'src/app/interface/replace-strings';
 
-fdescribe('HtmlToolService', () => {
+describe('HtmlToolService', () => {
   let service: HtmlTextToolService;
   let input: ElementRef<HTMLInputElement>;
   const firstText = 'This is some previews text';
   const link = 'www.google.com';
   const endText = 'Other Text';
-
-  const textWithVideo = ` 
-  [video]https://youtu.be/09j1wYdNfVQ[/video]
-  If you need a step by step you can always go to YouTube here is one that i really like
-  [video]https://www.youtube.com/embed/k5E2AVpwsko[/video]`;
-  const videoReplace: ReplaceStrings[] = [
-    {
-      original: '[video]',
-      replaceFor: `    
-    <iframe width="560" height="315" 
-    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
-    picture-in-picture" allowfullscreen
-    src="`,
-    },
-    {
-      original: '[/video]',
-      replaceFor: '"></iframe>',
-    },
-  ];
-  const iframePart = '<iframe width="560" height="315"';
 
   const setTextInInput = (fullText, lookingForText) => {
     input.nativeElement.innerText = fullText;
@@ -59,9 +39,142 @@ fdescribe('HtmlToolService', () => {
     expect(service).toBeTruthy();
   });
   //#region Text Formatting
-  //Testing formatTextToVideo function
-  it('should Create texts for formatTextToImg formatCommentsAndComponents formatAnyTagContainer formatTextToCode and formatAllText', () => {
-    expect(false).toBeTrue();
+
+  //#region img
+  const imgText = `<div class="back-button">
+<img src="assets/svg/backButton.svg" alt="back" (click)="onClose()" />
+</div>
+<div class="back-button">
+<img src="assets/svg/backButton.svg" alt="back" (click)="onClose()" />
+</div>
+<div class="back-button">
+<img src="assets/svg/backButton.svg" alt="back" (click)="onClose()" />
+</div>`;
+  const imgOriginal = '<img src=';
+  const imgReplaceFor = `<img class="imgObj" src=`;
+  //#endregion
+
+  //#region comments and Components
+  const lessThan = '&lt';
+  const graterThan = '&gt';
+  const commentsAndComponentsReplace: ReplaceStrings[] = [
+    {
+      original: '<app-',
+      replaceFor: `${lessThan}app-`,
+    },
+    {
+      original: '></',
+      replaceFor: `${graterThan}${lessThan}/`,
+    },
+    {
+      //Remove Comments
+      original: '<!',
+      replaceFor: `${lessThan}!`,
+    },
+    {
+      original: '->',
+      replaceFor: `-${graterThan}`,
+    },
+    {
+      original: '<br />',
+      replaceFor: `${lessThan}br /${graterThan}`,
+    },
+  ];
+  const commentAndComponentText = `
+<!-- Display the codes examples in the topic -->
+<div *ngSwitchCase="'Code'">
+  <app-code-display
+    codeText="{{ getContentText(content) }}"
+  ></app-code-display>
+</div>
+<br />
+<!-- Display the codes examples in the topic -->
+<div *ngSwitchCase="'Code'">
+  <app-code-display
+    codeText="{{ getContentText(content) }}"
+  ></app-code-display>
+</div>
+<br />`;
+
+  //#endregion
+
+  //#region code formatting
+  const codeTagStart = '[code]';
+  const codeTagEnd = '[/code]';
+  const codeFormateadStart =
+    '<div class="code-obj"><pre class="prettyprint linenums codeContainer">';
+  const codeFormateadEnd = '</pre></div>';
+  const codeText = `
+ ${firstText}
+  ${codeTagStart}
+  ${commentAndComponentText}
+  ${codeTagEnd}
+  ${link}
+  ${codeTagStart}
+  ${commentAndComponentText}
+  ${codeTagEnd}
+  ${endText}
+  ${codeTagStart}
+  ${commentAndComponentText}
+  ${codeTagEnd}
+  End
+  `;
+  //#endregion
+
+  //#region video formatting
+  const textWithVideo = ` 
+  [video]https://youtu.be/09j1wYdNfVQ[/video]
+  If you need a step by step you can always go to YouTube here is one that i really like
+  [video]https://www.youtube.com/embed/k5E2AVpwsko[/video]`;
+  const videoReplace: ReplaceStrings[] = [
+    {
+      original: '[video]',
+      replaceFor: `    
+    <iframe width="560" height="315" 
+    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
+    picture-in-picture" allowfullscreen
+    src="`,
+    },
+    {
+      original: '[/video]',
+      replaceFor: '"></iframe>',
+    },
+  ];
+  const iframePart = '<iframe width="560" height="315"';
+  //#endregion
+
+  //Testing formatTextToCode function
+  it('should change the text to code format ', () => {
+    let text = service.formatTextToCode(codeText);
+    expect(text).toContain(codeFormateadStart);
+    expect(text).toContain(codeFormateadEnd);
+    expect(text).toContain(lessThan);
+    expect(text).toContain(graterThan);
+    expect(text).not.toContain(codeTagStart);
+    expect(text).not.toContain(codeTagEnd);
+  });
+  //Testing formatAnyTagContainer function
+  it('should change any < , > tags to &lt and &gt so they can be displayed as text', () => {
+    let text = service.formatAnyTagContainer(commentAndComponentText);
+    expect(text).not.toContain('<');
+    expect(text).not.toContain('>');
+    expect(text).toContain(lessThan);
+    expect(text).toContain(graterThan);
+  });
+  //Testing formatCommentsAndComponents function
+  it('should change the comments and components tags', () => {
+    let text = service.formatCommentsAndComponents(commentAndComponentText);
+    for (let i = 0; i < commentsAndComponentsReplace.length; i++) {
+      const element = commentsAndComponentsReplace[i];
+      expect(text).not.toContain(element.original);
+      expect(text).toContain(element.replaceFor);
+    }
+  });
+  //Testing formatTextToImg function
+  it('should change the img tags to have the imgObj class', () => {
+    let text = service.formatTextToImg(imgText);
+    expect(text).toContain(imgReplaceFor);
+    expect(text).not.toContain(imgOriginal);
   });
   //Testing formatTextToVideo function
   it('should change the video tag to a iframe so the video can be displayed', () => {
