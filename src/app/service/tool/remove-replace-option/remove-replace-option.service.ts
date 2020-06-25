@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { TextToolService } from '../tool/text-tool/text-tool.service';
 import { ReplaceStrings } from 'src/app/interface/replace-strings';
 import { RemoveReplaceOptions } from 'src/app/interface/remove-replace-options';
+import { TextToolService } from '../text-tool/text-tool.service';
 
 @Injectable({
   providedIn: 'root',

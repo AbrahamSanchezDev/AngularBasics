@@ -1,6 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { RemoveReplaceOptionService } from '../../remove-replace-option/remove-replace-option.service';
 import { ReplaceStrings } from 'src/app/interface/replace-strings';
+import { RemoveReplaceOptionService } from '../remove-replace-option/remove-replace-option.service';
 
 const videoReplace: ReplaceStrings[] = [
   {
