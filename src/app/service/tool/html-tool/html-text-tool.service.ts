@@ -76,7 +76,7 @@ export class HtmlTextToolService extends RemoveReplaceOptionService {
     super();
   }
 
-  //#region Format Text To Display Text
+  //#region Format Text For Display
 
   //Does full formatting on the text
   formatAllText(originalString: string): string {
@@ -147,6 +147,7 @@ export class HtmlTextToolService extends RemoveReplaceOptionService {
   }
 
   //#endregion
+
   //#region Code tag
   //set the given text to have the code tags
   setToCode(

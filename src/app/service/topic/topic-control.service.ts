@@ -28,7 +28,10 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
     'How to use use angular basic commands',
   ];
 
-  constructor(private http: HttpClient, private httpText: HtmlTextToolService) {
+  constructor(
+    protected http: HttpClient,
+    private httpText: HtmlTextToolService
+  ) {
     super(http);
   }
   //Set data to replace the tags

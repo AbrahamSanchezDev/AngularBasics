@@ -60,12 +60,8 @@ fdescribe('HtmlToolService', () => {
   });
   //#region Text Formatting
   //Testing formatTextToVideo function
-  it('should change the video tag to a iframe so the video can be displayed', () => {
-    let text = service.formatTextToVideo(textWithVideo);
-    expect(text).toContain(iframePart);
-    expect(text).toContain(videoReplace[1].replaceFor);
-    expect(text).not.toContain(videoReplace[0].original);
-    expect(text).not.toContain(videoReplace[1].original);
+  it('should Create texts for formatTextToImg formatCommentsAndComponents formatAnyTagContainer formatTextToCode and formatAllText', () => {
+    expect(false).toBeTrue();
   });
   //Testing formatTextToVideo function
   it('should change the video tag to a iframe so the video can be displayed', () => {
