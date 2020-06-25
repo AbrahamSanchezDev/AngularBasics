@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicCreatorBaseComponent } from '../Topic/topic-creator-base/topic-creator-base.component';
 import { HowToDisplayComponent } from '../how-to-display/how-to-display.component';
-import { TopicControlService } from 'src/app/service/topic/topic-control.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DownloadToolService } from 'src/app/service/tool/download-tool/download-tool.service';
+import { HtmlTextToolService } from 'src/app/service/tool/html-tool/html-text-tool.service';
 
 @Component({
   selector: 'app-topic-simple-creator',
@@ -21,8 +21,8 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
 
   constructor(
     protected downloadTool: DownloadToolService,
-    private topicControlServer: TopicControlService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private httpText: HtmlTextToolService
   ) {
     super(downloadTool);
   }
@@ -39,7 +39,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   doPreview(): void {
     this.updateTopicData();
     if (this.topic.text != null && this.topic.text != '') {
-      this.topic.text = this.topicControlServer.replaceTags(this.topic.text);
+      this.topic.text = this.httpText.formatAllText(this.topic.text);
     }
     if (this.topic.title == '' && this.mainTopic.content == '') {
       this.errorText = 'Set Topic Title';

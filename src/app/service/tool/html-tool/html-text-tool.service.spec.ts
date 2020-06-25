@@ -3,13 +3,34 @@ import { TestBed, async } from '@angular/core/testing';
 import { HtmlTextToolService } from './html-text-tool.service';
 import { ElementRef } from '@angular/core';
 import { MockElementRef } from '../text-tool/text-tool.service.spec';
+import { ReplaceStrings } from 'src/app/interface/replace-strings';
 
-describe('HtmlToolService', () => {
+fdescribe('HtmlToolService', () => {
   let service: HtmlTextToolService;
   let input: ElementRef<HTMLInputElement>;
   const firstText = 'This is some previews text';
   const link = 'www.google.com';
   const endText = 'Other Text';
+
+  const textWithVideo = ` 
+  [video]https://youtu.be/09j1wYdNfVQ[/video]
+  If you need a step by step you can always go to YouTube here is one that i really like
+  [video]https://www.youtube.com/embed/k5E2AVpwsko[/video]`;
+  const videoReplace: ReplaceStrings[] = [
+    {
+      original: '[video]',
+      replaceFor: `    
+    <iframe width="560" height="315" 
+    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
+    picture-in-picture" allowfullscreen
+    src="`,
+    },
+    {
+      original: '[/video]',
+      replaceFor: '"></iframe>',
+    },
+  ];
+  const iframePart = '<iframe width="560" height="315"';
 
   const setTextInInput = (fullText, lookingForText) => {
     input.nativeElement.innerText = fullText;
@@ -37,6 +58,25 @@ describe('HtmlToolService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  //#region Text Formatting
+  //Testing formatTextToVideo function
+  it('should change the video tag to a iframe so the video can be displayed', () => {
+    let text = service.formatTextToVideo(textWithVideo);
+    expect(text).toContain(iframePart);
+    expect(text).toContain(videoReplace[1].replaceFor);
+    expect(text).not.toContain(videoReplace[0].original);
+    expect(text).not.toContain(videoReplace[1].original);
+  });
+  //Testing formatTextToVideo function
+  it('should change the video tag to a iframe so the video can be displayed', () => {
+    let text = service.formatTextToVideo(textWithVideo);
+    expect(text).toContain(iframePart);
+    expect(text).toContain(videoReplace[1].replaceFor);
+    expect(text).not.toContain(videoReplace[0].original);
+    expect(text).not.toContain(videoReplace[1].original);
+  });
+
+  //#endregion
   //Testing setToCode function
   it('should replace Code Text', () => {
     //this would be the code text

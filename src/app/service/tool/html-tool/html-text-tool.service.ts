@@ -1,13 +1,152 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { TextToolService } from '../text-tool/text-tool.service';
+import { RemoveReplaceOptionService } from '../../remove-replace-option/remove-replace-option.service';
+import { ReplaceStrings } from 'src/app/interface/replace-strings';
+
+const videoReplace: ReplaceStrings[] = [
+  {
+    original: '[video]',
+    replaceFor: `    
+<iframe width="560" height="315" 
+frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
+picture-in-picture" allowfullscreen
+src="`,
+  },
+  {
+    original: '[/video]',
+    replaceFor: '"></iframe>',
+  },
+];
+const imgReplace: ReplaceStrings[] = [
+  {
+    original: '<img src=',
+    replaceFor: `<img class="imgObj" src=`,
+  },
+  {
+    original: '[/video]',
+    replaceFor: '"></iframe>',
+  },
+];
+const lessThan = '&lt';
+const graterThan = '&gt';
+const commentsAndComponentsReplace: ReplaceStrings[] = [
+  {
+    original: '<app-',
+    replaceFor: `${lessThan}app-`,
+  },
+  {
+    original: '></',
+    replaceFor: `${graterThan}${lessThan}/`,
+  },
+  {
+    //Remove Comments
+    original: '<!',
+    replaceFor: `${lessThan}!`,
+  },
+  {
+    original: '->',
+    replaceFor: `-${graterThan}`,
+  },
+  {
+    original: '<br />',
+    replaceFor: `${lessThan}br /${graterThan}`,
+  },
+];
+
+const tagContainerReplace: ReplaceStrings[] = [
+  {
+    original: '<',
+    replaceFor: `${lessThan}`,
+  },
+  {
+    original: '>',
+    replaceFor: `${graterThan}`,
+  },
+];
+const codeTagStart = '[code]';
+const codeTagEnd = '[/code]';
+const codeFormateadStart =
+  '<div><pre class="prettyprint linenums codeContainer">';
+const codeFormateadEnd = '</pre></div>';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HtmlTextToolService extends TextToolService {
+export class HtmlTextToolService extends RemoveReplaceOptionService {
   constructor() {
     super();
   }
+
+  //#region Format Text To Display Text
+
+  //Does full formatting on the text
+  formatAllText(originalString: string): string {
+    if (originalString == null) {
+      console.log('Null originalString');
+      return originalString;
+    }
+    //Img
+    originalString = this.formatTextToImg(originalString);
+    //Remove any lesser than and greater than
+    originalString = this.formatCommentsAndComponents(originalString);
+    //Code
+    originalString = this.formatTextToCode(originalString);
+    originalString = this.formatTextToVideo(originalString);
+    return originalString;
+  }
+  //Format the text if has [code] and [/code] and set them to have a code display layout
+  formatTextToCode(originalString: string): string {
+    if (originalString == null) {
+      console.log('Null originalString');
+      return originalString;
+    }
+    let counter = 0;
+    while (originalString.indexOf(codeTagStart) != -1) {
+      let startIndex = originalString.indexOf(codeTagStart);
+      let endIndex = originalString.indexOf(codeTagEnd);
+      let originalInnerText = this.getTextBetween(
+        originalString,
+        codeTagStart,
+        codeTagEnd
+      );
+      let formateadText = originalInnerText;
+      formateadText = this.formatAnyTagContainer(formateadText);
+      let codeStartNew = `<div class="code-obj"><pre class="prettyprint linenums codeContainer">`;
+      let codeEndNew = `</pre></div>`;
+
+      let before = originalString.substring(0, startIndex);
+      let after = originalString.substring(endIndex + codeTagEnd.length);
+
+      originalString = `${before}${codeStartNew}${formateadText}${codeEndNew}${after}`;
+      counter++;
+      if (counter > 50) {
+        console.log('Max searches');
+        break;
+      }
+    }
+    return originalString;
+  }
+
+  //Format the text if has < , > so they can be displayed as text
+  formatAnyTagContainer(originalString: string): string {
+    return this.replaceTextOptions(originalString, tagContainerReplace);
+  }
+  //Format the text if has an app or component so they can be displayed as text
+  formatCommentsAndComponents(originalString: string): string {
+    return this.replaceTextOptions(
+      originalString,
+      commentsAndComponentsReplace
+    );
+  }
+  //Format the text if has img and set them to have the img class
+  formatTextToImg(originalString: string): string {
+    return this.replaceTextOptions(originalString, imgReplace);
+  }
+  //Format the text if has [video][/video] and set them to iframe
+  formatTextToVideo(originalString: string): string {
+    return this.replaceTextOptions(originalString, videoReplace);
+  }
+
+  //#endregion
   //#region Code tag
   //set the given text to have the code tags
   setToCode(

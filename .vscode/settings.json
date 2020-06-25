@@ -42,5 +42,9 @@
         "command": "ng serve --port 4201 -o"
       }
     ]
-  }
+  },
+  "cSpell.words": [
+    "allowfullscreen",
+    "linenums"
+  ]
 }

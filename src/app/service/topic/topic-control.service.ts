@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { TopicObjModule } from '../../model/topic-obj/topic-obj.module';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
 import { BaseDataService } from '../base-data.service';
+import { HttpClient } from '@angular/common/http';
+import { HtmlTextToolService } from '../tool/html-tool/html-text-tool.service';
 
 declare const PR: any;
 
@@ -25,9 +27,13 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
     'How to save and load from json',
     'How to use use angular basic commands',
   ];
+
+  constructor(private http: HttpClient, private httpText: HtmlTextToolService) {
+    super(http);
+  }
   //Set data to replace the tags
   protected initData(data: TopicObjModule): TopicObjModule {
-    data.text = this.replaceTags(data.text);
+    data.text = this.httpText.formatAllText(data.text);
     return data;
   }
   //Place it in the first place check

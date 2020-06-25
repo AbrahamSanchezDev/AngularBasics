@@ -65,5 +65,5 @@
   font-family: sans-serif;
 }
 .mainDisplay {
-  white-space: pre-line;
+  white-space: pre-wrap;
 }

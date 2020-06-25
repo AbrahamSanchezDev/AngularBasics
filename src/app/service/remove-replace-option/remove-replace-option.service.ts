@@ -29,12 +29,21 @@ export class RemoveReplaceOptionService extends TextToolService {
     originalString: string,
     replaceText: ReplaceStrings[]
   ): string {
+    let counter = 0;
     for (let i = 0; i < replaceText.length; i++) {
-      originalString = this.replaceText(
-        originalString,
-        replaceText[i].original,
-        replaceText[i].replaceFor
-      );
+      counter = 0;
+      while (originalString.indexOf(replaceText[i].original) != -1) {
+        originalString = this.replaceText(
+          originalString,
+          replaceText[i].original,
+          replaceText[i].replaceFor
+        );
+        counter++;
+        if (counter > 50) {
+          console.log('Search maxed out');
+          break;
+        }
+      }
     }
     return originalString;
   }
