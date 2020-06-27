@@ -15,20 +15,20 @@ export class TextToolService {
     originalText: string,
     element: ElementRef<any>,
     textToReplace: string,
-    originalReplace: string = ''
+    originalReplace?: string
   ): string {
     //Get the starting position
     let index = element.nativeElement.selectionStart;
     //Extra inf in case you changed something
-    if (originalReplace == '') {
-      originalReplace = textToReplace;
+    let originalLength = textToReplace.length;
+    if (originalReplace) {
+      originalLength = originalReplace.length;
     }
     //The Text to return
-    var finalText = `${originalText.substr(
+    return `${originalText.substr(
       0,
       index
-    )}${textToReplace}${originalText.substr(index + originalReplace.length)}`;
-    return finalText;
+    )}${textToReplace}${originalText.substr(index + originalLength)}`;
   }
   //Replace the first matching text for a new one
   replaceText(
@@ -44,9 +44,13 @@ export class TextToolService {
   //#region Insert
 
   //Insert text at the given element in it last selected position
-  insertText(originalText: String, textToAdd: string, element: ElementRef) {
-    if (originalText == null) {
-      return textToAdd;
+  insertText(
+    originalText: string,
+    textToAdd: string,
+    element: ElementRef
+  ): string {
+    if (textToAdd == null || element == null) {
+      return originalText;
     }
     //Get the last selected position
     let startPos = element.nativeElement.selectionStart;

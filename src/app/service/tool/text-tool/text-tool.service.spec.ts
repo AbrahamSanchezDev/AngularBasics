@@ -3,7 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { TextToolService } from './text-tool.service';
 import { ElementRef } from '@angular/core';
 export class MockElementRef extends ElementRef {}
-describe('TextToolService', () => {
+fdescribe('TextToolService', () => {
   let service: TextToolService;
   let input: ElementRef<HTMLInputElement>;
   const firstText = 'This is some previews text'; //26
@@ -46,6 +46,7 @@ describe('TextToolService', () => {
   it('should replace google link to youtube', () => {
     setTextInInput(fullText, link);
     let theText = service.replaceTextAt(fullText, input, link2, link);
+
     expect(theText).toContain(firstText);
     expect(theText).toContain(endText);
     expect(theText).toContain(link2);
@@ -71,6 +72,8 @@ describe('TextToolService', () => {
     expect(theText).toContain(endText);
     expect(theText).toContain(link);
     expect(theText).toContain(addedText);
+    theText = service.insertText(fullText, null, null);
+    expect(theText).toBe(fullText);
   });
 
   //Test insertText function
@@ -85,7 +88,7 @@ describe('TextToolService', () => {
     expect(theText).toContain(link);
     expect(theText).toContain(addedText);
   });
-  //Test insertText function
+  //Test insertBefore function
   it('should insert Some Text before the given text', () => {
     const addedText = `
     LinkedIn 
