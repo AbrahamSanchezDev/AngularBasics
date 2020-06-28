@@ -20,10 +20,10 @@ export class TextToolService {
     //Get the starting position
     let index = element.nativeElement.selectionStart;
     //Extra inf in case you changed something
-    let originalLength = textToReplace.length;
-    if (originalReplace) {
-      originalLength = originalReplace.length;
-    }
+    let originalLength = originalReplace
+      ? originalReplace.length
+      : textToReplace.length;
+
     //The Text to return
     return `${originalText.substr(
       0,
