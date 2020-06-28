@@ -43,7 +43,7 @@ export class TopicTextToolComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private htmlTextTool: HtmlTextToolService
+    public htmlTextTool: HtmlTextToolService
   ) {}
 
   ngOnInit(): void {}

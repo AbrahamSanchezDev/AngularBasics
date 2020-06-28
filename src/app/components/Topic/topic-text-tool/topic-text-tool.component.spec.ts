@@ -3,8 +3,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TopicTextToolComponent } from './topic-text-tool.component';
 import { InputMultilineComponent } from '../../Input/input-multiline/input-multiline.component';
 import { FormControlName } from '@angular/forms';
+import { InputData } from 'src/app/model/inputs/input-data';
 
-describe('TopicTextToolComponent', () => {
+fdescribe('TopicTextToolComponent', () => {
   let component: TopicTextToolComponent;
   let fixture: ComponentFixture<TopicTextToolComponent>;
   let component2: InputMultilineComponent;
@@ -21,6 +22,12 @@ describe('TopicTextToolComponent', () => {
     data.textContent = text;
     //Set the content to be the same as the value of theText element since [ngModel] in not been called
     component.mainTopic.content = data.value;
+  };
+  //Set to nothing selected
+  const setToNothingSelected = () => {
+    //Refer to theText nativeElement
+    const data = component.mainTopic.theText.nativeElement;
+    data.setSelectionRange(0, 0);
   };
   //Set ranges for the selected text
   const setRange = (text: string, start: number) => {
@@ -73,6 +80,7 @@ describe('TopicTextToolComponent', () => {
     component.mainTopic = component2;
     fixture2.detectChanges();
     fixture.detectChanges();
+    spyOn(console, 'log');
   });
   //Checking function hasSomethingSelected
   it('should check if has something selected', async(() => {
@@ -123,6 +131,11 @@ other Code`;
       //Final text
       let finalValue = component.mainTopic.content;
       expect(finalValue).toBe(finalCodeText);
+      //When there is nothing selected
+
+      setToNothingSelected();
+      component.setSelectedToCode();
+      expect(console.log).toHaveBeenCalled();
     });
   }));
 
@@ -154,6 +167,40 @@ other Code`;
     });
   }));
   //Checking function setSelectedToLink
+  it('should Display the insert ui for Image', () => {
+    setToNothingSelected();
+    spyOn(component, 'showInsertInput');
+    component.setSelectedToImage();
+    expect(component.showInsertInput).toHaveBeenCalled();
+  });
+  //Test onAddedImg
+  it('should Add the given link to the main text', () => {
+    let inputData: InputData = {
+      title: 'Add Link',
+      content: [
+        { text: 'Link:', value: 'www.youtube.com' },
+        { text: 'Display Text:', value: 'youtube' },
+      ],
+    };
+    spyOn(component.htmlTextTool, 'InsertImg');
+    component.mainTopic.content = '';
+    component.mainTopic.theText.nativeElement.innerText = '';
+    setToNothingSelected();
+    //Now check that the values are set to null after passing the values and the
+    component.onAddedImg(inputData);
+    expect(inputData.content[0].value).toEqual(null);
+    expect(inputData.content[1].value).toEqual(null);
+    expect(component.htmlTextTool.InsertImg).toHaveBeenCalled();
+  });
+  //Test onAddedImg
+  it('should not call insert img when passing null to onAddedImg', () => {
+    spyOn(component.htmlTextTool, 'InsertImg');
+    //Check that it doesn't call the html tool insert Img
+    component.onAddedImg(null);
+    expect(component.htmlTextTool.InsertImg).not.toHaveBeenCalled();
+  });
+
+  //Checking function setSelectedToLink
   it('should turn selected text to a link', async(() => {
     const currentText = `
     ${startText}
@@ -181,6 +228,13 @@ other Code`;
       expect(newText).toContain(end);
     });
   }));
+  //Checking function setSelectedToLink
+  it('should Display the insert ui for link links', () => {
+    setToNothingSelected();
+    spyOn(component, 'showInsertInput');
+    component.setSelectedToLink();
+    expect(component.showInsertInput).toHaveBeenCalled();
+  });
   //Checking function setToTag
   it('should turn selected text to a given tag', async(() => {
     const selectedText = 'This should be bold';
