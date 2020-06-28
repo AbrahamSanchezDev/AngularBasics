@@ -26,13 +26,13 @@ import { VideoDisplayComponent } from './components/Display/video-display/video-
 import { ProjectPreviewComponent } from './components/Projects/project-preview/project-preview.component';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+
 import { TextConfirmComponent } from './components/Input/text-confirm/text-confirm.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+
 import { TopicTextToolComponent } from './components/Topic/topic-text-tool/topic-text-tool.component';
 import { ViewSourceCodeComponent } from './components/view-source-code/view-source-code.component';
+import { InUseMaterialModule } from './material-module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,11 +63,8 @@ import { ViewSourceCodeComponent } from './components/view-source-code/view-sour
     FormsModule,
     HttpClientModule,
     TopicObjModule,
-    MatButtonModule,
-    MatDialogModule,
     NoopAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
+    InUseMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

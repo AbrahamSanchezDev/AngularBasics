@@ -1,18 +1,11 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChild,
-  ElementRef,
-  AfterViewInit,
-} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-input-multiline',
   templateUrl: './input-multiline.component.html',
   styleUrls: ['./input-multiline.component.css'],
 })
-export class InputMultilineComponent implements AfterViewInit {
+export class InputMultilineComponent implements OnInit {
   @Input() title: string = '';
   @Input() cssClass: string = 'expInputArea';
   @Input() content: string;
@@ -20,11 +13,6 @@ export class InputMultilineComponent implements AfterViewInit {
 
   @ViewChild('theText') theText: ElementRef<HTMLTextAreaElement>;
   constructor() {}
-  ngAfterViewInit(): void {
-    if (this.theText == null) {
-      console.log('No Text view child');
-    }
-  }
 
   ngOnInit(): void {}
 }

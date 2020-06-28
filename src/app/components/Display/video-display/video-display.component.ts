@@ -12,36 +12,36 @@ export class VideoDisplayComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer) {
     //Set to trusted
-    this.sanitize();
+    this.sanitizeLink();
   }
 
   ngOnInit(): void {}
   //Returns the SafeResourceUrl
   getUrl(): SafeResourceUrl {
+    if (this.link == null) {
+      return null;
+    }
     if (this.saveSrc != null) {
       return this.saveSrc;
     }
-    if (this.link == null) {
-      return;
-    }
-    this.sanitize();
+    this.sanitizeLink();
     return this.saveSrc;
   }
   //Makes the link save using the sanitizer
-  sanitize(): void {
+  sanitizeLink(): void {
     this.saveSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.turnYoutubeLinkToEmbeded(this.link)
+      this.turnYoutubeLinkToEmbedded(this.link)
     );
   }
   //Set the saveSrc value using the link
-  turnYoutubeLinkToEmbeded(url: string): string {
-    let video, results;
+  turnYoutubeLinkToEmbedded(url: string): string {
     if (url == null) {
       return url;
     }
-    results = url.match('[\\?&]v=([^&#]*)');
-    video = results === null ? url : results[1];
-    let embed = `https://www.youtube.com/embed/${video}`;
-    return embed;
+    const results = url.match('[\\?&]v=([^&#]*)');
+    if (results === null) {
+      return url;
+    }
+    return `https://www.youtube.com/embed/${results[1]}`;
   }
 }

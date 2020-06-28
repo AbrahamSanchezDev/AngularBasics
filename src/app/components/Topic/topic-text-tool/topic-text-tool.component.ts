@@ -64,7 +64,7 @@ export class TopicTextToolComponent implements OnInit {
       width: '500px',
       data: datas,
     });
-    //Subcribe to the event that is called when the pop up window is close
+    //Subscribe to the event that is called when the pop up window is close
     dialogRef.afterClosed().subscribe((result) => {
       onClose(result);
     });

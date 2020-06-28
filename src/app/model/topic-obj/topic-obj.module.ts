@@ -7,8 +7,8 @@ import { TopicData } from '../topic/topic-data';
   imports: [CommonModule],
 })
 export class TopicObjModule {
-  title: string = '';
-  description: string = '';
-  text: string = '';
-  content?: TopicData[] = [];
+  title: string;
+  description: string;
+  text: string;
+  content?: TopicData[];
 }

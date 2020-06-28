@@ -17,4 +17,9 @@ describe('AppComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  it('should have some text in title and link', () => {
+    expect(component.title).not.toEqual('');
+    expect(component.link).not.toEqual('');
+  });
 });
