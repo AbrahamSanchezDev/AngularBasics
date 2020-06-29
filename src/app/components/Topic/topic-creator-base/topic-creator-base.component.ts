@@ -16,12 +16,12 @@ export abstract class TopicCreatorBaseComponent {
   @ViewChild('descriptionField') descriptionField: TextFieldComponent;
   @ViewChild('mainTopic') mainTopic: InputMultilineComponent;
 
-  errorText: string = '';
-  topicName: string = 'Title';
-  topicDescription: string = 'Description';
-  introText: string = 'Intro / Main topic Text';
+  protected errorText: string = '';
+  protected topicName: string = 'Title';
+  protected topicDescription: string = 'Description';
+  protected introText: string = 'Intro / Main topic Text';
 
-  protected topic: TopicObjModule = new TopicObjModule();
+  topic: TopicObjModule = new TopicObjModule();
   constructor(protected downloadTool: DownloadToolService) {}
   //Returns the type of the given content and return it as string
   getType(content: TopicData): string {
@@ -36,6 +36,9 @@ export abstract class TopicCreatorBaseComponent {
   }
   //Check for valid values and create the json file
   checkText(): void {
+    // if (this.title == null) {
+    //   return;
+    // }
     this.errorText = '';
     if (this.title.myText == null || this.title.myText == '') {
       this.errorText = 'Please add a title';
@@ -53,5 +56,21 @@ export abstract class TopicCreatorBaseComponent {
     this.topic.title = this.title.myText;
     this.topic.description = this.descriptionField.myText;
     this.topic.text = this.mainTopic.content;
+  }
+  //Returns the error text
+  getErrorText(): string {
+    return this.errorText;
+  }
+  //Returns the topicName
+  getTopicName(): string {
+    return this.topicName;
+  }
+  //Returns the topicDescription
+  getTopicDescription(): string {
+    return this.topicDescription;
+  }
+  //Returns the introText
+  getIntroText(): string {
+    return this.introText;
   }
 }

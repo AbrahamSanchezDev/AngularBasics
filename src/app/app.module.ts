@@ -32,6 +32,7 @@ import { TextConfirmComponent } from './components/Input/text-confirm/text-confi
 import { TopicTextToolComponent } from './components/Topic/topic-text-tool/topic-text-tool.component';
 import { ViewSourceCodeComponent } from './components/view-source-code/view-source-code.component';
 import { InUseMaterialModule } from './material-module';
+import { TopicCreatorBaseComponent } from './components/topic-creator-base/topic-creator-base.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { InUseMaterialModule } from './material-module';
     TextConfirmComponent,
     TopicTextToolComponent,
     ViewSourceCodeComponent,
+    TopicCreatorBaseComponent,
   ],
   imports: [
     BrowserModule,

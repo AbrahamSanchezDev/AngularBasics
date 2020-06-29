@@ -1,15 +1,15 @@
 <div class="howTo">
   <h1 class="topicTitle">Simple Topic Creator!</h1>
   <!-- Display input for the topic -->
-  <app-text-field #titleField title="{{ topicName }}"> </app-text-field>
+  <app-text-field #titleField title="{{ getTopicName() }}"> </app-text-field>
   <!-- Display input for the description -->
-  <app-text-field #descriptionField title="{{ topicDescription }}">
+  <app-text-field #descriptionField title="{{ getTopicDescription() }}">
     <!-- Display input for the Intro / Main Topic -->
   </app-text-field>
   <app-topic-text-tool [mainTopic]="mainTopic"></app-topic-text-tool>
   <app-input-multiline
     #mainTopic
-    title="{{ introText }}"
+    title="{{ getIntroText() }}"
     height="600px"
   ></app-input-multiline>
   <button
@@ -22,6 +22,6 @@
   <button (click)="doPreview()" class="preview confirmButton">Preview</button>
   <input type="file" (change)="onChange($event)" />
   <app-how-to-display #preview extraClass=""></app-how-to-display>
-  <p class="errorText">{{ errorText }}</p>
+  <p class="errorText">{{ getErrorText() }}</p>
   <button (click)="checkText()" class="confirmButton">Create Json File</button>
 </div>
