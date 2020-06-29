@@ -4,8 +4,9 @@ import { TopicTextToolComponent } from './topic-text-tool.component';
 import { InputMultilineComponent } from '../../Input/input-multiline/input-multiline.component';
 import { FormControlName } from '@angular/forms';
 import { InputData } from 'src/app/model/inputs/input-data';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-fdescribe('TopicTextToolComponent', () => {
+describe('TopicTextToolComponent', () => {
   let component: TopicTextToolComponent;
   let fixture: ComponentFixture<TopicTextToolComponent>;
   let component2: InputMultilineComponent;
@@ -13,6 +14,7 @@ fdescribe('TopicTextToolComponent', () => {
   const link = 'https://www.youtube.com/';
   const startText = 'this text starts';
   const end = 'this one ends';
+  let inputData: InputData;
 
   //Fill the InputMultilineComponent with the given text
   const setText = (text: string) => {
@@ -62,7 +64,8 @@ fdescribe('TopicTextToolComponent', () => {
         InputMultilineComponent,
         FormControlName,
       ],
-      imports: [MatDialogModule],
+      imports: [MatDialogModule, NoopAnimationsModule],
+      providers: [],
     })
       .compileComponents()
       .then(() => {
@@ -81,7 +84,15 @@ fdescribe('TopicTextToolComponent', () => {
     fixture2.detectChanges();
     fixture.detectChanges();
     spyOn(console, 'log');
+    inputData = {
+      title: 'Add Link',
+      content: [
+        { text: 'Link:', value: 'www.youtube.com' },
+        { text: 'Display Text:', value: 'youtube' },
+      ],
+    };
   });
+
   //Checking function hasSomethingSelected
   it('should check if has something selected', async(() => {
     const currentText =
@@ -166,6 +177,25 @@ other Code`;
       expect(newText).toBe(updatedText);
     });
   }));
+
+  //Testing showInsertInput
+  it('should Display the insert ui', async(() => {
+    spyOn(component, 'onAddedLink');
+
+    component.onCloseCallback = component.onAddedLink;
+    component.showInsertInput(inputData, (result) => {
+      component.onAddedLink(result);
+      expect(result).toBe(inputData);
+    });
+    fixture.detectChanges();
+    component.dialogRef.close(inputData);
+    setTimeout(() => {
+      expect(component.onAddedLink).toHaveBeenCalled();
+
+      expect(component.onCloseCallback).not.toEqual(null);
+    });
+  }));
+
   //Checking function setSelectedToLink
   it('should Display the insert ui for Image', () => {
     setToNothingSelected();
@@ -174,17 +204,8 @@ other Code`;
     expect(component.showInsertInput).toHaveBeenCalled();
   });
   //Test onAddedImg
-  it('should Add the given link to the main text', () => {
-    let inputData: InputData = {
-      title: 'Add Link',
-      content: [
-        { text: 'Link:', value: 'www.youtube.com' },
-        { text: 'Display Text:', value: 'youtube' },
-      ],
-    };
+  it('should Add the given image to the main text', () => {
     spyOn(component.htmlTextTool, 'InsertImg');
-    component.mainTopic.content = '';
-    component.mainTopic.theText.nativeElement.innerText = '';
     setToNothingSelected();
     //Now check that the values are set to null after passing the values and the
     component.onAddedImg(inputData);
@@ -199,7 +220,6 @@ other Code`;
     component.onAddedImg(null);
     expect(component.htmlTextTool.InsertImg).not.toHaveBeenCalled();
   });
-
   //Checking function setSelectedToLink
   it('should turn selected text to a link', async(() => {
     const currentText = `
@@ -255,9 +275,34 @@ other Code`;
       expect(newText).toContain(startText);
       expect(newText).toContain(end);
       expect(newText).toContain(centerTag);
+
+      spyOn(component.htmlTextTool, 'setToTag');
+      setToNothingSelected();
+      component.setSelectedToTag('center');
+      expect(component.htmlTextTool.setToTag).not.toHaveBeenCalled();
     });
   }));
-
+  //Checking function setToTag
+  it('should not turn selected text to a given tag', async(() => {
+    spyOn(component.htmlTextTool, 'setToTag');
+    setToNothingSelected();
+    component.setSelectedToTag('center');
+    expect(component.htmlTextTool.setToTag).not.toHaveBeenCalled();
+  }));
+  //Testing onAddedLink
+  it('should Add the given link to the main text result', async(() => {
+    spyOn(component.htmlTextTool, 'insertLink');
+    component.onAddedLink(inputData);
+    expect(inputData.content[0].value).toEqual(null);
+    expect(inputData.content[1].value).toEqual(null);
+    expect(component.htmlTextTool.insertLink).toHaveBeenCalled();
+  }));
+  //Testing onAddedLink
+  it('should Not Add the given link to the main text result', async(() => {
+    spyOn(component.htmlTextTool, 'insertLink');
+    component.onAddedLink(null);
+    expect(component.htmlTextTool.insertLink).not.toHaveBeenCalled();
+  }));
   //Remove the InputMultilineComponent component
   afterAll(() => {
     fixture.debugElement.nativeElement.remove();

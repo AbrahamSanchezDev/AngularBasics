@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InputMultilineComponent } from '../../Input/input-multiline/input-multiline.component';
 import { InputData } from 'src/app/model/inputs/input-data';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TextConfirmComponent } from '../../Input/text-confirm/text-confirm.component';
 import { HtmlTextToolService } from 'src/app/service/tool/html-tool/html-text-tool.service';
 
@@ -40,6 +40,8 @@ export class TopicTextToolComponent implements OnInit {
 
   selected: Selection;
   selectedText: string;
+  dialogRef: MatDialogRef<TextConfirmComponent, any>;
+  onCloseCallback: Function;
 
   constructor(
     public dialog: MatDialog,
@@ -60,13 +62,14 @@ export class TopicTextToolComponent implements OnInit {
   }
   //Shows a input pop up window with the given data
   showInsertInput(datas: InputData, onClose: Function) {
-    const dialogRef = this.dialog.open(TextConfirmComponent, {
+    this.onCloseCallback = onClose;
+    this.dialogRef = this.dialog.open(TextConfirmComponent, {
       width: '500px',
       data: datas,
     });
     //Subscribe to the event that is called when the pop up window is close
-    dialogRef.afterClosed().subscribe((result) => {
-      onClose(result);
+    this.dialogRef.afterClosed().subscribe((result) => {
+      this.onCloseCallback(result);
     });
   }
 
@@ -96,7 +99,7 @@ export class TopicTextToolComponent implements OnInit {
       return;
     }
     //Nothing was selected thus show the insert link ui
-    this.showInsertInput(this.linkData, (result) => this.onAddedLink(result));
+    this.showInsertInput(this.linkData, this.onAddedLink);
   }
   //Set the selected text to be an img
   setSelectedToImage(): void {
@@ -111,7 +114,7 @@ export class TopicTextToolComponent implements OnInit {
       return;
     }
     //Nothing was selected thus show the insert image ui
-    this.showInsertInput(this.imgData, (result) => this.onAddedImg(result));
+    this.showInsertInput(this.imgData, this.onAddedImg);
   }
   //Set the selected text to have the given tag
   setSelectedToTag(tagName: string): void {
