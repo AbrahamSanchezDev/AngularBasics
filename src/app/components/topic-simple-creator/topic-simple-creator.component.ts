@@ -22,48 +22,41 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   constructor(
     protected downloadTool: DownloadToolService,
     public dialog: MatDialog,
-    private httpText: HtmlTextToolService
+    public httpText: HtmlTextToolService
   ) {
     super(downloadTool);
   }
 
   ngOnInit(): void {}
 
-  updateFromTopic(): void {
-    this.title.myText = this.topic.title;
-    this.descriptionField.myText = this.topic.description;
-    this.mainTopic.content = this.topic.text;
-  }
   //#region Load And Preview
   //Preview topic
   doPreview(): void {
     this.updateTopicData();
-    if (this.topic.text != null && this.topic.text != '') {
-      this.topic.text = this.httpText.formatAllText(this.topic.text);
-    }
+    this.errorText = '';
     if (this.topic.title == '' && this.mainTopic.content == '') {
       this.errorText = 'Set Topic Title';
       return;
     }
+    this.formatTopicText();
     this.preview.topic = this.topic;
   }
-  //On Selected imgs
-  onChange(event: any) {
-    let curFile = event.target.files[0];
-    let totalImgs = event.target.files.length;
-    if (totalImgs > 10) {
-      totalImgs = 10;
-    }
-    for (let i = 0; i < totalImgs; i++) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        var data = JSON.parse((reader.result as unknown) as string);
-        this.topic = data;
-        this.updateFromTopic();
-      };
-      reader.readAsText(curFile);
+  formatTopicText(): void {
+    if (this.topic.text != null && this.topic.text != '') {
+      this.topic.text = this.httpText.formatAllText(this.topic.text);
     }
   }
+  //On Selected images
+  onChange(event: any) {
+    let curFile = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.topic = JSON.parse((reader.result as unknown) as string);
+      this.updateFromTopic();
+    };
+    reader.readAsText(curFile);
+  }
+
   //#endregion
 
   //#region Testing
@@ -71,8 +64,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
   testingData() {
     this.title.myText = 'Some nice title';
     this.descriptionField.myText = 'We are a description';
-    this.mainTopic.content = `    
-    `;
+    this.mainTopic.content = ` Content `;
   }
   //#endregion
 }

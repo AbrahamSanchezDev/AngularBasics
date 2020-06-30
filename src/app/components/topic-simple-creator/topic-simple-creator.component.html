@@ -20,7 +20,7 @@
     Test Data
   </button>
   <button (click)="doPreview()" class="preview confirmButton">Preview</button>
-  <input type="file" (change)="onChange($event)" />
+  <input type="file" (change)="onChange($event)" accept=".json" />
   <app-how-to-display #preview extraClass=""></app-how-to-display>
   <p class="errorText">{{ getErrorText() }}</p>
   <button (click)="checkText()" class="confirmButton">Create Json File</button>

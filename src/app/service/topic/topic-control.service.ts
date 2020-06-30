@@ -30,25 +30,26 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
 
   constructor(
     protected http: HttpClient,
-    private httpText: HtmlTextToolService
+    public httpText: HtmlTextToolService
   ) {
     super(http);
   }
   //Set data to replace the tags
-  protected initData(data: TopicObjModule): TopicObjModule {
+  initData(data: TopicObjModule): TopicObjModule {
     data.text = this.httpText.formatAllText(data.text);
     return data;
   }
   //Place it in the first place check
-  protected firstPlaceObj(data: TopicObjModule): boolean {
+  firstPlaceObj(data: TopicObjModule): boolean {
     return data.title == this.firstPlace;
   }
   //Repaint the code from prettyprint
   rePaintCode() {
     PR.prettyPrint();
   }
-  //Check if the topic contains the keyword
-  protected matchTopic(topic: TopicObjModule, keyword: string): boolean {
+
+  // //Check if the topic contains the keyword
+  matchTopic(topic: TopicObjModule, keyword: string): boolean {
     return topic.title.includes(keyword);
   }
   //Get Temp Topics for testing

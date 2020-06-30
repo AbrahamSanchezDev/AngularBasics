@@ -77,6 +77,17 @@ describe('TopicCreatorBaseComponent', () => {
     expect(component.topic.description).toBe('Description Text');
     expect(component.topic.text).toBe('Main Topic Content');
   });
+  //Testing updateFromTopic
+  it('should update ui data based on the topic', () => {
+    component.topic.title = 'Title Text';
+    component.topic.description = 'Description Text';
+    component.topic.text = 'Main Topic Content';
+
+    component.updateFromTopic();
+    expect(component.title.myText).toBe('Title Text');
+    expect(component.descriptionField.myText).toBe('Description Text');
+    expect(component.mainTopic.content).toBe('Main Topic Content');
+  });
 
   //Testing getTopicName  getTopicDescription getIntroText
   it('should return the correct getters', async(() => {

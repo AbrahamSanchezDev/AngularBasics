@@ -3,7 +3,7 @@ import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 import { TopicControlService } from 'src/app/service/topic/topic-control.service';
 import { TopicData } from 'src/app/model/topic/topic-data';
 import { TopicDataType } from 'src/app/model/enum/topic-data-type.enum';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-how-to-display',
@@ -14,42 +14,46 @@ export class HowToDisplayComponent implements AfterViewChecked {
   @Input() extraClass: string = 'mostTop';
   topic: TopicObjModule;
 
+  saveHtml: SafeHtml;
+  showUi: boolean = false;
   constructor(
-    private topicControl: TopicControlService,
+    public topicControl: TopicControlService,
     private sanitizer: DomSanitizer
   ) {
-    topicControl.onSelected.subscribe((topic) => this.onSelectedHowTo(topic));
-    topicControl.onSearch.subscribe((text) => {
-      this.onClose();
-    });
+    this.register();
   }
 
   //Repaint the display code
-  public ngAfterViewChecked(): any {
+  public ngAfterViewChecked() {
+    this.repaint();
+  }
+
+  //Call on repaint
+  repaint(): void {
     this.topicControl.rePaintCode();
+  }
+  register(): void {
+    this.topicControl.onSelected.subscribe((topic) =>
+      this.onSelectedHowTo(topic)
+    );
+    this.topicControl.onSearch.subscribe((text) => {
+      this.onClose();
+    });
   }
   //Check if the topic is valid
   isValid(): boolean {
-    return this.topic != null;
+    return this.showUi;
   }
   //Returns all the topic data in the current topic
   getContent(): TopicData[] {
     return this.topic.content;
   }
   //Get topic text as trusted html
-  getTopicText() {
-    var saveHtml = this.sanitizer.bypassSecurityTrustHtml(this.topic.text);
-    return saveHtml;
+  getTopicText(): SafeHtml {
+    return this.saveHtml;
   }
   //Returns the text of the given topic
   getContentText(content: TopicData): string {
-    if (content == null) {
-      return '';
-    }
-    return content.text;
-  }
-  //Returns the content of the given topic
-  getContentCode(content: TopicData): string {
     if (content == null) {
       return '';
     }
@@ -61,11 +65,16 @@ export class HowToDisplayComponent implements AfterViewChecked {
   }
   //Called by the event onSelectedTopic and set this topic to the selected topic
   onSelectedHowTo(topic: TopicObjModule): void {
+    this.showUi = topic != null;
+    if (topic == null) {
+      return;
+    }
     this.topic = topic;
+    this.saveHtml = this.sanitizer.bypassSecurityTrustHtml(this.topic.text);
   }
   //Called when the X button is pressed and set the current topic to null and send the event
   onClose(): void {
-    this.topic = null;
-    this.topicControl.onSelected.emit(this.topic);
+    this.showUi = false;
+    this.topicControl.onSelected.emit(null);
   }
 }

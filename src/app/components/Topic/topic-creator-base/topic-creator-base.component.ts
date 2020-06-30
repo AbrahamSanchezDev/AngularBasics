@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TextFieldComponent } from '../../Input/text-field/text-field.component';
 import { InputMultilineComponent } from '../../Input/input-multiline/input-multiline.component';
 import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
@@ -56,6 +56,11 @@ export abstract class TopicCreatorBaseComponent {
     this.topic.title = this.title.myText;
     this.topic.description = this.descriptionField.myText;
     this.topic.text = this.mainTopic.content;
+  }
+  updateFromTopic(): void {
+    this.title.myText = this.topic.title;
+    this.descriptionField.myText = this.topic.description;
+    this.mainTopic.content = this.topic.text;
   }
   //Returns the error text
   getErrorText(): string {
