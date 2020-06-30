@@ -9,10 +9,9 @@ export abstract class BaseDataService<T> {
   public onSelected: EventEmitter<T> = new EventEmitter<T>();
   public onLoadedAll: EventEmitter<void> = new EventEmitter();
   public onSearch: EventEmitter<string> = new EventEmitter<string>();
-  abstract jsonPath: string = 'assets/';
+
   protected allData: T[] = [];
   customData: T[] = [];
-  abstract fileNames: string[] = [];
 
   abstract mainObjectsFile;
 

@@ -146,7 +146,7 @@ other Code`;
 
       setToNothingSelected();
       component.setSelectedToCode();
-      expect(console.log).toHaveBeenCalled();
+      // expect(console.log).toHaveBeenCalled();
     });
   }));
 

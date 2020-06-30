@@ -82,8 +82,6 @@ export class TopicTextToolComponent implements OnInit {
         this.selectedText,
         this.mainTopic.theText
       );
-    } else {
-      console.log('nothing Selected');
     }
   }
   //Turn selected to link if not then show Insert link if there nothing select

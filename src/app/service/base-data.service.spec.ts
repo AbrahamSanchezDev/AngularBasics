@@ -8,8 +8,6 @@ import {
 } from '@angular/common/http/testing';
 
 export class BaseMuckClass extends BaseDataService<TopicObjModule> {
-  jsonPath: string;
-  fileNames: string[];
   mainObjectsFile = 'assets/topics/topics';
   firstPlaceObj(data: TopicObjModule): boolean {
     return data.title.includes('html input fields');

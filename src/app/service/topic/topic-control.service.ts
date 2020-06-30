@@ -11,24 +11,9 @@ declare const PR: any;
   providedIn: 'root',
 })
 export class TopicControlService extends BaseDataService<TopicObjModule> {
-  jsonPath: string = 'assets/topics/';
   firstPlace: string = 'How to get started with Angular';
   filePath = 'assets/topics/';
   mainObjectsFile = 'assets/topics/topics.json';
-  fileNames: string[] = [
-    'How to use variables in html',
-    'How to change variable in a component via html',
-    'How to keep track of a component in the html',
-    'How to use if in html',
-    'How to use for loop in html',
-    'How to use html input fields',
-    'How to pass boolean value to a component',
-    'How to use switch in the html using angular',
-    'How to insert content to a component',
-    'How to get started with Angular',
-    'How to save and load from json',
-    'How to use use angular basic commands',
-  ];
 
   constructor(
     protected http: HttpClient,

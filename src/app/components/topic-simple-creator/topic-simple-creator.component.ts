@@ -39,7 +39,7 @@ export class TopicSimpleCreatorComponent extends TopicCreatorBaseComponent
       return;
     }
     this.formatTopicText();
-    this.preview.topic = this.topic;
+    this.preview.onSelectedHowTo(this.topic);
   }
   formatTopicText(): void {
     if (this.topic.text != null && this.topic.text != '') {

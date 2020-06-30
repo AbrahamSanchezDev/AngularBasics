@@ -7,6 +7,7 @@
   margin-top: -3px;
   padding-left: 2%;
   padding: 20px;
+  position: relative;
 }
 .mostTop {
   position: absolute;
@@ -53,11 +54,10 @@
   box-shadow: rgba(0, 0, 0, 0.2) 3px 5px 5px;
 }
 .back-button img {
-  position: absolute;
   top: -5px;
-  left: -10px;
-  width: 150px;
-  height: 60px;
+  left: -0;
+  width: 100%;
+  height: 100%;
 }
 
 .displayText {
@@ -66,4 +66,19 @@
 }
 .mainDisplay {
   white-space: pre-wrap;
+}
+
+/* Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575px) {
+  .back-button {
+    width: 70px;
+    height: 25px;
+  }
+}
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) and (max-width: 767px) {
+  .back-button {
+    width: 100px;
+    height: 30px;
+  }
 }
