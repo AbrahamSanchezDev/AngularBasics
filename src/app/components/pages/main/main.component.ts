@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicObjModule } from 'src/app/model/topic-obj/topic-obj.module';
 import { TopicControlService } from 'src/app/service/topic/topic-control.service';
+import { DownloadToolService } from 'src/app/service/tool/download-tool/download-tool.service';
 
 @Component({
   selector: 'app-main',
@@ -13,12 +14,18 @@ export class MainComponent implements OnInit {
   currentTopics: TopicObjModule[];
   description: string;
 
-  constructor(private topicsServer: TopicControlService) {
+  constructor(
+    private topicsServer: TopicControlService,
+    private download: DownloadToolService
+  ) {
     topicsServer.onSearch.subscribe((text) => {
       this.getTopics(text);
     });
     topicsServer.onSelected.subscribe((topic) => {
       this.onDisplayTopic(topic);
+    });
+    topicsServer.onLoadedAll.subscribe(() => {
+      this.getTopics();
     });
   }
   //On Init get the topic
@@ -28,7 +35,7 @@ export class MainComponent implements OnInit {
   //Get the topics if no text given if not then do a custom search
   getTopics(text?: string): void {
     if (text == null || text == '') {
-      this.topics = this.topicsServer.getJsonData();
+      this.topics = this.topicsServer.getAllData();
       this.currentTopics = this.topics;
       return;
     }
@@ -43,4 +50,7 @@ export class MainComponent implements OnInit {
     }
     this.topics = null;
   }
+  // onDownloadAll(): void {
+  //   this.download.DownloadTextToFileAsJson(this.topicsServer.allData, 'topics');
+  // }
 }

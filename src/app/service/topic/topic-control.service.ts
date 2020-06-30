@@ -13,6 +13,8 @@ declare const PR: any;
 export class TopicControlService extends BaseDataService<TopicObjModule> {
   jsonPath: string = 'assets/topics/';
   firstPlace: string = 'How to get started with Angular';
+  filePath = 'assets/topics/';
+  mainObjectsFile = 'assets/topics/topics.json';
   fileNames: string[] = [
     'How to use variables in html',
     'How to change variable in a component via html',
@@ -33,7 +35,9 @@ export class TopicControlService extends BaseDataService<TopicObjModule> {
     public httpText: HtmlTextToolService
   ) {
     super(http);
+    this.loadTopicsFromFile();
   }
+
   //Set data to replace the tags
   initData(data: TopicObjModule): TopicObjModule {
     data.text = this.httpText.formatAllText(data.text);
