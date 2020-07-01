@@ -1,7 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { BaseDataService } from './base-data.service';
 import { TopicObjModule } from '../model/topic-obj/topic-obj.module';
-import { HttpClientModule } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
