@@ -52,4 +52,23 @@ describe('ArraysToolService', () => {
     const newOne = service.removeFromArray(original, original[0]);
     expect(newOne[0]).toBe('two');
   });
+
+  it('should shuffle the array order', () => {
+    let original = [1, 2, 3, 4, 5];
+    let doubleArray = service.combine(original, original);
+    let originalText = doubleArray.toString();
+    console.info('original : ' + originalText);
+
+    let shuffled = service.shuffle(doubleArray);
+    let shuffledText = shuffled.toString();
+    expect(originalText).not.toEqual(shuffledText);
+    console.info('shuffled : ' + shuffledText);
+  });
+  it('should combine two arrays', () => {
+    let original = [1, 2, 3, 4, 5];
+    let doubleArray = service.combine(original, original);
+    console.info('original');
+    console.info(doubleArray);
+    expect(doubleArray.length).toBe(original.length * 2);
+  });
 });
