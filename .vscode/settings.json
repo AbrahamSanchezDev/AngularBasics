@@ -42,6 +42,12 @@
         "command": "ng update @angular/core @angular/cli"
       },
       {
+        "name": "Update Packages",
+        "singleInstance": true,
+        "color": "#fff",
+        "command": "npm update"
+      },
+      {
         "name": "Start Server 4201",
         "singleInstance": true,
         "color": "#fff8",
